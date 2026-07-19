@@ -238,6 +238,52 @@ footer .footer-note{font-size:10px;color:rgba(245,240,232,.3);letter-spacing:.06
   header{height:auto;min-height:56px;padding:.55rem 1rem;align-items:flex-start;flex-wrap:wrap}nav{width:100%;gap:14px;overflow-x:auto;padding-bottom:3px}.history-page{padding:2rem .75rem 8rem}.history-stage{grid-template-columns:34px minmax(0,1fr) 34px;padding:10px 2px}.history-arrow{width:30px;height:44px;font-size:19px}.history-info{grid-template-columns:1fr}.history-topbar{align-items:flex-start;flex-direction:column}.history-autoplay{align-self:flex-end}.history-title{font-size:15px}.history-lightbox{padding:50px 38px}.history-thumb{flex-basis:92px}
 }
 
+
+/* PRESS & FEATURES */
+.press-page{min-height:calc(100vh - 56px);padding:3.5rem 2rem 8rem;background:linear-gradient(180deg,var(--bg) 0,var(--bg-card) 52%,var(--bg) 100%)}
+.press-intro{max-width:1040px;margin:0 auto 2rem;padding-bottom:2rem;border-bottom:.5px solid var(--border-strong)}
+.press-kicker{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:.75rem}
+.press-intro h1{font-family:var(--font-display);font-size:clamp(2.2rem,5vw,3.8rem);font-weight:400;line-height:1.05;margin-bottom:1rem}
+.press-intro h1 em{font-weight:400;color:var(--accent)}
+.press-intro p{max-width:720px;color:var(--ink-mid);font-size:13px;line-height:1.8}
+.press-summary{max-width:1040px;margin:0 auto 1.5rem;display:grid;grid-template-columns:repeat(3,1fr);border:.5px solid var(--border-strong);background:var(--bg-card);box-shadow:var(--shadow)}
+.press-summary-item{padding:1rem 1.25rem;border-right:.5px solid var(--border-strong);display:flex;flex-direction:column;gap:2px}
+.press-summary-item:last-child{border-right:0}
+.press-summary-num{font-family:var(--font-display);font-size:1.6rem;color:var(--accent);line-height:1}
+.press-summary-label{font-size:9px;text-transform:uppercase;letter-spacing:.12em;color:var(--ink-light)}
+.press-grid{max-width:1040px;margin:0 auto;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.press-card{position:relative;background:var(--bg-card);border:.5px solid var(--border-strong);border-radius:4px;overflow:hidden;box-shadow:var(--shadow);display:flex;flex-direction:column;min-height:330px;transition:transform .2s,box-shadow .2s,border-color .2s}
+.press-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-hover);border-color:var(--accent)}
+.press-card.featured{grid-column:1/-1;display:grid;grid-template-columns:minmax(250px,.72fr) minmax(0,1.28fr);min-height:360px;background:var(--tape-dark);border-color:rgba(184,92,44,.65)}
+.press-art{min-height:170px;padding:1.5rem;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden;background:var(--tape-dark)}
+.press-card.featured .press-art{min-height:100%;border-right:1px solid rgba(184,92,44,.35)}
+.press-art::before,.press-art::after{content:'';position:absolute;border-radius:50%;border:1px solid rgba(232,196,168,.13)}
+.press-art::before{width:250px;height:250px;right:-70px;top:-105px}
+.press-art::after{width:150px;height:150px;right:20px;bottom:-90px}
+.press-outlet-mark{position:relative;z-index:1;font-family:var(--font-display);font-size:clamp(2rem,5vw,4rem);line-height:.9;color:var(--accent-light);letter-spacing:-.04em}
+.press-card:not(.featured) .press-outlet-mark{font-size:2.5rem}
+.press-format{position:relative;z-index:1;color:rgba(245,240,232,.45);font-size:9px;text-transform:uppercase;letter-spacing:.15em}
+.press-content{padding:1.5rem;display:flex;flex-direction:column;flex:1}
+.press-card.featured .press-content{padding:2rem}
+.press-meta{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:9px;text-transform:uppercase;letter-spacing:.1em;color:var(--ink-light);margin-bottom:.9rem}
+.press-card.featured .press-meta{color:rgba(245,240,232,.42)}
+.press-meta span+span::before{content:'•';margin-right:8px;color:var(--accent)}
+.press-title{font-family:var(--font-display);font-size:clamp(1.35rem,2.5vw,2rem);font-weight:400;line-height:1.18;margin-bottom:.85rem;color:var(--ink)}
+.press-card.featured .press-title{font-size:clamp(1.8rem,3.5vw,3rem);color:var(--accent-light)}
+.press-description{font-size:12px;line-height:1.75;color:var(--ink-mid);margin-bottom:1.25rem}
+.press-card.featured .press-description{color:rgba(245,240,232,.63);font-size:13px;max-width:650px}
+.press-credit{font-size:10px;color:var(--ink-light);margin-bottom:1.1rem}
+.press-card.featured .press-credit{color:rgba(245,240,232,.38)}
+.press-link{display:inline-flex;align-items:center;gap:8px;align-self:flex-start;margin-top:auto;background:var(--accent);color:#fff;text-decoration:none;padding:9px 14px;border-radius:2px;font-size:9px;letter-spacing:.11em;text-transform:uppercase;transition:background .15s,transform .15s}
+.press-link:hover{background:#9f4920;transform:translateX(2px)}
+.press-link.secondary{background:var(--tape-dark);color:var(--accent-light)}
+.press-quote{max-width:1040px;margin:1.5rem auto 0;padding:1.6rem 1.8rem;border-left:3px solid var(--accent);background:var(--accent-pale)}
+.press-quote p{font-family:var(--font-display);font-size:clamp(1.25rem,2.5vw,1.8rem);font-style:italic;line-height:1.35;color:var(--ink);margin-bottom:.55rem}
+.press-quote cite{font-style:normal;font-size:9px;text-transform:uppercase;letter-spacing:.12em;color:var(--ink-light)}
+@media(max-width:760px){
+  .press-page{padding:2.25rem 1rem 8rem}.press-summary{grid-template-columns:1fr}.press-summary-item{border-right:0;border-bottom:.5px solid var(--border-strong)}.press-summary-item:last-child{border-bottom:0}.press-grid{grid-template-columns:1fr}.press-card.featured{grid-column:auto;grid-template-columns:1fr}.press-card.featured .press-art{min-height:210px;border-right:0;border-bottom:1px solid rgba(184,92,44,.35)}.press-card.featured .press-content{padding:1.5rem}.press-quote{padding:1.25rem}
+}
+
 </style>
 </head>
 <body>
@@ -250,6 +296,7 @@ footer .footer-note{font-size:10px;color:rgba(245,240,232,.3);letter-spacing:.06
     <a class="active" data-page="home" onclick="showPage('home',this)">Home</a>
     <a data-page="archive" onclick="showPage('archive',this)">Archive</a>
     <a data-page="history" onclick="showPage('history',this)">History</a>
+    <a data-page="press" onclick="showPage('press',this)">Press</a>
     <a data-page="mission" onclick="showPage('mission',this)">Mission</a>
     <a data-page="contact" onclick="showPage('contact',this)">Contact</a>
   </nav>
@@ -265,7 +312,7 @@ footer .footer-note{font-size:10px;color:rgba(245,240,232,.3);letter-spacing:.06
       <div class="stat"><span class="stat-num">5</span><span class="stat-label">Decades</span></div>
       <div class="stat"><span class="stat-num">∞</span><span class="stat-label">Preservation</span></div>
     </div>
-    <div class="hero-actions"><button class="hero-btn" onclick="showPage('archive',document.querySelector('[data-page=archive]'))">→ Explore the Archive</button><button class="hero-btn secondary" onclick="showPage('history',document.querySelector('[data-page=history]'))">Explore the History →</button></div>
+    <div class="hero-actions"><button class="hero-btn" onclick="showPage('archive',document.querySelector('[data-page=archive]'))">→ Explore the Archive</button><button class="hero-btn secondary" onclick="showPage('history',document.querySelector('[data-page=history]'))">Explore the History →</button><button class="hero-btn secondary" onclick="showPage('press',document.querySelector('[data-page=press]'))">Press &amp; Features →</button></div>
   </div>
   <section class="cover-showcase" aria-labelledby="cover-showcase-title">
     <div class="cover-showcase-head">
@@ -353,6 +400,72 @@ footer .footer-note{font-size:10px;color:rgba(245,240,232,.3);letter-spacing:.06
   <img id="history-lightbox-image" src="history-slides/slide-01.jpg" alt="Full-screen history slide">
   <button class="history-arrow history-lightbox-next" type="button" onclick="changeHistorySlide(1)" aria-label="Next history slide">›</button>
   <div class="history-lightbox-caption" id="history-lightbox-caption"></div>
+</div>
+
+
+<div id="page-press" class="page-section">
+  <section class="press-page">
+    <div class="press-intro">
+      <div class="press-kicker">Press attention · Radio · Journalism</div>
+      <h1>In the <em>press</em></h1>
+      <p>Selected radio documentaries, broadcasts, and reporting about the Afghan Cassette Archive, its international preservation network, and the effort to keep Afghanistan’s endangered musical memory accessible.</p>
+    </div>
+
+    <div class="press-summary" aria-label="Press coverage summary">
+      <div class="press-summary-item"><span class="press-summary-num">3</span><span class="press-summary-label">Featured stories</span></div>
+      <div class="press-summary-item"><span class="press-summary-num">2</span><span class="press-summary-label">Audio broadcasts</span></div>
+      <div class="press-summary-item"><span class="press-summary-num">2025–26</span><span class="press-summary-label">Coverage period</span></div>
+    </div>
+
+    <div class="press-grid">
+      <article class="press-card featured">
+        <div class="press-art">
+          <div class="press-outlet-mark">BBC<br>Radio 4</div>
+          <div class="press-format">Audio documentary · Artworks</div>
+        </div>
+        <div class="press-content">
+          <div class="press-meta"><span>November 25, 2025</span><span>Radio documentary</span></div>
+          <h2 class="press-title">Omid’s Tapes: The Afghan Memory Keeper</h2>
+          <p class="press-description">A documentary following Omid and an international network working to find and rescue Afghan music, radio, film, and television recordings. Journalist and filmmaker Tamana Ayazi joins a mission to move two rare cassette collections out of Afghanistan before they are lost or destroyed.</p>
+          <div class="press-credit">Presented by Tamana Ayazi · An Almost Tangible production for BBC Radio 4</div>
+          <a class="press-link" href="https://www.bbc.co.uk/programmes/m002mmsh" target="_blank" rel="noopener noreferrer">Listen on BBC <span aria-hidden="true">↗</span></a>
+        </div>
+      </article>
+
+      <article class="press-card">
+        <div class="press-art">
+          <div class="press-outlet-mark">KALW</div>
+          <div class="press-format">Crosscurrents · Audio &amp; transcript</div>
+        </div>
+        <div class="press-content">
+          <div class="press-meta"><span>June 18, 2026</span><span>11:28 audio report</span></div>
+          <h2 class="press-title">Tapes That Cross Borders</h2>
+          <p class="press-description">Christopher Alam visits the Oakland archive and traces the dangerous, expensive route rare recordings travel from Afghanistan and Pakistan to preservation in California.</p>
+          <div class="press-credit">KALW Crosscurrents · By Christopher Alam</div>
+          <a class="press-link secondary" href="https://www.kalw.org/2026-06-18/its-resistance-the-afghan-cassette-archive-and-ephemera-under-threat" target="_blank" rel="noopener noreferrer">Listen &amp; read <span aria-hidden="true">↗</span></a>
+        </div>
+      </article>
+
+      <article class="press-card">
+        <div class="press-art">
+          <div class="press-outlet-mark">ACoM</div>
+          <div class="press-format">American Community Media · Feature</div>
+        </div>
+        <div class="press-content">
+          <div class="press-meta"><span>May 6, 2026</span><span>Written feature</span></div>
+          <h2 class="press-title">The Bay Area Archivist Saving Afghanistan’s Musical Legacy</h2>
+          <p class="press-description">A reported profile of the archive’s Oakland collection, Omid’s connection to Afghan music, and the cross-border network helping endangered tapes survive war, censorship, and displacement.</p>
+          <div class="press-credit">American Community Media · By Christopher Alam · Photography by Peter Schurmann</div>
+          <a class="press-link secondary" href="https://americancommunitymedia.org/news-exchange/the-bay-area-archivist-saving-afghanistans-musical-legacy/" target="_blank" rel="noopener noreferrer">Read the article <span aria-hidden="true">↗</span></a>
+        </div>
+      </article>
+    </div>
+
+    <blockquote class="press-quote">
+      <p>“What I’m doing is a form of resistance.”</p>
+      <cite>Omid J · quoted by KALW and American Community Media</cite>
+    </blockquote>
+  </section>
 </div>
 
 <div id="page-mission" class="page-section">
