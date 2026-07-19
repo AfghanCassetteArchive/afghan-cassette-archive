@@ -38,6 +38,35 @@ nav a.active{border-bottom:1px solid var(--accent)}
 .stat-label{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-light)}
 .hero-btn{display:inline-block;margin-top:1.5rem;background:var(--tape-dark);color:var(--accent-light);border:none;padding:12px 24px;font-family:var(--font-mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;border-radius:2px;transition:background .15s}
 .hero-btn:hover{background:#3A2510}
+/* Moving cassette-cover carousel on the homepage */
+.cover-showcase{position:relative;z-index:1;padding:1.4rem 0 3.2rem;overflow:hidden;border-bottom:.5px solid var(--border-strong);background:linear-gradient(180deg,var(--bg) 0%,var(--accent-pale) 100%)}
+.cover-showcase-head{max-width:1100px;margin:0 auto 1.1rem;padding:0 2rem;display:flex;align-items:end;justify-content:space-between;gap:1rem}
+.cover-showcase-kicker{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:3px}
+.cover-showcase-title{font-family:var(--font-display);font-size:clamp(1.2rem,3vw,1.8rem);font-weight:400;color:var(--ink)}
+.cover-showcase-note{font-size:10px;color:var(--ink-light);letter-spacing:.04em;text-align:right}
+.cover-carousel{position:relative;width:100%;overflow:hidden;padding:12px 0 20px;mask-image:linear-gradient(to right,transparent 0,#000 6%,#000 94%,transparent 100%);-webkit-mask-image:linear-gradient(to right,transparent 0,#000 6%,#000 94%,transparent 100%)}
+.cover-carousel::before,.cover-carousel::after{content:'';position:absolute;top:0;bottom:0;width:7vw;z-index:2;pointer-events:none}
+.cover-carousel::before{left:0;background:linear-gradient(90deg,var(--bg),transparent)}
+.cover-carousel::after{right:0;background:linear-gradient(-90deg,var(--bg),transparent)}
+.cover-carousel-track{--carousel-gap:18px;display:flex;gap:var(--carousel-gap);width:max-content;will-change:transform;animation:coverMarquee 72s linear infinite}
+.cover-carousel:hover .cover-carousel-track,.cover-carousel:focus-within .cover-carousel-track{animation-play-state:paused}
+.cover-carousel-group{display:flex;gap:var(--carousel-gap);align-items:center;flex-shrink:0}
+.cover-slide{appearance:none;-webkit-appearance:none;width:clamp(128px,15vw,184px);aspect-ratio:3/4;padding:0;border:0;border-radius:5px;background:var(--tape-dark);position:relative;overflow:hidden;cursor:pointer;box-shadow:0 7px 22px rgba(26,21,16,.18);transform:perspective(700px) rotateY(-3deg) scale(.94);transition:transform .28s ease,box-shadow .28s ease;flex-shrink:0}
+.cover-slide:nth-child(even){transform:perspective(700px) rotateY(3deg) translateY(8px) scale(.94)}
+.cover-slide:hover,.cover-slide:focus-visible{z-index:4;transform:perspective(700px) rotateY(0) translateY(-8px) scale(1.07);box-shadow:0 18px 42px rgba(26,21,16,.32);outline:2px solid var(--accent);outline-offset:4px}
+.cover-slide img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .35s ease,filter .35s ease}
+.cover-slide:hover img,.cover-slide:focus-visible img{transform:scale(1.035);filter:saturate(1.06)}
+.cover-slide-overlay{position:absolute;inset:auto 0 0;padding:2.4rem .75rem .65rem;background:linear-gradient(transparent,rgba(26,21,16,.9));color:#fff;text-align:left;opacity:.82;transition:opacity .2s}
+.cover-slide:hover .cover-slide-overlay,.cover-slide:focus-visible .cover-slide-overlay{opacity:1}
+.cover-slide-artist{display:block;font-family:var(--font-display);font-size:12px;font-weight:600;line-height:1.2;text-shadow:0 1px 4px #000}
+.cover-slide-album{display:block;font-size:8px;letter-spacing:.06em;text-transform:uppercase;color:var(--accent-light);margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cover-slide-action{position:absolute;top:8px;right:8px;width:27px;height:27px;border-radius:50%;display:grid;place-items:center;background:rgba(26,21,16,.78);color:var(--accent-light);font-size:13px;opacity:0;transform:scale(.8);transition:opacity .2s,transform .2s}
+.cover-slide:hover .cover-slide-action,.cover-slide:focus-visible .cover-slide-action{opacity:1;transform:scale(1)}
+@keyframes coverMarquee{from{transform:translateX(0)}to{transform:translateX(calc(-50% - (var(--carousel-gap) / 2)))}}
+.modal-cover-link{display:block;text-decoration:none;position:relative}
+.modal-cover-link::after{content:'View full-size cover ↗';position:absolute;right:9px;bottom:calc(1.25rem + 9px);background:rgba(26,21,16,.82);color:var(--accent-light);padding:5px 8px;border-radius:2px;font-size:9px;letter-spacing:.05em;opacity:0;transition:opacity .2s;pointer-events:none}
+.modal-cover-link:hover::after,.modal-cover-link:focus-visible::after{opacity:1}
+@media(prefers-reduced-motion:reduce){.cover-carousel-track{animation:none}.cover-carousel{overflow-x:auto;mask-image:none;-webkit-mask-image:none}.cover-carousel::before,.cover-carousel::after{display:none}.cover-slide{transform:none!important}}
 .archive-section{position:relative;z-index:1;max-width:1100px;margin:0 auto;padding:2rem 2rem 8rem}
 .toolbar{display:flex;align-items:center;gap:12px;margin-bottom:1.5rem;flex-wrap:wrap}
 .search-box{position:relative;flex:1;min-width:200px;max-width:320px}
@@ -152,6 +181,8 @@ footer .footer-note{font-size:10px;color:rgba(245,240,232,.3);letter-spacing:.06
   header{padding:0 1rem}.hero{padding:2rem 1rem}.archive-section{padding:1.5rem 1rem 8rem}
   .player-bar{padding:10px 1rem;gap:8px}.volume-wrap{display:none}.player-progress{min-width:60px}
   nav a{font-size:10px}
+  .cover-showcase-head{padding:0 1rem;align-items:flex-start;flex-direction:column}.cover-showcase-note{text-align:left}
+  .cover-carousel-track{--carousel-gap:12px;animation-duration:55s}.cover-slide{width:132px}
 }
 </style>
 </head>
@@ -181,6 +212,18 @@ footer .footer-note{font-size:10px;color:rgba(245,240,232,.3);letter-spacing:.06
     </div>
     <button class="hero-btn" onclick="showPage('archive',document.querySelector('[data-page=archive]'))">→ Explore the Archive</button>
   </div>
+  <section class="cover-showcase" aria-labelledby="cover-showcase-title">
+    <div class="cover-showcase-head">
+      <div>
+        <div class="cover-showcase-kicker">From the collection</div>
+        <h2 class="cover-showcase-title" id="cover-showcase-title">Cassette covers in motion</h2>
+      </div>
+      <div class="cover-showcase-note">Hover to pause · Click a cover to explore</div>
+    </div>
+    <div class="cover-carousel" id="cover-carousel" aria-label="Featured cassette covers">
+      <div class="cover-carousel-track" id="cover-carousel-track"></div>
+    </div>
+  </section>
 </div>
 
 <div id="page-archive" class="page-section">
@@ -235,7 +278,7 @@ footer .footer-note{font-size:10px;color:rgba(245,240,232,.3);letter-spacing:.06
       <div class="modal-title" id="modal-title-text">—</div>
       <button class="modal-close" onclick="closeModal()">✕</button>
     </div>
-    <img id="modal-cover" class="modal-cover" src="" alt="Cassette cover">
+    <a id="modal-cover-link" class="modal-cover-link" href="#" target="_blank" rel="noopener" aria-label="Open full-size cassette cover"><img id="modal-cover" class="modal-cover" src="" alt="Cassette cover"></a>
     <div class="modal-meta" id="modal-meta"></div>
     <div class="modal-tags" id="modal-tags"></div>
     <ul class="track-list" id="track-list"></ul>
@@ -282,12 +325,12 @@ const R2 = "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev";
 // Each entry: folder = exact R2 folder name, cover = true if cover.jpg exists inside
 const CASSETTES = [
   {id:1,  artist:"Abdullah Maqurai",          folder:"Abdullah Maqurai Vol 130",         album:"Vol. 130",                    era:"2000s",genre:"Folk",language:"Pashto",   cover:true, coverFile:"Abdullah Maqurai Vol 130.jpg", tracks:[{name:"Side A",file:"Abdullah Maqurai MMC 130 Side A.mp3"},{name:"Side B",file:"Abdullah Maqurai MMC 130 Side B.mp3"}]},
-  {id:2,  artist:"Afghan Gulcheen",           folder:"Afghan Gulcheen",                  album:"Afghan Gulcheen",             era:"1970s",genre:"Classical",language:"Dari",   cover:false,tracks:[{name:"Side A",file:"Afghan Gulcheen Side A.mp3"},{name:"Side B",file:"Afghan Gulcheen Side B.mp3"}]},
-  {id:3,  artist:"Afghan Local Folk Tunes",   folder:"Afghan Local Folk Tunes Afghan Music",album:"Afghan Music",            era:"1970s",genre:"Folk",     language:"Dari",   cover:false,tracks:[{name:"Side A",file:"Afghan Local Folk Tunes Side A.mp3"},{name:"Side B",file:"Afghan Local Folk Tunes Side B.mp3"}]},
-  {id:4,  artist:"Afghan Top DJ 2000",        folder:"Afghan Top Dj 2000",               album:"Afghan Top DJ 2000",          era:"2000s",genre:"Pop",      language:"Dari",   cover:false,tracks:[{name:"Side A",file:"Afghan Top Dj 2000 Side A.mp3"},{name:"Side B",file:"Afghan Top Dj 2000 Side B.mp3"}]},
-  {id:5,  artist:"Afsana",                    folder:"Afsana Afghan Music 1",            album:"Afghan Music Vol. 1",         era:"1980s",genre:"Classical",language:"Dari",   cover:false,tracks:[{name:"Side A",file:"Afsana Afghan Music 1 Side A.mp3"},{name:"Side B",file:"Afsana Afghan Music 1 Side B.mp3"}]},
-  {id:6,  artist:"Afsana Music Center",       folder:"Afsana Music center",              album:"Music Center",                era:"1980s",genre:"Classical",language:"Dari",   cover:false,tracks:[{name:"Side A",file:"Afsana Music Center Side A.mp3"},{name:"Side B",file:"Afsana Music Center Side B.mp3"}]},
-  {id:7,  artist:"Ahmad Morid",               folder:"Ahmad Morid Afghan Music 1",       album:"Afghan Music Vol. 1",         era:"1980s",genre:"Pop",      language:"Dari",   cover:false,tracks:[{name:"Side A",file:"Ahmad Morid Afghan Music 1 Side A.mp3"},{name:"Side B",file:"Ahmad Morid Afghan Music 1 Side B.mp3"}]},
+  {id:2,  artist:"Afghan Gulcheen",           folder:"Afghan Gulcheen",                  album:"Afghan Gulcheen",             era:"1970s",genre:"Classical",language:"Dari",   cover:true, coverFile:"Afghan Gulcheen.jpg", tracks:[{name:"Side A",file:"Gulcheen Afghan Music Side A.mp3"},{name:"Side B",file:"Gulcheen Afghan Music Side B.mp3"}]},
+  {id:3,  artist:"Afghan Local Folk Tunes",   folder:"Afghan Local Folk Tunes Afghan Music",album:"Afghan Music",            era:"1970s",genre:"Folk",     language:"Dari",   cover:true,coverFile:"Afghan Local Folk Tunes Afghan Music.jpg",tracks:[{name:"Side A",file:"Afghan Local Folk Tunes Side A.mp3"},{name:"Side B",file:"Afghan Local Folk Tunes Side B.mp3"}]},
+  {id:4,  artist:"Afghan Top DJ 2000",        folder:"Afghan Top Dj 2000",               album:"Afghan Top DJ 2000",          era:"2000s",genre:"Pop",      language:"Dari",   cover:true,coverFile:"Afghan Top Dj 2000.jpg",tracks:[{name:"Side A",file:"Afghan Top DJ 2000 Side A.mp3"},{name:"Side B",file:"Afghan Top DJ 2000 Side B .mp3"}]},
+  {id:5,  artist:"Afsana",                    folder:"Afsana Afghan Music 1",            album:"Afghan Music Vol. 1",         era:"1980s",genre:"Classical",language:"Dari",   cover:true, coverFile:"Afsana Afghan Music 1.jpg",tracks:[{name:"Side A",file:"Afsana Afghan Music 1 Side A.mp3"},{name:"Side B",file:"Afsana Afghan Music 1 Side B.mp3"}]},
+  {id:6,  artist:"Afsana Music Center",       folder:"Afsana Music center",              album:"Music Center",                era:"1980s",genre:"Classical",language:"Dari",   cover:true, coverFile:"Afsana Music center_Scan 173(1).jpg", tracks:[{name:"Side A",file:"Afsana Side A MC_01.mp3"},{name:"Side B",file:"Afsana Side B_01.mp3"}]},
+  {id:7,  artist:"Ahmad Morid",               folder:"Ahmad Morid Afghan Music 1",       album:"Afghan Music Vol. 1",         era:"1980s",genre:"Pop",      language:"Dari",   cover:true, coverFile:"Ahmad Morid Afghan Music 1.jpg",tracks:[{name:"Side A",file:"Ahmad Murid 1 Side A.mp3"},{name:"Side B",file:"Ahmad Murid 1 Side B.mp3"}]},
   {id:8,  artist:"Ahmad Shah Hassan",         folder:"Ahmad Shah Hassan",                album:"Ahmad Shah Hassan",           era:"1980s",genre:"Classical",language:"Dari",   cover:false,tracks:[{name:"Side A",file:"Ahmad Shah Hassan Side A.mp3"},{name:"Side B",file:"Ahmad Shah Hassan Side B.mp3"}]},
   {id:9,  artist:"Ahmad Walio",               folder:"Ahmad Walio Music Center 1",       album:"Music Center Vol. 1",         era:"1980s",genre:"Classical",language:"Dari",   cover:false,tracks:[{name:"Side A",file:"Ahmad Walio Music Center 1 Side A.mp3"},{name:"Side B",file:"Ahmad Walio Music Center 1 Side B.mp3"}]},
   {id:10, artist:"Ahmad Zahir",               folder:"Ahmad Zahir Album 3 Afghan Music ",album:"Album 3",                    era:"1970s",genre:"Pop",      language:"Dari",   cover:false,tracks:[{name:"Side A",file:"Ahmad Zahir Album 3 Side A.mp3"},{name:"Side B",file:"Ahmad Zahir Album 3 Side B.mp3"}]},
@@ -296,11 +339,11 @@ const CASSETTES = [
   {id:13, artist:"Akbar Ramesh",              folder:"Akbar Ramesh Taraneh",             album:"Taraneh",                     era:"1980s",genre:"Pop",      language:"Dari",   cover:false,tracks:[{name:"Side A",file:"Akbar Ramesh Taraneh Side A.mp3"},{name:"Side B",file:"Akbar Ramesh Taraneh Side B.mp3"}]},
   {id:14, artist:"Akram Osman",               folder:"Akram Osman Dastane Mard Qawal ast",album:"Dastane Mard Qawal",        era:"1980s",genre:"Folk",     language:"Dari",   cover:false,tracks:[{name:"Side A",file:"Akram Osman Dastane Mard Qawal Side A.mp3"},{name:"Side B",file:"Akram Osman Dastane Mard Qawal Side B.mp3"}]},
   {id:15, artist:"Akram Osman (Poems 2)",     folder:"Akram Osman Poems Cassette 2",     album:"Poems Cassette 2",            era:"1980s",genre:"Classical",language:"Dari",   cover:false,tracks:[{name:"Side A",file:"Akram Osman Poems 2 Side A.mp3"},{name:"Side B",file:"Akram Osman Poems 2 Side B.mp3"}]},
-  {id:16, artist:"Arzu & Habib Sharif",       folder:"Arzu and Habib Sharif Afghan Music",album:"Afghan Music",              era:"1980s",genre:"Folk",     language:"Dari",   cover:false,tracks:[{name:"Side A",file:"Arzu and Habib Sharif Afghan Music Side A.mp3"},{name:"Side B",file:"Arzu and Habib Sharif Afghan Music Side B.mp3"}]},
+  {id:16, artist:"Arzu & Habib Sharif",       folder:"Arzu wa Habib Sharif Majlisi",album:"Majlisi",                  era:"1980s",genre:"Folk",     language:"Dari",   cover:true, coverFile:"459_edited.jpg", tracks:[{name:"Side A",file:"Arzu and Habib Sharif Majlisi Side A.mp3"},{name:"Side B",file:"Arzu and Habib Sharif Majlisi Side B.mp3"}]},
   {id:17, artist:"Faiz Karezi",               folder:"Faiz Karezi",                      album:"Faiz Karezi",                 era:"1970s",genre:"Classical",language:"Dari",   cover:false,tracks:[{name:"Side A",file:"Faiz Karezi Side A.mp3"},{name:"Side B",file:"Faiz Karezi Side B.mp3"}]},
-  {id:18, artist:"Farhad Darya",              folder:"Farhad Darya Qalbeh Ishq",         album:"Qalbeh Ishq",                 era:"1990s",genre:"Pop",      language:"Dari",   cover:false,tracks:[{name:"Side A",file:"Farhad Darya Qalbeh Ishq Side A.mp3"},{name:"Side B",file:"Farhad Darya Qalbeh Ishq Side B.mp3"}]},
-  {id:19, artist:"Fawad Ramez Farhad",        folder:"Fawad Ramez Farhad Music",         album:"Fawad Ramez Farhad",          era:"1990s",genre:"Pop",      language:"Dari",   cover:false,tracks:[{name:"Side A",file:"Fawad Ramez Farhad Music Side A.mp3"},{name:"Side B",file:"Fawad Ramez Farhad Music Side B.mp3"}]},
-  {id:20, artist:"Female Radio Singers",      folder:"Female Radio Singers",             album:"Female Radio Singers",        era:"1960s",genre:"Radio",    language:"Dari",   cover:false,tracks:[{name:"Side A",file:"Female Radio Singers Side A.mp3"},{name:"Side B",file:"Female Radio Singers Side B.mp3"}]},
+  {id:18, artist:"Farhad Darya",              folder:"Farhad Darya Qalbeh Ishq",         album:"Qalbeh Ishq",                 era:"1990s",genre:"Pop",      language:"Dari",   cover:true, coverFile:"IMG_20260208_0003.jpg", tracks:[{name:"Side A",file:"FD Qalbeh Ishq Side A.mp3"},{name:"Side B",file:"FD Qalbeh Ishq Side B.mp3"}]},
+  {id:19, artist:"Fawad Ramez Farhad",        folder:"Fawad Ramez Farhad Music",         album:"Fawad Ramez Farhad",          era:"1990s",genre:"Pop",      language:"Dari",   cover:true, coverFile:"Fawad Ramez Farhad Music_Fawad Ramez Farhad Music.jpg", tracks:[{name:"Side A",file:"Fawad Ramez Farhad Music Side A.mp3"},{name:"Side B",file:"Fawad Ramez Farhad Music Side B.mp3"}]},
+  {id:20, artist:"Female Radio Singers",      folder:"Female Radio Singers",             album:"Female Radio Singers",        era:"1960s",genre:"Radio",    language:"Dari",   cover:true, coverFile:"IMG_20260205_0004_edited.jpg", tracks:[{name:"Side A",file:"Female Radio Singer Tape Recorded 1973 MNK Archive Side A.mp3"},{name:"Side B",file:"Female Radio Singers Side B.mp3"}]},
   {id:21, artist:"Ghulam Farooq (Ariana)",    folder:"Ghulam Farooq Ariana music",       album:"Ariana Music",                era:"1970s",genre:"Classical",language:"Dari",   cover:false,tracks:[{name:"Side A",file:"Ghulam Farooq Ariana Music Side A.mp3"},{name:"Side B",file:"Ghulam Farooq Ariana Music Side B.mp3"}]},
   {id:22, artist:"Ghulam Farooq",             folder:"Ghulam Farooq",                    album:"Ghulam Farooq",               era:"1970s",genre:"Classical",language:"Dari",   cover:false,tracks:[{name:"Side A",file:"Ghulam Farooq Side A.mp3"},{name:"Side B",file:"Ghulam Farooq Side B.mp3"}]},
   {id:23, artist:"Gorohe Baraan",             folder:"Gorohe Baraan",                    album:"Gorohe Baraan",               era:"1990s",genre:"Pop",      language:"Dari",   cover:false,tracks:[{name:"Side A",file:"Gorohe Baraan Side A.mp3"},{name:"Side B",file:"Gorohe Baraan Side B.mp3"}]},
@@ -405,6 +448,10 @@ const CASSETTES = [
   {id:122,artist:"Zahir Howaida (Album 4)",   folder:"Zahir Howaida Album 4 Afghan Music",album:"Album 4",                   era:"1980s",genre:"Pop",      language:"Dari",   cover:false,tracks:[{name:"Side A",file:"Zahir Howaida Album 4 Side A.mp3"},{name:"Side B",file:"Zahir Howaida Album 4 Side B.mp3"}]},
   {id:123,artist:"Zahir Howaida (Ariana)",    folder:"Zahir Howaida Ariana Music 1",     album:"Ariana Music Vol. 1",         era:"1980s",genre:"Pop",      language:"Dari",   cover:false,tracks:[{name:"Side A",file:"Zahir Howaida Ariana Music 1 Side A.mp3"},{name:"Side B",file:"Zahir Howaida Ariana Music 1 Side B.mp3"}]},
   {id:124,artist:"Zmaray Rasul Rahim",        folder:"Zmaray Rasul Rahim Music",         album:"Zmaray Rasul Rahim",          era:"1980s",genre:"Folk",     language:"Pashto", cover:false,tracks:[{name:"Side A",file:"Zmaray Rasul Rahim Music Side A.mp3"},{name:"Side B",file:"Zmaray Rasul Rahim Music Side B.mp3"}]},
+  {id:125,artist:"Arzu & Habib Sharif",       folder:"Arzu and Habib Sharif Afghan Music",album:"Afghan Music",                era:"1980s",genre:"Folk",     language:"Dari",   cover:true, coverFile:"Arzu and Habib Sharif Afghan Music_Arzu and Habib Sharif Afghan Music.jpg", tracks:[{name:"Side A",file:"Arzu and Habib Sharif Afghan Music Side A.mp3"},{name:"Side B",file:"Arzu and Habib Sharif Afghan Music Side B.mp3"}]},
+  {id:126,artist:"Bakht Zamina",              folder:"Bakht Zamina Afghan Music 2",         album:"Afghan Music Vol. 2",         era:"Unknown",genre:"Folk",     language:"Pashto", cover:true, coverFile:"Bakht Zamina Afghan Music 2_Bakht Zamina Afghan Music 2.jpg", tracks:[]},
+  {id:127,artist:"Bakht Zamina",              folder:"Bakht Zamina Afghan Music 1",         album:"Afghan Music Vol. 1",         era:"Unknown",genre:"Folk",     language:"Pashto", cover:true, coverFile:"IMG_20260206_0002.jpg", tracks:[{name:"Side A",file:"Bakht Zarmina AM Side A.mp3"},{name:"Side B",file:"Bakht Zarmina AM Side B.mp3"}]},
+  {id:128,artist:"Bangicha & Najiba",           folder:"Bangicha and Najiba Afghan Music",     album:"Afghan Music",                era:"Unknown",genre:"Folk",     language:"Dari",   cover:true, coverFile:"Bangicha and Najiba Afghan Music_Scan 326(2).jpg", tracks:[{name:"Side A",file:"Najiba and Bangicha Afgha Music Side A.mp3"},{name:"Side B",file:"Bangicha and Najiba Afghan Music Side B.mp3"}]},
 ];
 
 const audio = document.getElementById("audio-el");
@@ -417,6 +464,23 @@ function r2url(folder,file){
 function coverUrl(c){
   const file = c.coverFile || "cover.jpg";
   return `${R2}/${encodeURIComponent(c.folder)}/${encodeURIComponent(file)}`;
+}
+
+function renderHomeCarousel(){
+  const track=document.getElementById("cover-carousel-track");
+  if(!track)return;
+  const featured=CASSETTES.filter(c=>c.cover).slice(0,24);
+  if(!featured.length){
+    document.getElementById("cover-carousel").style.display="none";
+    return;
+  }
+  const makeSlides=(isClone=false)=>featured.map(c=>`
+    <button class="cover-slide" type="button" ${isClone?'tabindex="-1" aria-hidden="true"':''} aria-label="Open ${c.artist} — ${c.album}" onclick="openModal(${c.id})">
+      <img src="${coverUrl(c)}" alt="${c.artist} — ${c.album} cassette cover" loading="${isClone?'lazy':'eager'}" onerror="this.closest('.cover-slide').style.display='none'">
+      <span class="cover-slide-action" aria-hidden="true">↗</span>
+      <span class="cover-slide-overlay"><span class="cover-slide-artist">${c.artist}</span><span class="cover-slide-album">${c.album}</span></span>
+    </button>`).join("");
+  track.innerHTML=`<div class="cover-carousel-group">${makeSlides(false)}</div><div class="cover-carousel-group" aria-hidden="true">${makeSlides(true)}</div>`;
 }
 
 function showPage(name,el){
@@ -469,7 +533,19 @@ function openModal(id){
   modalCassette=c;
   document.getElementById("modal-title-text").textContent=c.artist;
   const cover=document.getElementById("modal-cover");
-  if(c.cover){cover.src=coverUrl(c);cover.classList.add("visible")}else{cover.classList.remove("visible")}
+  const coverLink=document.getElementById("modal-cover-link");
+  if(c.cover){
+    const fullCoverUrl=coverUrl(c);
+    cover.src=fullCoverUrl;
+    cover.alt=`${c.artist} — ${c.album} cassette cover`;
+    cover.classList.add("visible");
+    coverLink.href=fullCoverUrl;
+    coverLink.style.display="block";
+  }else{
+    cover.classList.remove("visible");
+    coverLink.removeAttribute("href");
+    coverLink.style.display="none";
+  }
   document.getElementById("modal-meta").innerHTML=`
     <div class="modal-row"><span class="modal-label">Album</span><span class="modal-val">${c.album}</span></div>
     <div class="modal-row"><span class="modal-label">Era</span><span class="modal-val">${c.era}</span></div>
@@ -553,8 +629,9 @@ document.getElementById("searchInput").addEventListener("input",e=>{searchQuery=
 document.getElementById("sortSelect").addEventListener("change",e=>{sortMode=e.target.value;renderGrid()});
 
 document.getElementById("statTotal").textContent=CASSETTES.length;
-// Pre-render grid so archive is ready when user clicks it
+// Pre-render the archive and homepage carousel
 renderGrid();
+renderHomeCarousel();
 </script>
 </body>
 </html>
