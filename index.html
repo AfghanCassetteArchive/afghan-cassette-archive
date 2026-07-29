@@ -185,6 +185,87 @@ footer .footer-note{font-size:10px;color:rgba(245,240,232,.3);letter-spacing:.06
   .cover-carousel-track{--carousel-gap:12px;animation-duration:55s}.cover-slide{width:132px}
 }
 
+
+/* 24/7 ARCHIVE RADIO */
+.radio-page{min-height:calc(100vh - 56px);padding:3.2rem 2rem 9rem;background:linear-gradient(180deg,var(--bg) 0%,var(--accent-pale) 42%,var(--bg) 100%)}
+.radio-intro{max-width:1080px;margin:0 auto 1.6rem;padding-bottom:1.8rem;border-bottom:.5px solid var(--border-strong)}
+.radio-kicker{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:.7rem}
+.radio-intro h1{font-family:var(--font-display);font-size:clamp(2.4rem,6vw,4.7rem);font-weight:400;line-height:1;margin-bottom:1rem}
+.radio-intro h1 em{font-weight:400;color:var(--accent)}
+.radio-intro p{max-width:760px;color:var(--ink-mid);font-size:13px;line-height:1.8}
+.radio-station{max-width:1080px;margin:0 auto;background:var(--tape-dark);color:var(--accent-light);border:1px solid rgba(184,92,44,.7);border-radius:6px;overflow:hidden;box-shadow:0 24px 70px rgba(26,21,16,.25)}
+.radio-station-top{min-height:52px;padding:10px 14px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:12px;border-bottom:1px solid rgba(232,196,168,.13);background:#201307}
+.radio-live-mark{display:flex;align-items:center;gap:8px;font-size:9px;letter-spacing:.13em;text-transform:uppercase;color:rgba(245,240,232,.55)}
+.radio-live-dot{width:8px;height:8px;border-radius:50%;background:rgba(245,240,232,.25)}
+.radio-station.is-playing .radio-live-dot{background:#e84b3c;box-shadow:0 0 0 5px rgba(232,75,60,.13);animation:radioPulse 1.6s ease-in-out infinite}
+.radio-station-name{font-family:var(--font-display);font-size:14px;text-align:center;color:var(--accent-light)}
+.radio-small-button{justify-self:end;background:transparent;border:1px solid rgba(232,196,168,.28);color:var(--accent-light);font-family:var(--font-mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;padding:7px 10px;border-radius:2px;cursor:pointer}
+.radio-small-button:hover{background:rgba(184,92,44,.2);border-color:var(--accent)}
+.radio-console{display:grid;grid-template-columns:minmax(280px,.78fr) minmax(0,1.22fr);gap:0}
+.radio-cover-wrap{position:relative;min-height:510px;background:#110c08;display:flex;align-items:center;justify-content:center;padding:2.2rem;border-right:1px solid rgba(232,196,168,.13);overflow:hidden}
+.radio-cover-wrap::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 35%,rgba(184,92,44,.22),transparent 60%)}
+.radio-cover{position:relative;z-index:1;display:none;width:min(100%,370px);max-height:470px;aspect-ratio:3/4;object-fit:cover;border-radius:4px;box-shadow:0 24px 60px rgba(0,0,0,.55)}
+.radio-cover.visible{display:block}
+.radio-cover-placeholder{position:relative;z-index:1;width:min(100%,330px);aspect-ratio:3/4;border:1px solid rgba(232,196,168,.22);background:linear-gradient(145deg,#34200d,#160e07);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;color:rgba(232,196,168,.42);text-align:center;font-family:var(--font-display);font-size:17px;font-style:italic}
+.radio-cover-placeholder svg{width:88px;height:88px}
+.radio-now{padding:3.1rem;display:flex;flex-direction:column;justify-content:center;min-width:0}
+.radio-now-label,.radio-panel-kicker{font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:.65rem}
+.radio-now h2{font-family:var(--font-display);font-size:clamp(2rem,4vw,3.5rem);font-weight:400;line-height:1.06;color:var(--accent-light);margin-bottom:.6rem}
+.radio-album{font-size:13px;color:rgba(245,240,232,.63);margin-bottom:.4rem}
+.radio-track{font-size:11px;color:rgba(245,240,232,.38);letter-spacing:.04em;margin-bottom:1rem}
+.radio-tags{display:flex;gap:6px;flex-wrap:wrap;min-height:24px}
+.radio-tags .tag{background:rgba(212,232,216,.12);border-color:rgba(212,232,216,.22);color:#b7d8bd}
+.radio-tags .tag-lang{background:rgba(232,196,168,.1);color:var(--accent-light);border-color:rgba(232,196,168,.22)}
+.radio-main-controls{display:flex;align-items:center;gap:14px;margin:2.2rem 0 1rem}
+.radio-start-button{min-width:190px;background:var(--accent);border:0;color:white;font-family:var(--font-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;padding:14px 20px;border-radius:3px;cursor:pointer}
+.radio-start-button:hover{background:#a94f25}
+.radio-skip-button{width:46px;height:46px;border-radius:50%;background:rgba(245,240,232,.06);border:1px solid rgba(245,240,232,.13);color:var(--accent-light);cursor:pointer;font-size:13px}
+.radio-skip-button:hover{background:rgba(184,92,44,.2);border-color:var(--accent)}
+.radio-options{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:1.4rem}
+.radio-option-button{background:transparent;border:1px solid rgba(245,240,232,.13);color:rgba(245,240,232,.42);font-family:var(--font-mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;padding:7px 10px;border-radius:100px;cursor:pointer}
+.radio-option-button:hover,.radio-option-button.active{border-color:var(--accent);color:var(--accent-light);background:rgba(184,92,44,.13)}
+.radio-volume-row{display:grid;grid-template-columns:auto minmax(120px,280px);align-items:center;gap:12px;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:rgba(245,240,232,.4)}
+.radio-volume-row input{width:100%;accent-color:var(--accent)}
+.radio-status{margin-top:1rem;font-size:9px;line-height:1.6;color:rgba(245,240,232,.3);max-width:520px}
+.radio-stats{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid rgba(232,196,168,.13);background:#1b1007}
+.radio-stats div{padding:1rem 1.25rem;border-right:1px solid rgba(232,196,168,.1);display:flex;align-items:baseline;gap:8px}
+.radio-stats div:last-child{border-right:0}
+.radio-stats strong{font-family:var(--font-display);font-size:1.7rem;font-weight:400;color:var(--accent-light)}
+.radio-stats span{font-size:8px;letter-spacing:.1em;text-transform:uppercase;color:rgba(245,240,232,.33)}
+.radio-lower-grid{max-width:1080px;margin:18px auto 0;display:grid;grid-template-columns:1.2fr .8fr;gap:18px}
+.radio-panel{background:var(--bg-card);border:.5px solid var(--border-strong);padding:1.4rem;box-shadow:var(--shadow)}
+.radio-panel-heading{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:.8rem}
+.radio-panel h3{font-family:var(--font-display);font-size:1.45rem;font-weight:400}
+.radio-recent{list-style:none;counter-reset:radioRecent}
+.radio-recent li{counter-increment:radioRecent;display:grid;grid-template-columns:28px minmax(0,1fr) auto;gap:10px;align-items:center;padding:9px 0;border-bottom:.5px solid var(--border)}
+.radio-recent li::before{content:counter(radioRecent,decimal-leading-zero);font-size:9px;color:var(--ink-light)}
+.radio-recent li:last-child{border-bottom:0}
+.radio-recent-main{min-width:0}
+.radio-recent-artist{font-family:var(--font-display);font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.radio-recent-track{font-size:9px;color:var(--ink-light);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.radio-recent-time{font-size:8px;color:var(--ink-light)}
+.radio-recent .radio-empty{display:block;color:var(--ink-light);font-size:11px;font-style:italic}
+.radio-recent .radio-empty::before{display:none}
+.radio-info-panel p{font-size:11px;line-height:1.75;color:var(--ink-mid);margin-top:.75rem}
+.radio-upgrade-note{border-left:2px solid var(--accent);padding-left:10px}
+@keyframes radioPulse{0%,100%{opacity:1}50%{opacity:.45}}
+body.cafe-mode{overflow:hidden;background:#0d0905}
+body.cafe-mode header,body.cafe-mode footer,body.cafe-mode .player-bar,body.cafe-mode .radio-intro,body.cafe-mode .radio-lower-grid{display:none!important}
+body.cafe-mode #page-radio{display:block!important}
+body.cafe-mode .radio-page{padding:0;min-height:100vh;background:#0d0905}
+body.cafe-mode .radio-station{max-width:none;width:100%;height:100vh;border:0;border-radius:0;display:grid;grid-template-rows:auto 1fr auto}
+body.cafe-mode .radio-console{min-height:0}
+body.cafe-mode .radio-cover-wrap{min-height:0}
+body.cafe-mode .radio-cover{width:auto;height:min(69vh,700px);max-height:100%}
+body.cafe-mode .radio-now{padding:clamp(2rem,5vw,5rem)}
+body.cafe-mode .radio-now h2{font-size:clamp(3rem,6vw,6.5rem)}
+body.cafe-mode .radio-station-top{padding:14px 24px}
+@media(max-width:760px){
+  .radio-page{padding:2.2rem 1rem 8rem}.radio-station-top{grid-template-columns:1fr auto}.radio-station-name{display:none}.radio-console{grid-template-columns:1fr}.radio-cover-wrap{min-height:auto;max-height:430px;border-right:0;border-bottom:1px solid rgba(232,196,168,.13);padding:1.4rem}.radio-cover{max-height:380px;width:auto}.radio-cover-placeholder{height:340px;width:255px}.radio-now{padding:2rem 1.4rem}.radio-main-controls{justify-content:center}.radio-start-button{min-width:160px}.radio-stats{grid-template-columns:1fr}.radio-stats div{border-right:0;border-bottom:1px solid rgba(232,196,168,.1)}.radio-stats div:last-child{border-bottom:0}.radio-lower-grid{grid-template-columns:1fr}
+  body.cafe-mode .radio-console{grid-template-columns:1fr;overflow:auto}.radio-station-top{position:relative;z-index:3}body.cafe-mode .radio-cover-wrap{max-height:46vh}body.cafe-mode .radio-now{padding:1.2rem}body.cafe-mode .radio-now h2{font-size:2rem}body.cafe-mode .radio-main-controls{margin:1rem 0}
+}
+
+
 /* HISTORY PRESENTATION */
 .hero-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:1.5rem}
 .hero-actions .hero-btn{margin-top:0}
@@ -334,6 +415,7 @@ footer .footer-note{font-size:10px;color:rgba(245,240,232,.3);letter-spacing:.06
   </div>
   <nav>
     <a class="active" data-page="home" onclick="showPage('home',this)">Home</a>
+    <a data-page="radio" onclick="showPage('radio',this)">Radio</a>
     <a data-page="archive" onclick="showPage('archive',this)">Archive</a>
     <a data-page="history" onclick="showPage('history',this)">History</a>
     <a data-page="press" onclick="showPage('press',this)">Press</a>
@@ -365,8 +447,94 @@ footer .footer-note{font-size:10px;color:rgba(245,240,232,.3);letter-spacing:.06
       <div class="stat"><span class="stat-num">5</span><span class="stat-label">Decades</span></div>
       <div class="stat"><span class="stat-num">∞</span><span class="stat-label">Preservation</span></div>
     </div>
-    <div class="hero-actions"><button class="hero-btn" onclick="showPage('archive',document.querySelector('[data-page=archive]'))">→ Explore the Archive</button><button class="hero-btn secondary" onclick="showPage('history',document.querySelector('[data-page=history]'))">Explore the History →</button><button class="hero-btn secondary" onclick="showPage('press',document.querySelector('[data-page=press]'))">Press &amp; Features →</button><button class="hero-btn secondary" onclick="showPage('events',document.querySelector('[data-page=events]'))">Past Events →</button></div>
+    <div class="hero-actions"><button class="hero-btn" onclick="showPage('radio',document.querySelector('[data-page=radio]'))">▶ Listen to Archive Radio</button><button class="hero-btn secondary" onclick="showPage('archive',document.querySelector('[data-page=archive]'))">Explore the Archive →</button><button class="hero-btn secondary" onclick="showPage('history',document.querySelector('[data-page=history]'))">Explore the History →</button><button class="hero-btn secondary" onclick="showPage('press',document.querySelector('[data-page=press]'))">Press &amp; Features →</button><button class="hero-btn secondary" onclick="showPage('events',document.querySelector('[data-page=events]'))">Past Events →</button></div>
   </div>
+</div>
+
+
+<div id="page-radio" class="page-section">
+  <main class="radio-page">
+    <section class="radio-intro">
+      <div class="radio-kicker">Afghan Cassette Archive · Continuous listening</div>
+      <h1>Archive <em>Radio</em></h1>
+      <p>Play every available cassette recording continuously, track by track, along with special radio-only selections that remain hidden from the public cassette archive.</p>
+    </section>
+
+    <section class="radio-station" id="radio-station" aria-label="Afghan Cassette Archive Radio player">
+      <div class="radio-station-top">
+        <div class="radio-live-mark"><span class="radio-live-dot"></span><span id="radio-live-label">Ready to play</span></div>
+        <div class="radio-station-name">Afghan Cassette Archive Radio</div>
+        <button class="radio-small-button" id="radio-cafe-btn" type="button" onclick="toggleCafeMode()">Enter Café Mode</button>
+      </div>
+
+      <div class="radio-console">
+        <div class="radio-cover-wrap">
+          <img id="radio-cover" class="radio-cover" alt="" src="">
+          <div id="radio-cover-placeholder" class="radio-cover-placeholder">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true">
+              <rect x="2" y="6" width="20" height="12" rx="2"/>
+              <circle cx="8" cy="12" r="2"/><circle cx="16" cy="12" r="2"/>
+              <path d="M8 14h8"/>
+            </svg>
+            <span>Afghan Cassette Archive</span>
+          </div>
+        </div>
+
+        <div class="radio-now">
+          <div class="radio-now-label">Now playing</div>
+          <h2 id="radio-artist">Press Start Radio</h2>
+          <div class="radio-album" id="radio-album">All available cassette recordings</div>
+          <div class="radio-track" id="radio-track">Continuous archive rotation</div>
+          <div class="radio-tags" id="radio-tags"></div>
+
+          <div class="radio-main-controls">
+            <button class="radio-skip-button" type="button" onclick="advanceRadio(-1)" aria-label="Previous radio track">◀</button>
+            <button class="radio-start-button" id="radio-start-btn" type="button" onclick="startRadio()">▶ Start Radio</button>
+            <button class="radio-skip-button" type="button" onclick="advanceRadio(1)" aria-label="Next radio track">▶</button>
+          </div>
+
+          <div class="radio-options">
+            <button class="radio-option-button active" id="radio-shuffle-btn" type="button" onclick="setRadioOrder('shuffle')">Shuffle rotation</button>
+            <button class="radio-option-button" id="radio-alpha-btn" type="button" onclick="setRadioOrder('alphabetical')">A–Z rotation</button>
+          </div>
+
+          <div class="radio-volume-row">
+            <span>Volume</span>
+            <input type="range" id="radio-volume" min="0" max="1" step="0.02" value="1" aria-label="Radio volume">
+          </div>
+          <div class="radio-status" id="radio-status">Press play once. The station will continue until this browser tab is closed.</div>
+        </div>
+      </div>
+
+      <div class="radio-stats">
+        <div><strong id="radio-album-count">0</strong><span>albums with audio</span></div>
+        <div><strong id="radio-track-count">0</strong><span>audio files in rotation</span></div>
+        <div><strong id="radio-queue-count">0</strong><span>remaining in queue</span></div>
+      </div>
+    </section>
+
+    <section class="radio-lower-grid">
+      <div class="radio-panel">
+        <div class="radio-panel-heading">
+          <div>
+            <span class="radio-panel-kicker">Listening history</span>
+            <h3>Recently played</h3>
+          </div>
+        </div>
+        <ol class="radio-recent" id="radio-recent">
+          <li class="radio-empty">Nothing has played yet.</li>
+        </ol>
+      </div>
+
+      <div class="radio-panel radio-info-panel">
+        <span class="radio-panel-kicker">Restaurant and café use</span>
+        <h3>Designed for continuous playback</h3>
+        <p>Café Mode enlarges the cover and controls, requests fullscreen, and keeps the display awake where the browser supports it.</p>
+        <p>This version runs directly in each browser and now combines cassette audio with hidden radio-exclusive tracks. Different restaurants begin their own rotation when they press play; they are not synchronized to the same broadcast moment.</p>
+        <p class="radio-upgrade-note">A future Icecast or AzuraCast stream URL can replace the local rotation when one synchronized station is needed.</p>
+      </div>
+    </section>
+  </main>
 </div>
 
 <div id="page-archive" class="page-section">
@@ -674,7 +842,7 @@ footer .footer-note{font-size:10px;color:rgba(245,240,232,.3);letter-spacing:.06
       <path d="M8 14h8" stroke-width="1"/>
     </svg>
   </div>
-  <div class="player-idle" id="player-idle">Click a cassette to start playing</div>
+  <div class="player-idle" id="player-idle">Choose a cassette or start Archive Radio</div>
   <div class="player-info" id="player-info" style="display:none">
     <div class="player-artist" id="player-artist">—</div>
     <div class="player-album" id="player-album">—</div>
@@ -940,6 +1108,105 @@ const CASSETTES = [
 const audio = document.getElementById("audio-el");
 let currentCassetteId=null,currentTrackIdx=0,isPlaying=false;
 let activeFilter="all",searchQuery="",sortMode="artist";
+let playbackMode="archive";
+let radioOrder="shuffle";
+let radioQueue=[];
+let radioQueueIndex=-1;
+let radioRecent=[];
+let radioWakeLock=null;
+let currentRadioItem=null;
+
+const RADIO_ONLY_TRACKS = [
+  {
+    source:"radio-only",
+    radioOnlyId:"jamal-jamalo-instrumental",
+    folder:"Radio Tracks",
+    file:"Jamal jamalo instrumental.mp3",
+    artist:"Jamal Jamalo",
+    album:"Radio Exclusive",
+    trackName:"Instrumental",
+    era:"",
+    language:"",
+    genres:["Radio Exclusive","Instrumental"]
+  },
+  {
+    source:"radio-only",
+    radioOnlyId:"najib-rastagar-flute",
+    folder:"Radio Tracks",
+    file:"Instrumental 1.mp3",
+    artist:"Najib Rastagar",
+    album:"Radio Exclusive",
+    trackName:"Flute",
+    era:"",
+    language:"",
+    genres:["Radio Exclusive","Instrumental","Flute"]
+  },
+  {
+    source:"radio-only",
+    radioOnlyId:"rock-instrumental",
+    folder:"Radio Tracks",
+    file:"Instrumental Rock.mp3",
+    artist:"Afghan Cassette Archive",
+    album:"Radio Exclusive",
+    trackName:"Rock Instrumental",
+    era:"",
+    language:"",
+    genres:["Radio Exclusive","Instrumental","Rock"]
+  },
+  {
+    source:"radio-only",
+    radioOnlyId:"ustad-mahsrar-sitar",
+    folder:"Radio Tracks",
+    file:"Instrumental.mp3",
+    artist:"Ustad Mahsrar",
+    album:"Radio Exclusive",
+    trackName:"Sitar",
+    era:"",
+    language:"Instrumental",
+    genres:["Radio Exclusive","Instrumental","Sitar"]
+  },
+  {
+    source:"radio-only",
+    radioOnlyId:"nashenas-zama-negar-rang-e",
+    folder:"Radio Tracks",
+    file:"Nashenas Zama Negar Rangi Radio.mp3",
+    artist:"Nashenas",
+    album:"Radio Exclusive",
+    trackName:"Zama Negar Rang-e",
+    era:"",
+    language:"",
+    genres:["Radio Exclusive"]
+  },
+  {
+    source:"radio-only",
+    radioOnlyId:"anjali-banerji-agar-bud-baja-bud",
+    folder:"Radio Tracks",
+    file:"Anjali Agar buud baja Bud.mp3",
+    artist:"Anjali Banerji",
+    album:"Radio Exclusive",
+    trackName:"Agar Bud Baja Bud",
+    era:"",
+    language:"",
+    genres:["Radio Exclusive"]
+  }
+];
+
+const RADIO_PLAYLIST = [
+  ...CASSETTES.flatMap(c=>
+    (c.tracks||[]).map((track,trackIdx)=>({
+      source:"archive",
+      cassetteId:c.id,
+      trackIdx,
+      artist:c.artist,
+      album:c.album,
+      trackName:track.name,
+      era:c.era||"",
+      language:c.language||"",
+      genres:genreList(c)
+    }))
+  ),
+  ...RADIO_ONLY_TRACKS
+];
 
 function r2url(folder,file){
   return `${R2}/${encodeURIComponent(folder)}/${encodeURIComponent(file)}`;
@@ -982,6 +1249,7 @@ function showPage(name,el){
   if(el)el.classList.add("active");
   if(name==="archive")renderGrid();
   if(name==="history")initHistory();
+  if(name==="radio")initRadio();
 }
 
 function filteredCassettes(){
@@ -1061,60 +1329,437 @@ document.addEventListener("keydown",e=>{
   if((historyActive||lightboxOpen)&&e.key==="ArrowLeft")changeHistorySlide(-1);
 });
 
-function playTrack(cassetteId,trackIdx){
-  const c=CASSETTES.find(x=>x.id===cassetteId);
-  if(!c)return;
-  currentCassetteId=cassetteId;
-  currentTrackIdx=trackIdx;
-  audio.src=r2url(c.folder,c.tracks[trackIdx].file);
-  audio.play().catch(()=>{});
-  isPlaying=true;
+function setPlayIcon(playing){
+  const icon=document.getElementById("play-icon");
+  if(icon)icon.innerHTML=playing
+    ?'<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>'
+    :'<path d="M8 5v14l11-7z"/>';
+  const radioButton=document.getElementById("radio-start-btn");
+  if(radioButton){
+    if(playbackMode==="radio"&&playing)radioButton.textContent="❚❚ Pause Radio";
+    else if(playbackMode==="radio"&&currentRadioItem)radioButton.textContent="▶ Resume Radio";
+    else radioButton.textContent="▶ Start Radio";
+  }
+}
+
+function updateMediaSessionData({title,artist,album,artworkUrl=""}){
+  if(!("mediaSession" in navigator))return;
+  const artwork=artworkUrl?[{src:artworkUrl,sizes:"512x512",type:"image/jpeg"}]:[];
+  try{
+    navigator.mediaSession.metadata=new MediaMetadata({
+      title,
+      artist,
+      album,
+      artwork
+    });
+  }catch(e){}
+}
+
+function updateSharedPlayerData({artist,album,trackName,artworkUrl=""}){
   document.getElementById("player-idle").style.display="none";
   document.getElementById("player-info").style.display="block";
   document.getElementById("player-controls").style.display="flex";
   document.getElementById("player-progress").style.display="flex";
   document.getElementById("volume-wrap").style.display="flex";
-  document.getElementById("player-artist").textContent=c.artist;
-  document.getElementById("player-album").textContent=c.tracks[trackIdx].name+(c.era?" · "+c.era:"");
-  document.getElementById("play-icon").innerHTML='<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>';
+  document.getElementById("player-artist").textContent=(playbackMode==="radio"?"RADIO · ":"")+artist;
+  document.getElementById("player-album").textContent=trackName+" · "+album;
+  updateMediaSessionData({title:trackName,artist,album,artworkUrl});
+}
+
+function updateSharedPlayer(c,trackIdx){
+  const track=c.tracks[trackIdx];
+  updateSharedPlayerData({
+    artist:c.artist,
+    album:c.album,
+    trackName:track.name,
+    artworkUrl:c.cover?coverUrl(c):""
+  });
+}
+
+function loadArchiveTrack(cassetteId,trackIdx,mode="archive"){
+  const c=CASSETTES.find(x=>x.id===cassetteId);
+  if(!c||!c.tracks||!c.tracks[trackIdx])return;
+  playbackMode=mode;
+  currentCassetteId=cassetteId;
+  currentTrackIdx=trackIdx;
+  if(mode==="archive")currentRadioItem=null;
+  if(mode==="radio"&&!currentRadioItem){
+    currentRadioItem=RADIO_PLAYLIST.find(item=>
+      item.source==="archive"&&item.cassetteId===cassetteId&&item.trackIdx===trackIdx
+    )||null;
+  }
+  const track=c.tracks[trackIdx];
+  audio.src=r2url(c.folder,track.file);
+  updateSharedPlayer(c,trackIdx);
+  updateRadioNowPlaying();
+  audio.play().then(()=>{
+    isPlaying=true;
+    setPlayIcon(true);
+    updateRadioPlayingState();
+  }).catch(()=>{
+    isPlaying=false;
+    setPlayIcon(false);
+    updateRadioPlayingState();
+    const status=document.getElementById("radio-status");
+    if(status&&playbackMode==="radio")status.textContent="Playback is ready. Press Start Radio once to allow audio in this browser.";
+  });
   renderGrid();
   closeModal();
 }
 
+function loadRadioOnlyTrack(item){
+  if(!item||item.source!=="radio-only")return;
+  playbackMode="radio";
+  currentRadioItem=item;
+  currentCassetteId=null;
+  currentTrackIdx=0;
+  audio.src=r2url(item.folder,item.file);
+  updateSharedPlayerData({
+    artist:item.artist,
+    album:item.album,
+    trackName:item.trackName
+  });
+  updateRadioNowPlaying();
+  audio.play().then(()=>{
+    isPlaying=true;
+    setPlayIcon(true);
+    updateRadioPlayingState();
+  }).catch(()=>{
+    isPlaying=false;
+    setPlayIcon(false);
+    updateRadioPlayingState();
+    const status=document.getElementById("radio-status");
+    if(status)status.textContent="Playback is ready. Press Start Radio once to allow audio in this browser.";
+  });
+  renderGrid();
+  closeModal();
+}
+
+function playTrack(cassetteId,trackIdx){
+  loadArchiveTrack(cassetteId,trackIdx,"archive");
+}
+
 function togglePlay(){
-  if(!currentCassetteId)return;
-  if(isPlaying){audio.pause();isPlaying=false;document.getElementById("play-icon").innerHTML='<path d="M8 5v14l11-7z"/>';}
-  else{audio.play().catch(()=>{});isPlaying=true;document.getElementById("play-icon").innerHTML='<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>';}
+  if(playbackMode==="radio"&&currentRadioItem){
+    if(isPlaying)audio.pause();
+    else audio.play().catch(()=>{});
+    return;
+  }
+  if(!currentCassetteId){
+    startRadio();
+    return;
+  }
+  if(isPlaying)audio.pause();
+  else audio.play().catch(()=>{});
 }
 
 function skipTrack(dir){
   if(!currentCassetteId)return;
   const c=CASSETTES.find(x=>x.id===currentCassetteId);
+  if(!c)return;
   const newIdx=currentTrackIdx+dir;
   if(newIdx>=0&&newIdx<c.tracks.length){playTrack(c.id,newIdx);return}
-  const list=filteredCassettes();
+  const list=filteredCassettes().filter(item=>item.tracks&&item.tracks.length);
   const cIdx=list.findIndex(x=>x.id===currentCassetteId);
-  const nextC=list[cIdx+dir];
-  if(nextC)playTrack(nextC.id,dir>0?0:nextC.tracks.length-1);
+  if(cIdx<0)return;
+  const nextIndex=(cIdx+dir+list.length)%list.length;
+  const nextC=list[nextIndex];
+  playTrack(nextC.id,dir>0?0:nextC.tracks.length-1);
 }
 
-document.getElementById("btn-play").addEventListener("click",togglePlay);
-document.getElementById("btn-next").addEventListener("click",()=>skipTrack(1));
-document.getElementById("btn-prev").addEventListener("click",()=>skipTrack(-1));
+function shuffleArray(items){
+  const list=[...items];
+  for(let i=list.length-1;i>0;i--){
+    const j=Math.floor(Math.random()*(i+1));
+    [list[i],list[j]]=[list[j],list[i]];
+  }
+  return list;
+}
 
+function buildRadioQueue(){
+  if(radioOrder==="alphabetical"){
+    radioQueue=[...RADIO_PLAYLIST].sort((a,b)=>
+      a.artist.localeCompare(b.artist,undefined,{sensitivity:"base"})||
+      a.album.localeCompare(b.album,undefined,{sensitivity:"base"})||
+      (a.trackIdx??0)-(b.trackIdx??0)
+    );
+  }else{
+    radioQueue=shuffleArray(RADIO_PLAYLIST);
+  }
+  radioQueueIndex=-1;
+  updateRadioCounts();
+}
+
+function initRadio(){
+  if(!radioQueue.length)buildRadioQueue();
+  const albumCount=new Set(
+    RADIO_PLAYLIST.filter(item=>item.source==="archive").map(item=>item.cassetteId)
+  ).size;
+  const albumEl=document.getElementById("radio-album-count");
+  const trackEl=document.getElementById("radio-track-count");
+  if(albumEl)albumEl.textContent=albumCount;
+  if(trackEl)trackEl.textContent=RADIO_PLAYLIST.length;
+  const radioVolume=document.getElementById("radio-volume");
+  if(radioVolume)radioVolume.value=audio.volume;
+  updateRadioCounts();
+  updateRadioNowPlaying();
+  renderRadioRecent();
+  updateRadioPlayingState();
+}
+
+function startRadio(){
+  initRadio();
+  if(playbackMode==="radio"&&currentRadioItem){
+    if(isPlaying)audio.pause();
+    else audio.play().catch(()=>{});
+    return;
+  }
+  if(!radioQueue.length)return;
+  radioQueueIndex=0;
+  playRadioQueueItem();
+}
+
+function playRadioQueueItem(){
+  if(!radioQueue.length)buildRadioQueue();
+  if(radioQueueIndex<0)radioQueueIndex=0;
+  if(radioQueueIndex>=radioQueue.length){
+    buildRadioQueue();
+    radioQueueIndex=0;
+  }
+  const item=radioQueue[radioQueueIndex];
+  if(!item)return;
+  currentRadioItem=item;
+  radioRecent.unshift({...item,playedAt:new Date()});
+  radioRecent=radioRecent.slice(0,10);
+  renderRadioRecent();
+  if(item.source==="radio-only")loadRadioOnlyTrack(item);
+  else loadArchiveTrack(item.cassetteId,item.trackIdx,"radio");
+  updateRadioCounts();
+}
+
+function advanceRadio(dir){
+  initRadio();
+  if(playbackMode!=="radio"||radioQueueIndex<0){
+    radioQueueIndex=dir<0?radioQueue.length-1:0;
+  }else{
+    radioQueueIndex=(radioQueueIndex+dir+radioQueue.length)%radioQueue.length;
+  }
+  playRadioQueueItem();
+}
+
+function advancePlayback(dir){
+  if(playbackMode==="radio")advanceRadio(dir);
+  else skipTrack(dir);
+}
+
+function setRadioOrder(order){
+  radioOrder=order;
+  document.getElementById("radio-shuffle-btn")?.classList.toggle("active",order==="shuffle");
+  document.getElementById("radio-alpha-btn")?.classList.toggle("active",order==="alphabetical");
+  buildRadioQueue();
+  const status=document.getElementById("radio-status");
+  if(status)status.textContent=order==="shuffle"
+    ?"Shuffle rotation is ready. The full library will play before a new shuffle is created."
+    :"A–Z rotation is ready, ordered by artist, album, and cassette side.";
+}
+
+function updateRadioCounts(){
+  const queueEl=document.getElementById("radio-queue-count");
+  if(!queueEl)return;
+  const remaining=radioQueueIndex<0?radioQueue.length:Math.max(0,radioQueue.length-radioQueueIndex-1);
+  queueEl.textContent=remaining;
+}
+
+function updateRadioNowPlaying(){
+  const artistEl=document.getElementById("radio-artist");
+  if(!artistEl)return;
+  const cover=document.getElementById("radio-cover");
+  const placeholder=document.getElementById("radio-cover-placeholder");
+
+  if(playbackMode==="radio"&&currentRadioItem){
+    const item=currentRadioItem;
+    artistEl.textContent=item.artist;
+    document.getElementById("radio-album").textContent=item.album+(item.era?" · "+item.era:"");
+    document.getElementById("radio-track").textContent=item.trackName;
+    document.getElementById("radio-tags").innerHTML=
+      `${(item.genres||[]).map(g=>`<span class="tag tag-genre">${g}</span>`).join("")}`+
+      `${item.language?`<span class="tag tag-lang">${item.language}</span>`:""}`;
+
+    if(item.source==="archive"){
+      const c=CASSETTES.find(x=>x.id===item.cassetteId);
+      if(c&&c.cover){
+        cover.src=coverUrl(c);
+        cover.alt=`${c.artist} — ${c.album} cassette cover`;
+        cover.classList.add("visible");
+        placeholder.style.display="none";
+        cover.onerror=()=>{
+          cover.classList.remove("visible");
+          placeholder.style.display="flex";
+        };
+        return;
+      }
+    }
+
+    cover.removeAttribute("src");
+    cover.classList.remove("visible");
+    placeholder.style.display="flex";
+    return;
+  }
+
+  if(!currentCassetteId){
+    artistEl.textContent="Press Start Radio";
+    document.getElementById("radio-album").textContent="Cassette recordings and radio exclusives";
+    document.getElementById("radio-track").textContent="Continuous archive rotation";
+    document.getElementById("radio-tags").innerHTML="";
+    cover.removeAttribute("src");
+    cover.classList.remove("visible");
+    placeholder.style.display="flex";
+    return;
+  }
+
+  const c=CASSETTES.find(x=>x.id===currentCassetteId);
+  if(!c||!c.tracks[currentTrackIdx])return;
+  const track=c.tracks[currentTrackIdx];
+  artistEl.textContent=c.artist;
+  document.getElementById("radio-album").textContent=c.album+(c.recorded?" · "+c.recorded:"");
+  document.getElementById("radio-track").textContent=track.name;
+  document.getElementById("radio-tags").innerHTML=`${genreTags(c)}${c.language?`<span class="tag tag-lang">${c.language}</span>`:""}`;
+  if(c.cover){
+    cover.src=coverUrl(c);
+    cover.alt=`${c.artist} — ${c.album} cassette cover`;
+    cover.classList.add("visible");
+    placeholder.style.display="none";
+    cover.onerror=()=>{
+      cover.classList.remove("visible");
+      placeholder.style.display="flex";
+    };
+  }else{
+    cover.removeAttribute("src");
+    cover.classList.remove("visible");
+    placeholder.style.display="flex";
+  }
+}
+
+function updateRadioPlayingState(){
+  const station=document.getElementById("radio-station");
+  const liveLabel=document.getElementById("radio-live-label");
+  if(station)station.classList.toggle("is-playing",playbackMode==="radio"&&isPlaying);
+  if(liveLabel){
+    if(playbackMode==="radio"&&isPlaying)liveLabel.textContent="On air";
+    else if(playbackMode==="radio"&&currentCassetteId)liveLabel.textContent="Radio paused";
+    else liveLabel.textContent="Ready to play";
+  }
+  setPlayIcon(isPlaying);
+}
+
+function renderRadioRecent(){
+  const list=document.getElementById("radio-recent");
+  if(!list)return;
+  if(!radioRecent.length){
+    list.innerHTML='<li class="radio-empty">Nothing has played yet.</li>';
+    return;
+  }
+  list.innerHTML=radioRecent.map(item=>`
+    <li>
+      <div class="radio-recent-main">
+        <div class="radio-recent-artist">${item.artist}</div>
+        <div class="radio-recent-track">${item.album} · ${item.trackName}</div>
+      </div>
+      <time class="radio-recent-time">${item.playedAt.toLocaleTimeString([],{hour:"numeric",minute:"2-digit"})}</time>
+    </li>`).join("");
+}
+
+async function toggleCafeMode(){
+  const entering=!document.body.classList.contains("cafe-mode");
+  document.body.classList.toggle("cafe-mode",entering);
+  const button=document.getElementById("radio-cafe-btn");
+  if(button)button.textContent=entering?"Exit Café Mode":"Enter Café Mode";
+  if(entering){
+    showPage("radio",document.querySelector('[data-page="radio"]'));
+    try{
+      if(document.documentElement.requestFullscreen&&!document.fullscreenElement)await document.documentElement.requestFullscreen();
+    }catch(e){}
+    try{
+      if("wakeLock" in navigator)radioWakeLock=await navigator.wakeLock.request("screen");
+    }catch(e){}
+  }else{
+    try{
+      if(document.fullscreenElement)await document.exitFullscreen();
+    }catch(e){}
+    try{
+      if(radioWakeLock)await radioWakeLock.release();
+    }catch(e){}
+    radioWakeLock=null;
+  }
+}
+
+document.addEventListener("fullscreenchange",()=>{
+  if(!document.fullscreenElement&&document.body.classList.contains("cafe-mode")){
+    document.body.classList.remove("cafe-mode");
+    const button=document.getElementById("radio-cafe-btn");
+    if(button)button.textContent="Enter Café Mode";
+    if(radioWakeLock)radioWakeLock.release().catch(()=>{});
+    radioWakeLock=null;
+  }
+});
+
+document.getElementById("btn-play").addEventListener("click",togglePlay);
+document.getElementById("btn-next").addEventListener("click",()=>advancePlayback(1));
+document.getElementById("btn-prev").addEventListener("click",()=>advancePlayback(-1));
+
+audio.addEventListener("play",()=>{
+  isPlaying=true;
+  setPlayIcon(true);
+  updateRadioPlayingState();
+});
+audio.addEventListener("pause",()=>{
+  isPlaying=false;
+  setPlayIcon(false);
+  updateRadioPlayingState();
+});
 audio.addEventListener("timeupdate",()=>{
   if(!audio.duration)return;
   document.getElementById("progress-fill").style.width=(audio.currentTime/audio.duration*100)+"%";
   document.getElementById("time-cur").textContent=fmt(audio.currentTime);
   document.getElementById("time-total").textContent=fmt(audio.duration);
 });
-audio.addEventListener("ended",()=>skipTrack(1));
+audio.addEventListener("ended",()=>advancePlayback(1));
+audio.addEventListener("error",()=>{
+  if(playbackMode!=="radio")return;
+  const status=document.getElementById("radio-status");
+  if(status)status.textContent="That file could not be played. Moving to the next archive track…";
+  window.setTimeout(()=>advanceRadio(1),1400);
+});
 document.getElementById("progress-track").addEventListener("click",e=>{
   if(!audio.duration)return;
   const r=e.currentTarget.getBoundingClientRect();
   audio.currentTime=((e.clientX-r.left)/r.width)*audio.duration;
 });
-document.getElementById("volume-slider").addEventListener("input",e=>{audio.volume=parseFloat(e.target.value)});
+document.getElementById("volume-slider").addEventListener("input",e=>{
+  audio.volume=parseFloat(e.target.value);
+  const radioVolume=document.getElementById("radio-volume");
+  if(radioVolume)radioVolume.value=audio.volume;
+  localStorage.setItem("acaRadioVolume",String(audio.volume));
+});
+document.getElementById("radio-volume").addEventListener("input",e=>{
+  audio.volume=parseFloat(e.target.value);
+  document.getElementById("volume-slider").value=audio.volume;
+  localStorage.setItem("acaRadioVolume",String(audio.volume));
+});
+
+if("mediaSession" in navigator){
+  navigator.mediaSession.setActionHandler("play",()=>audio.play());
+  navigator.mediaSession.setActionHandler("pause",()=>audio.pause());
+  navigator.mediaSession.setActionHandler("previoustrack",()=>advancePlayback(-1));
+  navigator.mediaSession.setActionHandler("nexttrack",()=>advancePlayback(1));
+}
+
+const savedRadioVolume=parseFloat(localStorage.getItem("acaRadioVolume"));
+if(Number.isFinite(savedRadioVolume)){
+  audio.volume=Math.min(1,Math.max(0,savedRadioVolume));
+  document.getElementById("volume-slider").value=audio.volume;
+  document.getElementById("radio-volume").value=audio.volume;
+}
 
 function fmt(s){s=Math.floor(s||0);return Math.floor(s/60)+":"+String(s%60).padStart(2,"0")}
 
@@ -1132,6 +1777,7 @@ document.getElementById("statTotal").textContent=CASSETTES.length;
 // Pre-render the archive and homepage carousel
 renderGrid();
 renderHomeCarousel();
+initRadio();
 </script>
 </body>
 </html>
