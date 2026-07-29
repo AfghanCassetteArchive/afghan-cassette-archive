@@ -344,17 +344,6 @@ footer .footer-note{font-size:10px;color:rgba(245,240,232,.3);letter-spacing:.06
 </header>
 
 <div id="page-home" class="page-section active">
-  <div class="hero">
-    <div class="hero-eyebrow">Est. community archive · 1960s–2000s</div>
-    <h1 class="hero-title">Preserving the<br><em>sounds of Afghanistan</em><br>one cassette at a time.</h1>
-    <p class="hero-desc">An independent, non-commercial archive dedicated to Afghan music and cassette culture. Each tape holds a fragment of history — artists, songs, and sounds from decades now largely inaccessible.</p>
-    <div class="hero-stats">
-      <div class="stat"><span class="stat-num" id="statTotal">0</span><span class="stat-label">Albums</span></div>
-      <div class="stat"><span class="stat-num">5</span><span class="stat-label">Decades</span></div>
-      <div class="stat"><span class="stat-num">∞</span><span class="stat-label">Preservation</span></div>
-    </div>
-    <div class="hero-actions"><button class="hero-btn" onclick="showPage('archive',document.querySelector('[data-page=archive]'))">→ Explore the Archive</button><button class="hero-btn secondary" onclick="showPage('history',document.querySelector('[data-page=history]'))">Explore the History →</button><button class="hero-btn secondary" onclick="showPage('press',document.querySelector('[data-page=press]'))">Press &amp; Features →</button><button class="hero-btn secondary" onclick="showPage('events',document.querySelector('[data-page=events]'))">Past Events →</button></div>
-  </div>
   <section class="cover-showcase" aria-labelledby="cover-showcase-title">
     <div class="cover-showcase-head">
       <div>
@@ -367,6 +356,17 @@ footer .footer-note{font-size:10px;color:rgba(245,240,232,.3);letter-spacing:.06
       <div class="cover-carousel-track" id="cover-carousel-track"></div>
     </div>
   </section>
+  <div class="hero">
+    <div class="hero-eyebrow">Est. community archive · 1960s–2000s</div>
+    <h1 class="hero-title">Preserving the<br><em>sounds of Afghanistan</em><br>one cassette at a time.</h1>
+    <p class="hero-desc">An independent, non-commercial archive dedicated to Afghan music and cassette culture. Each tape holds a fragment of history — artists, songs, and sounds from decades now largely inaccessible.</p>
+    <div class="hero-stats">
+      <div class="stat"><span class="stat-num" id="statTotal">0</span><span class="stat-label">Albums</span></div>
+      <div class="stat"><span class="stat-num">5</span><span class="stat-label">Decades</span></div>
+      <div class="stat"><span class="stat-num">∞</span><span class="stat-label">Preservation</span></div>
+    </div>
+    <div class="hero-actions"><button class="hero-btn" onclick="showPage('archive',document.querySelector('[data-page=archive]'))">→ Explore the Archive</button><button class="hero-btn secondary" onclick="showPage('history',document.querySelector('[data-page=history]'))">Explore the History →</button><button class="hero-btn secondary" onclick="showPage('press',document.querySelector('[data-page=press]'))">Press &amp; Features →</button><button class="hero-btn secondary" onclick="showPage('events',document.querySelector('[data-page=events]'))">Past Events →</button></div>
+  </div>
 </div>
 
 <div id="page-archive" class="page-section">
@@ -413,8 +413,8 @@ footer .footer-note{font-size:10px;color:rgba(245,240,232,.3);letter-spacing:.06
         <button class="filter-pill" data-filter="Radio">Radio</button>
       </div>
       <select class="sort-select" id="sortSelect">
-        <option value="default">Sort: Default</option>
-        <option value="artist">Artist A–Z</option>
+        <option value="artist" selected>Artist A–Z</option>
+        <option value="default">Archive order</option>
         <option value="era-asc">Era: Oldest</option>
         <option value="era-desc">Era: Newest</option>
       </select>
@@ -812,7 +812,7 @@ const CASSETTES = [
   {id:27, artist:"Haider Saleem & Salma Jahani",folder:"Haider Saleem and Salma Jahani Music Center",album:"Ba Tu Hastam", recorded:"Music Center", era:"1980s",genres:["Duet","Female","Folk","Pop"],language:"Farsi",cover:true,coverFile:"Haider Saleem and Salma Jahani Music Center_Haider Saleem and Salma Jahani Music Center.jpg",tracks:[{name:"Side A",file:"haider salim salma redo music center_01.mp3"},{name:"Side B",file:"haider salim salma redo music center_02.mp3"}]},
   {id:28, artist:"Hakim Noor Akakhel",        folder:"Hakim Noor Akakhel Khorasan Music",album:"Khorasan Music",            recorded:"Khost, Afghanistan — 1978 · Tape made by Khorasan Music", era:"1970s",genres:["Propaganda","Folk (Tapay)"],language:"Pashto",cover:true,coverFile:"IMG_20260720_0017.jpg",tracks:[{name:"Side A",file:"Hakim Noor Side A.mp3"},{name:"Side B",file:"Hakim Noor Side B.mp3"}]},
   {id:29, artist:"Hamidullah Charikari & Ayesha",folder:"Hamid Charikari and Ayesha Khorasan Music",album:"Hamidullah Charikari and Ayesha", recorded:"Khorasan Music", era:"1970s",genres:["Folk (Mahali)","Duet","Female"],language:"Farsi",cover:true,coverFile:"IMG_20260720_0016.jpg",tracks:[{name:"Side A",file:"Hamedullah Charikari and female_01.mp3"},{name:"Side B",file:"Hamedullah Charikari and female_02.mp3"}]},
-  {id:30, artist:"Hangama & Ahmad Wali",      folder:"Hangama and Ahmad Wali Afghan Music",album:"Afghan Music",           era:"1980s",genre:"Pop",      language:"Farsi",   cover:false,tracks:[{name:"Side A",file:"Hangama and Ahmad Wali Afghan Music Side A.mp3"},{name:"Side B",file:"Hangama and Ahmad Wali Afghan Music Side B.mp3"}]},
+  {id:30, artist:"Hangama & Ahmad Wali",      folder:"Hangama and Ahmad Wali Afghan Music",album:"Afghan Music",           recorded:"1979", era:"1970s",genres:["Female","Duet","Pop","Funk","Psychedelic"],language:"Farsi",cover:true,coverFile:"70927321_2618016394948658_3272372734289510400_n copy(1).jpeg",tracks:[{name:"Side A",file:"Hangama and Ahmad Wali Album Afghan Music Nainawaz_01_01.mp3"},{name:"Side B",file:"Hangama and Ahmad Wali Album Afghan Music Nainawaz_01_02.mp3"}]},
   {id:31, artist:"Homa",                      folder:"Homa Allah Wei Allah Zar",         album:"Allah Wei Allah Zar",         era:"1970s",genre:"Folk",     language:"Farsi",   cover:false,tracks:[{name:"Side A",file:"Homa Allah Wei Allah Zar Side A.mp3"},{name:"Side B",file:"Homa Allah Wei Allah Zar Side B.mp3"}]},
   {id:32, artist:"Homa",                      folder:"Homa Da Janana Gham",              album:"Da Janana Gham",              era:"1970s",genre:"Folk",     language:"Pashto", cover:false,tracks:[{name:"Side A",file:"Homa Da Janana Gham Side A.mp3"},{name:"Side B",file:"Homa Da Janana Gham Side B.mp3"}]},
   {id:33, artist:"Homa",                      folder:"Homa Vol 52",                      album:"Vol. 52",                     era:"1980s",genre:"Pop",      language:"Farsi",   cover:false,tracks:[{name:"Side A",file:"Homa Vol 52 Side A.mp3"},{name:"Side B",file:"Homa Vol 52 Side B.mp3"}]},
@@ -939,7 +939,7 @@ const CASSETTES = [
 
 const audio = document.getElementById("audio-el");
 let currentCassetteId=null,currentTrackIdx=0,isPlaying=false;
-let activeFilter="all",searchQuery="",sortMode="default";
+let activeFilter="all",searchQuery="",sortMode="artist";
 
 function r2url(folder,file){
   return `${R2}/${encodeURIComponent(folder)}/${encodeURIComponent(file)}`;
@@ -961,7 +961,7 @@ function genreTags(c){
 function renderHomeCarousel(){
   const track=document.getElementById("cover-carousel-track");
   if(!track)return;
-  const featured=CASSETTES.filter(c=>c.cover);
+  const featured=CASSETTES.filter(c=>c.cover).sort((a,b)=>a.artist.localeCompare(b.artist,undefined,{sensitivity:"base"})||a.album.localeCompare(b.album,undefined,{sensitivity:"base"}));
   if(!featured.length){
     document.getElementById("cover-carousel").style.display="none";
     return;
@@ -991,7 +991,7 @@ function filteredCassettes(){
     const q=searchQuery.toLowerCase();
     list=list.filter(c=>c.artist.toLowerCase().includes(q)||c.album.toLowerCase().includes(q)||(c.era||"").toLowerCase().includes(q)||genreText(c).toLowerCase().includes(q)||(c.language||"").toLowerCase().includes(q)||(c.recorded||"").toLowerCase().includes(q));
   }
-  if(sortMode==="artist")list.sort((a,b)=>a.artist.localeCompare(b.artist));
+  if(sortMode==="artist")list.sort((a,b)=>a.artist.localeCompare(b.artist,undefined,{sensitivity:"base"})||a.album.localeCompare(b.album,undefined,{sensitivity:"base"}));
   if(sortMode==="era-asc")list.sort((a,b)=>parseInt(a.era)-parseInt(b.era));
   if(sortMode==="era-desc")list.sort((a,b)=>parseInt(b.era)-parseInt(a.era));
   return list;
