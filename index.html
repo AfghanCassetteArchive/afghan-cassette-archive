@@ -63,9 +63,25 @@ nav a.active{border-bottom:1px solid var(--accent)}
 .cover-slide-action{position:absolute;top:8px;right:8px;width:27px;height:27px;border-radius:50%;display:grid;place-items:center;background:rgba(26,21,16,.78);color:var(--accent-light);font-size:13px;opacity:0;transform:scale(.8);transition:opacity .2s,transform .2s}
 .cover-slide:hover .cover-slide-action,.cover-slide:focus-visible .cover-slide-action{opacity:1;transform:scale(1)}
 @keyframes coverMarquee{from{transform:translateX(0)}to{transform:translateX(calc(-50% - (var(--carousel-gap) / 2)))}}
-.modal-cover-link{display:block;text-decoration:none;position:relative}
-.modal-cover-link::after{content:'View full-size cover ↗';position:absolute;right:9px;bottom:calc(1.25rem + 9px);background:rgba(26,21,16,.82);color:var(--accent-light);padding:5px 8px;border-radius:2px;font-size:9px;letter-spacing:.05em;opacity:0;transition:opacity .2s;pointer-events:none}
+.modal-cover-link{display:block;width:100%;padding:0;border:0;background:transparent;text-decoration:none;position:relative;cursor:zoom-in}
+.modal-cover-link::after{content:'Press to view full cover';position:absolute;right:9px;bottom:calc(1.25rem + 9px);background:rgba(26,21,16,.82);color:var(--accent-light);padding:5px 8px;border-radius:2px;font-size:9px;letter-spacing:.05em;opacity:1;transition:opacity .2s;pointer-events:none}
 .modal-cover-link:hover::after,.modal-cover-link:focus-visible::after{opacity:1}
+
+.cover-viewer{position:fixed;inset:0;z-index:650;display:none;align-items:center;justify-content:center;padding:54px 26px 30px;background:rgba(7,5,3,.97);backdrop-filter:blur(8px)}
+.cover-viewer.open{display:flex}
+.cover-viewer-stage{position:relative;display:flex;align-items:center;justify-content:center;max-width:100%;max-height:100%;overflow:auto}
+.cover-viewer-image{display:block;width:auto;height:auto;max-width:94vw;max-height:86vh;object-fit:contain;background:#0b0b09;box-shadow:0 26px 90px rgba(0,0,0,.8);-webkit-user-drag:none;user-select:none;-webkit-touch-callout:none}
+.cover-viewer-stage::after{content:'AFGHAN CASSETTE ARCHIVE · PROTECTED PREVIEW';position:absolute;left:50%;top:50%;transform:translate(-50%,-50%) rotate(-24deg);z-index:2;color:rgba(255,255,255,.22);font-family:var(--font-mono);font-size:clamp(18px,4vw,58px);font-weight:700;letter-spacing:.08em;white-space:nowrap;text-shadow:0 1px 2px rgba(0,0,0,.45);pointer-events:none;user-select:none}
+.cover-viewer-close{position:fixed;top:14px;right:18px;z-index:3;width:42px;height:42px;border:1px solid rgba(245,240,232,.28);background:rgba(245,240,232,.08);color:#fff;font-size:22px;cursor:pointer}
+.cover-viewer-close:hover,.cover-viewer-close:focus-visible{background:rgba(184,92,44,.35);border-color:var(--accent)}
+.cover-viewer-caption{position:fixed;left:50%;bottom:14px;transform:translateX(-50%);z-index:3;max-width:min(760px,86vw);padding:7px 12px;background:rgba(26,21,16,.84);color:rgba(245,240,232,.82);font-size:10px;text-align:center;border:1px solid rgba(245,240,232,.12)}
+.cover-viewer-shield{position:absolute;inset:0;z-index:4;background:transparent;pointer-events:auto}
+@media(max-width:640px){.cover-viewer{padding:56px 12px 44px}.cover-viewer-image{max-width:96vw;max-height:82vh}.cover-viewer-stage::after{font-size:clamp(14px,5vw,30px)}}
+@media print{
+  .cover-viewer,.modal-overlay,.cover-carousel,.cassette-grid{display:none!important}
+  body::before{content:'Printing and PDF export are disabled for protected archive previews.';display:block;padding:3rem;font-family:var(--font-mono);font-size:16px}
+}
+img,.cover-img,.modal-cover,.radio-cover{-webkit-user-drag:none;user-select:none;-webkit-touch-callout:none}
 @media(prefers-reduced-motion:reduce){.cover-carousel-track{animation:none}.cover-carousel{overflow-x:auto;mask-image:none;-webkit-mask-image:none}.cover-carousel::before,.cover-carousel::after{display:none}.cover-slide{transform:none!important}}
 .archive-section{position:relative;z-index:1;max-width:1100px;margin:0 auto;padding:2rem 2rem 8rem}
 .toolbar{display:flex;align-items:center;gap:12px;margin-bottom:1.5rem;flex-wrap:wrap}
@@ -204,7 +220,7 @@ footer .footer-note{font-size:10px;color:rgba(245,240,232,.3);letter-spacing:.06
 .radio-console{display:grid;grid-template-columns:minmax(280px,.78fr) minmax(0,1.22fr);gap:0}
 .radio-cover-wrap{position:relative;min-height:510px;background:#110c08;display:flex;align-items:center;justify-content:center;padding:2.2rem;border-right:1px solid rgba(232,196,168,.13);overflow:hidden}
 .radio-cover-wrap::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 35%,rgba(184,92,44,.22),transparent 60%)}
-.radio-cover{position:relative;z-index:1;display:none;width:min(100%,370px);max-height:470px;aspect-ratio:3/4;object-fit:cover;border-radius:4px;box-shadow:0 24px 60px rgba(0,0,0,.55)}
+.radio-cover{position:relative;z-index:1;display:none;width:min(100%,370px);max-height:470px;aspect-ratio:3/4;object-fit:contain;border-radius:4px;box-shadow:0 24px 60px rgba(0,0,0,.55);background:#0b0b09;padding:10px;box-sizing:border-box}
 .radio-cover.visible{display:block}
 .radio-cover-placeholder{position:relative;z-index:1;width:min(100%,330px);aspect-ratio:3/4;border:1px solid rgba(232,196,168,.22);background:linear-gradient(145deg,#34200d,#160e07);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;color:rgba(232,196,168,.42);text-align:center;font-family:var(--font-display);font-size:17px;font-style:italic}
 .radio-cover-placeholder svg{width:88px;height:88px}
@@ -457,7 +473,7 @@ body.cafe-mode .radio-station-top{padding:14px 24px}
     <section class="radio-intro">
       <div class="radio-kicker">Afghan Cassette Archive · Continuous listening</div>
       <h1>Archive <em>Radio</em></h1>
-      <p>Play every available cassette recording continuously, track by track, along with special radio-only selections that remain hidden from the public cassette archive.</p>
+      <p>Play only the hidden radio-exclusive tracks continuously, track by track. These selections stay separate from the public cassette archive and are used only inside the Radio page.</p>
     </section>
 
     <section class="radio-station" id="radio-station" aria-label="Afghan Cassette Archive Radio player">
@@ -483,8 +499,8 @@ body.cafe-mode .radio-station-top{padding:14px 24px}
         <div class="radio-now">
           <div class="radio-now-label">Now playing</div>
           <h2 id="radio-artist">Press Start Radio</h2>
-          <div class="radio-album" id="radio-album">All available cassette recordings</div>
-          <div class="radio-track" id="radio-track">Continuous archive rotation</div>
+          <div class="radio-album" id="radio-album">Hidden radio selections</div>
+          <div class="radio-track" id="radio-track">Continuous radio-only rotation</div>
           <div class="radio-tags" id="radio-tags"></div>
 
           <div class="radio-main-controls">
@@ -507,8 +523,8 @@ body.cafe-mode .radio-station-top{padding:14px 24px}
       </div>
 
       <div class="radio-stats">
-        <div><strong id="radio-album-count">0</strong><span>albums with audio</span></div>
-        <div><strong id="radio-track-count">0</strong><span>audio files in rotation</span></div>
+        <div><strong id="radio-album-count">0</strong><span>special tracks</span></div>
+        <div><strong id="radio-track-count">0</strong><span>artists featured</span></div>
         <div><strong id="radio-queue-count">0</strong><span>remaining in queue</span></div>
       </div>
     </section>
@@ -530,7 +546,7 @@ body.cafe-mode .radio-station-top{padding:14px 24px}
         <span class="radio-panel-kicker">Restaurant and café use</span>
         <h3>Designed for continuous playback</h3>
         <p>Café Mode enlarges the cover and controls, requests fullscreen, and keeps the display awake where the browser supports it.</p>
-        <p>This version runs directly in each browser and now combines cassette audio with hidden radio-exclusive tracks. Different restaurants begin their own rotation when they press play; they are not synchronized to the same broadcast moment.</p>
+        <p>This version runs directly in each browser and plays only the hidden radio-exclusive tracks. Different restaurants begin their own rotation when they press play; they are not synchronized to the same broadcast moment.</p>
         <p class="radio-upgrade-note">A future Icecast or AzuraCast stream URL can replace the local rotation when one synchronized station is needed.</p>
       </div>
     </section>
@@ -827,11 +843,20 @@ body.cafe-mode .radio-station-top{padding:14px 24px}
       <div class="modal-title" id="modal-title-text">—</div>
       <button class="modal-close" onclick="closeModal()">✕</button>
     </div>
-    <a id="modal-cover-link" class="modal-cover-link" href="#" target="_blank" rel="noopener" aria-label="Open full-size cassette cover"><img id="modal-cover" class="modal-cover" src="" alt="Cassette cover"></a>
+    <button id="modal-cover-link" class="modal-cover-link" type="button" onclick="openCoverViewer()" aria-label="View complete cassette cover"><img id="modal-cover" class="modal-cover" src="" alt="Cassette cover"></button>
     <div class="modal-meta" id="modal-meta"></div>
     <div class="modal-tags" id="modal-tags"></div>
     <ul class="track-list" id="track-list"></ul>
   </div>
+</div>
+
+<div class="cover-viewer" id="cover-viewer" role="dialog" aria-modal="true" aria-label="Protected full cassette cover preview" onclick="closeCoverViewerOutside(event)">
+  <button class="cover-viewer-close" type="button" onclick="closeCoverViewer()" aria-label="Close full cover preview">✕</button>
+  <div class="cover-viewer-stage" id="cover-viewer-stage">
+    <img id="cover-viewer-image" class="cover-viewer-image" src="" alt="Complete cassette cover preview" draggable="false">
+    <div class="cover-viewer-shield" aria-hidden="true"></div>
+  </div>
+  <div class="cover-viewer-caption" id="cover-viewer-caption">Protected archival preview</div>
 </div>
 
 <div class="player-bar">
@@ -860,7 +885,7 @@ body.cafe-mode .radio-station-top{padding:14px 24px}
     <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3A4.5 4.5 0 0 0 14 7.97v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/></svg>
     <input type="range" class="volume-slider" id="volume-slider" min="0" max="1" step="0.02" value="1">
   </div>
-  <audio id="audio-el" preload="none"></audio>
+  <audio id="audio-el" preload="none" controlslist="nodownload noplaybackrate noremoteplayback" disablepictureinpicture disableremoteplayback></audio>
 </div>
 
 <footer>
@@ -1191,22 +1216,7 @@ const RADIO_ONLY_TRACKS = [
   }
 ];
 
-const RADIO_PLAYLIST = [
-  ...CASSETTES.flatMap(c=>
-    (c.tracks||[]).map((track,trackIdx)=>({
-      source:"archive",
-      cassetteId:c.id,
-      trackIdx,
-      artist:c.artist,
-      album:c.album,
-      trackName:track.name,
-      era:c.era||"",
-      language:c.language||"",
-      genres:genreList(c)
-    }))
-  ),
-  ...RADIO_ONLY_TRACKS
-];
+const RADIO_PLAYLIST = [...RADIO_ONLY_TRACKS];
 
 function r2url(folder,file){
   return `${R2}/${encodeURIComponent(folder)}/${encodeURIComponent(file)}`;
@@ -1225,6 +1235,32 @@ function genreTags(c){
   return genreList(c).map(g=>`<span class="tag tag-genre">${g}</span>`).join("");
 }
 
+
+function hardenMediaProtection(){
+  document.querySelectorAll("img").forEach(img=>{
+    img.setAttribute("draggable","false");
+    img.draggable=false;
+  });
+}
+
+document.addEventListener("contextmenu",e=>{
+  if(e.target.closest("img,audio,.cassette-card,.cover-slide,.modal-cover-link,.radio-cover-wrap,.cover-viewer"))e.preventDefault();
+});
+
+document.addEventListener("dragstart",e=>{
+  if(e.target.closest("img,audio"))e.preventDefault();
+});
+document.addEventListener("auxclick",e=>{
+  if(e.target.closest("img,.modal-cover-link,.cover-viewer"))e.preventDefault();
+});
+
+document.addEventListener("keydown",e=>{
+  const key=(e.key||"").toLowerCase();
+  if((e.ctrlKey||e.metaKey)&&["s","u"].includes(key)){e.preventDefault();return;}
+  if((e.ctrlKey||e.metaKey)&&e.shiftKey&&["i","j","c","s"].includes(key)){e.preventDefault();return;}
+  if(key==="f12")e.preventDefault();
+});
+
 function renderHomeCarousel(){
   const track=document.getElementById("cover-carousel-track");
   if(!track)return;
@@ -1240,6 +1276,7 @@ function renderHomeCarousel(){
       <span class="cover-slide-overlay"><span class="cover-slide-artist">${c.artist}</span><span class="cover-slide-album">${c.album}</span></span>
     </button>`).join("");
   track.innerHTML=`<div class="cover-carousel-group">${makeSlides(false)}</div><div class="cover-carousel-group" aria-hidden="true">${makeSlides(true)}</div>`;
+  hardenMediaProtection();
 }
 
 function showPage(name,el){
@@ -1285,6 +1322,7 @@ function renderGrid(){
       <div class="card-info"><div class="card-artist">${c.artist}</div><div class="card-album">${c.album}</div><div class="card-tags">${c.era?`<span class="tag tag-era">${c.era}</span>`:""}${genreTags(c)}${c.language?`<span class="tag tag-lang">${c.language}</span>`:""}</div></div>
     </div>`;
   }).join("");
+  hardenMediaProtection();
 }
 
 let modalCassette=null;
@@ -1300,11 +1338,9 @@ function openModal(id){
     cover.src=fullCoverUrl;
     cover.alt=`${c.artist} — ${c.album} cassette cover`;
     cover.classList.add("visible");
-    coverLink.href=fullCoverUrl;
     coverLink.style.display="block";
   }else{
     cover.classList.remove("visible");
-    coverLink.removeAttribute("href");
     coverLink.style.display="none";
   }
   document.getElementById("modal-meta").innerHTML=`
@@ -1318,11 +1354,37 @@ function openModal(id){
     return`<li class="track-item${active?" is-active":""}" onclick="playTrack(${c.id},${i})"><span class="track-num">${i+1}</span><span class="track-name">${t.name}</span><span class="track-play-icon">▶</span></li>`;
   }).join("");
   document.getElementById("modal").classList.add("open");
+  hardenMediaProtection();
 }
+
+function openCoverViewer(){
+  if(!modalCassette||!modalCassette.cover)return;
+  const viewer=document.getElementById("cover-viewer");
+  const image=document.getElementById("cover-viewer-image");
+  image.src=coverUrl(modalCassette);
+  image.alt=`Complete cover for ${modalCassette.artist} — ${modalCassette.album}`;
+  document.getElementById("cover-viewer-caption").textContent=
+    `${modalCassette.artist} — ${modalCassette.album} · Protected archival preview`;
+  viewer.classList.add("open");
+  document.body.style.overflow="hidden";
+  hardenMediaProtection();
+}
+
+function closeCoverViewer(){
+  const viewer=document.getElementById("cover-viewer");
+  viewer.classList.remove("open");
+  document.getElementById("cover-viewer-image").removeAttribute("src");
+  document.body.style.overflow="";
+}
+
+function closeCoverViewerOutside(event){
+  if(event.target===document.getElementById("cover-viewer"))closeCoverViewer();
+}
+
 function closeModal(){document.getElementById("modal").classList.remove("open")}
 function closeModalOutside(e){if(e.target===document.getElementById("modal"))closeModal()}
 document.addEventListener("keydown",e=>{
-  if(e.key==="Escape"){closeModal();closeHistoryLightbox()}
+  if(e.key==="Escape"){closeCoverViewer();closeModal();closeHistoryLightbox()}
   const historyActive=document.getElementById("page-history").classList.contains("active");
   const lightboxOpen=document.getElementById("history-lightbox").classList.contains("open");
   if((historyActive||lightboxOpen)&&e.key==="ArrowRight")changeHistorySlide(1);
@@ -1492,13 +1554,12 @@ function buildRadioQueue(){
 
 function initRadio(){
   if(!radioQueue.length)buildRadioQueue();
-  const albumCount=new Set(
-    RADIO_PLAYLIST.filter(item=>item.source==="archive").map(item=>item.cassetteId)
-  ).size;
+  const specialTrackCount=RADIO_ONLY_TRACKS.length;
+  const artistCount=new Set(RADIO_ONLY_TRACKS.map(item=>item.artist)).size;
   const albumEl=document.getElementById("radio-album-count");
   const trackEl=document.getElementById("radio-track-count");
-  if(albumEl)albumEl.textContent=albumCount;
-  if(trackEl)trackEl.textContent=RADIO_PLAYLIST.length;
+  if(albumEl)albumEl.textContent=specialTrackCount;
+  if(trackEl)trackEl.textContent=artistCount;
   const radioVolume=document.getElementById("radio-volume");
   if(radioVolume)radioVolume.value=audio.volume;
   updateRadioCounts();
@@ -1608,8 +1669,8 @@ function updateRadioNowPlaying(){
 
   if(!currentCassetteId){
     artistEl.textContent="Press Start Radio";
-    document.getElementById("radio-album").textContent="Cassette recordings and radio exclusives";
-    document.getElementById("radio-track").textContent="Continuous archive rotation";
+    document.getElementById("radio-album").textContent="Hidden radio selections";
+    document.getElementById("radio-track").textContent="Continuous radio-only rotation";
     document.getElementById("radio-tags").innerHTML="";
     cover.removeAttribute("src");
     cover.classList.remove("visible");
@@ -1778,6 +1839,7 @@ document.getElementById("statTotal").textContent=CASSETTES.length;
 renderGrid();
 renderHomeCarousel();
 initRadio();
+hardenMediaProtection();
 </script>
 </body>
 </html>
