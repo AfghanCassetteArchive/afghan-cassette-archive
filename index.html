@@ -84,17 +84,23 @@ nav a.active{border-bottom:1px solid var(--accent)}
 img,.cover-img,.modal-cover,.radio-cover{-webkit-user-drag:none;user-select:none;-webkit-touch-callout:none}
 @media(prefers-reduced-motion:reduce){.cover-carousel-track{animation:none}.cover-carousel{overflow-x:auto;mask-image:none;-webkit-mask-image:none}.cover-carousel::before,.cover-carousel::after{display:none}.cover-slide{transform:none!important}}
 .archive-section{position:relative;z-index:1;max-width:1100px;margin:0 auto;padding:2rem 2rem 8rem}
-.toolbar{display:flex;align-items:center;gap:12px;margin-bottom:1.5rem;flex-wrap:wrap}
-.search-box{position:relative;flex:1;min-width:200px;max-width:320px}
+.toolbar{display:grid;grid-template-columns:minmax(220px,320px) minmax(0,1fr) auto;align-items:end;gap:14px;margin-bottom:1.5rem}
+.search-box{position:relative;width:100%;min-width:0;max-width:320px}
 .search-box input{width:100%;background:var(--bg-card);border:.5px solid var(--border-strong);border-radius:2px;padding:8px 12px 8px 34px;font-family:var(--font-mono);font-size:12px;color:var(--ink);outline:none;transition:border-color .2s}
 .search-box input:focus{border-color:var(--accent)}
 .search-box input::placeholder{color:var(--ink-light)}
 .search-icon{position:absolute;left:10px;top:50%;transform:translateY(-50%);color:var(--ink-light);font-size:14px;pointer-events:none}
+.genre-controls{display:flex;align-items:flex-end;gap:12px;min-width:0}
+.genre-shortcuts{min-width:0}
+.genre-shortcuts-label,.genre-select-wrap>span{display:block;margin-bottom:5px;font-size:8px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-light)}
 .filters{display:flex;gap:6px;flex-wrap:wrap}
-.filter-pill{padding:6px 14px;border:.5px solid var(--border-strong);border-radius:100px;background:transparent;color:var(--ink-mid);font-family:var(--font-mono);font-size:11px;cursor:pointer;transition:all .15s;letter-spacing:.04em}
+.filter-pill{padding:6px 13px;border:.5px solid var(--border-strong);border-radius:100px;background:transparent;color:var(--ink-mid);font-family:var(--font-mono);font-size:10px;cursor:pointer;transition:all .15s;letter-spacing:.04em;white-space:nowrap}
 .filter-pill:hover{border-color:var(--accent);color:var(--accent)}
 .filter-pill.active{background:var(--tape-dark);border-color:var(--tape-dark);color:var(--accent-light)}
-.sort-select{background:var(--bg-card);border:.5px solid var(--border-strong);border-radius:2px;padding:7px 10px;font-family:var(--font-mono);font-size:11px;color:var(--ink);cursor:pointer;outline:none;margin-left:auto}
+.genre-select-wrap{display:block;flex:0 0 190px}
+.genre-select,.sort-select{width:100%;background:var(--bg-card);border:.5px solid var(--border-strong);border-radius:2px;padding:8px 30px 8px 10px;font-family:var(--font-mono);font-size:10px;color:var(--ink);cursor:pointer;outline:none}
+.genre-select:focus,.sort-select:focus{border-color:var(--accent)}
+.sort-select{width:auto;min-width:132px;margin-left:0}
 .result-count{font-size:11px;color:var(--ink-light);letter-spacing:.04em;margin-bottom:1.25rem}
 .cassette-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(175px,1fr));gap:16px}
 .cassette-card{background:var(--bg-card);border:.5px solid var(--border);border-radius:3px;overflow:hidden;cursor:pointer;transition:box-shadow .2s,transform .2s,border-color .2s;position:relative}
@@ -143,11 +149,14 @@ img,.cover-img,.modal-cover,.radio-cover{-webkit-user-drag:none;user-select:none
 .ctrl svg{width:18px;height:18px}
 .ctrl.primary{color:var(--accent-light)}
 .ctrl.primary svg{width:22px;height:22px}
-.player-progress{display:flex;flex-direction:column;gap:4px;flex:1;min-width:80px}
-.progress-track{height:4px;background:rgba(255,255,255,.12);border-radius:2px;cursor:pointer;position:relative}
-.progress-track:hover{height:6px}
-.progress-fill{height:100%;background:var(--accent);border-radius:2px;width:0%;pointer-events:none}
-.progress-times{display:flex;justify-content:space-between;font-size:9px;color:rgba(245,240,232,.3);letter-spacing:.04em}
+.player-progress{display:flex;flex-direction:column;gap:2px;flex:1;min-width:100px}
+.progress-track{height:18px;background:transparent;border-radius:9px;cursor:pointer;position:relative;touch-action:none;outline:none}
+.progress-track::before{content:'';position:absolute;left:0;right:0;top:50%;height:5px;transform:translateY(-50%);background:rgba(255,255,255,.14);border-radius:5px}
+.progress-fill{position:absolute;left:0;top:50%;height:5px;transform:translateY(-50%);background:var(--accent);border-radius:5px;width:0%;pointer-events:none;z-index:1}
+.progress-fill::after{content:'';position:absolute;right:-7px;top:50%;width:14px;height:14px;transform:translateY(-50%);border-radius:50%;background:var(--accent-light);box-shadow:0 0 0 3px rgba(184,92,44,.22)}
+.progress-track:hover::before,.progress-track:focus-visible::before{background:rgba(255,255,255,.22)}
+.progress-track:focus-visible{box-shadow:0 0 0 2px var(--accent)}
+.progress-times{display:flex;justify-content:space-between;font-size:9px;color:rgba(245,240,232,.46);letter-spacing:.04em}
 .volume-wrap{display:flex;align-items:center;gap:6px;flex-shrink:0}
 .volume-wrap svg{width:15px;height:15px;color:rgba(245,240,232,.4);flex-shrink:0}
 .volume-slider{-webkit-appearance:none;appearance:none;width:70px;height:3px;background:rgba(255,255,255,.2);border-radius:2px;outline:none;cursor:pointer}
@@ -193,9 +202,40 @@ footer .footer-brand{color:var(--accent-light);font-family:var(--font-display);f
 footer .footer-note{font-size:10px;color:rgba(245,240,232,.3);letter-spacing:.06em}
 @keyframes spin{to{transform:rotate(360deg)}}
 .is-playing .reel{animation:spin 2s linear infinite}
+@media(max-width:760px){
+  .toolbar{grid-template-columns:1fr;align-items:stretch;gap:11px}
+  .search-box{max-width:none}
+  .genre-controls{display:grid;grid-template-columns:1fr;gap:10px}
+  .genre-shortcuts-label{margin-bottom:7px}
+  .filters{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}
+  .filter-pill{width:100%;padding:8px 7px;text-align:center;overflow:hidden;text-overflow:ellipsis}
+  .genre-select-wrap{width:100%;flex-basis:auto}
+  .genre-select,.sort-select{width:100%;min-height:42px;font-size:11px}
+}
 @media(max-width:600px){
-  header{padding:0 1rem}.hero{padding:2rem 1rem}.archive-section{padding:1.5rem 1rem 8rem}
-  .player-bar{padding:10px 1rem;gap:8px}.volume-wrap{display:none}.player-progress{min-width:60px}
+  header{padding:0 1rem}.hero{padding:2rem 1rem}.archive-section{padding:1.5rem 1rem 11rem}
+  .player-bar{
+    display:grid;
+    grid-template-columns:34px minmax(0,1fr) auto;
+    grid-template-areas:
+      "icon info controls"
+      "progress progress progress";
+    align-items:center;
+    gap:6px 9px;
+    padding:9px 12px calc(9px + env(safe-area-inset-bottom));
+  }
+  .player-tape-icon{grid-area:icon;width:34px;height:34px}
+  .player-idle,.player-info{grid-area:info;max-width:none;min-width:0}
+  .player-controls{grid-area:controls;gap:1px}
+  .ctrl{width:40px;height:40px;justify-content:center;padding:7px}
+  .ctrl svg{width:20px;height:20px}.ctrl.primary svg{width:25px;height:25px}
+  .player-progress{grid-area:progress;width:100%;min-width:0;gap:0}
+  .progress-track{height:28px;border-radius:14px}
+  .progress-track::before,.progress-fill{height:7px}
+  .progress-fill::after{width:18px;height:18px;right:-9px;box-shadow:0 0 0 4px rgba(184,92,44,.22)}
+  .progress-times{font-size:10px;color:rgba(245,240,232,.62);margin-top:-1px}
+  .volume-wrap{display:none!important}
+  footer{margin-bottom:118px}
   nav a{font-size:10px}
   .cover-showcase-head{padding:0 1rem;align-items:flex-start;flex-direction:column}.cover-showcase-note{text-align:left}
   .cover-carousel-track{--carousel-gap:12px;animation-duration:55s}.cover-slide{width:132px}
@@ -560,41 +600,23 @@ body.cafe-mode .radio-station-top{padding:14px 24px}
         <span class="search-icon">⌕</span>
         <input type="text" id="searchInput" placeholder="Artist, album, era, genre…" autocomplete="off">
       </div>
-      <div class="filters">
-        <button class="filter-pill active" data-filter="all">All</button>
-        <button class="filter-pill" data-filter="Classical">Classical</button>
-        <button class="filter-pill" data-filter="Ghazal">Ghazal</button>
-        <button class="filter-pill" data-filter="Instrumental">Instrumental</button>
-        <button class="filter-pill" data-filter="Sitar">Sitar</button>
-        <button class="filter-pill" data-filter="Folk">Folk</button>
-        <button class="filter-pill" data-filter="Folk (Mahali)">Folk (Mahali)</button>
-        <button class="filter-pill" data-filter="Pop">Pop</button>
-        <button class="filter-pill" data-filter="Synth Pop">Synth Pop</button>
-        <button class="filter-pill" data-filter="Moog">Moog</button>
-        <button class="filter-pill" data-filter="Experimental">Experimental</button>
-        <button class="filter-pill" data-filter="Funk">Funk</button>
-        <button class="filter-pill" data-filter="Psychedelic">Psychedelic</button>
-        <button class="filter-pill" data-filter="New Wave">New Wave</button>
-        <button class="filter-pill" data-filter="Diaspora Music">Diaspora Music</button>
-        <button class="filter-pill" data-filter="Diaspora Recording">Diaspora Recording</button>
-        <button class="filter-pill" data-filter="Diaspora Media">Diaspora Media</button>
-        <button class="filter-pill" data-filter="Female">Female</button>
-        <button class="filter-pill" data-filter="Duet">Duet</button>
-        <button class="filter-pill" data-filter="Folk (Tapay)">Folk (Tapay)</button>
-        <button class="filter-pill" data-filter="Propaganda">Propaganda</button>
-        <button class="filter-pill" data-filter="Rubab">Rubab</button>
-        <button class="filter-pill" data-filter="Tanbur">Tanbur</button>
-        <button class="filter-pill" data-filter="Harmonia">Harmonia</button>
-        <button class="filter-pill" data-filter="Dambora">Dambora</button>
-        <button class="filter-pill" data-filter="Qawali">Qawali</button>
-        <button class="filter-pill" data-filter="Qataghani">Qataghani</button>
-        <button class="filter-pill" data-filter="Folk (Landai)">Folk (Landai)</button>
-        <button class="filter-pill" data-filter="Classical (Kharabat)">Classical (Kharabat)</button>
-        <button class="filter-pill" data-filter="Spoken Word">Spoken Word</button>
-        <button class="filter-pill" data-filter="Violin">Violin</button>
-        <button class="filter-pill" data-filter="House Music">House Music</button>
-        <button class="filter-pill" data-filter="Female Vocals">Female Vocals</button>
-        <button class="filter-pill" data-filter="Radio">Radio</button>
+      <div class="genre-controls">
+        <div class="genre-shortcuts" aria-label="Popular genre shortcuts">
+          <span class="genre-shortcuts-label">Popular genres</span>
+          <div class="filters" id="quickGenreFilters">
+            <button class="filter-pill active" type="button" data-filter="all">All</button>
+            <button class="filter-pill" type="button" data-filter="Pop">Pop</button>
+            <button class="filter-pill" type="button" data-filter="Classical">Classical</button>
+            <button class="filter-pill" type="button" data-filter="Folk">Folk</button>
+            <button class="filter-pill" type="button" data-filter="Diaspora Music">Diaspora Music</button>
+          </div>
+        </div>
+        <label class="genre-select-wrap">
+          <span>Browse every genre</span>
+          <select class="genre-select" id="genreSelect" aria-label="Filter archive by genre">
+            <option value="all">All genres</option>
+          </select>
+        </label>
       </div>
       <select class="sort-select" id="sortSelect">
         <option value="artist" selected>Artist A–Z</option>
@@ -878,7 +900,7 @@ body.cafe-mode .radio-station-top{padding:14px 24px}
     <button class="ctrl" id="btn-next" aria-label="Next"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 6h-2v12h2zM6 18l8.5-6L6 6z"/></svg></button>
   </div>
   <div class="player-progress" id="player-progress" style="display:none">
-    <div class="progress-track" id="progress-track"><div class="progress-fill" id="progress-fill"></div></div>
+    <div class="progress-track" id="progress-track" role="slider" tabindex="0" aria-label="Track position" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-valuetext="0:00 of 0:00"><div class="progress-fill" id="progress-fill"></div></div>
     <div class="progress-times"><span id="time-cur">0:00</span><span id="time-total">0:00</span></div>
   </div>
   <div class="volume-wrap" id="volume-wrap" style="display:none">
@@ -1780,9 +1802,12 @@ audio.addEventListener("pause",()=>{
 });
 audio.addEventListener("timeupdate",()=>{
   if(!audio.duration)return;
-  document.getElementById("progress-fill").style.width=(audio.currentTime/audio.duration*100)+"%";
+  const percent=audio.currentTime/audio.duration*100;
+  document.getElementById("progress-fill").style.width=percent+"%";
   document.getElementById("time-cur").textContent=fmt(audio.currentTime);
   document.getElementById("time-total").textContent=fmt(audio.duration);
+  progressTrack.setAttribute("aria-valuenow",String(Math.round(percent)));
+  progressTrack.setAttribute("aria-valuetext",`${fmt(audio.currentTime)} of ${fmt(audio.duration)}`);
 });
 audio.addEventListener("ended",()=>advancePlayback(1));
 audio.addEventListener("error",()=>{
@@ -1791,10 +1816,44 @@ audio.addEventListener("error",()=>{
   if(status)status.textContent="That file could not be played. Moving to the next archive track…";
   window.setTimeout(()=>advanceRadio(1),1400);
 });
-document.getElementById("progress-track").addEventListener("click",e=>{
+const progressTrack=document.getElementById("progress-track");
+let isSeeking=false;
+
+function seekFromClientX(clientX){
   if(!audio.duration)return;
-  const r=e.currentTarget.getBoundingClientRect();
-  audio.currentTime=((e.clientX-r.left)/r.width)*audio.duration;
+  const rect=progressTrack.getBoundingClientRect();
+  const ratio=Math.min(1,Math.max(0,(clientX-rect.left)/rect.width));
+  audio.currentTime=ratio*audio.duration;
+}
+
+progressTrack.addEventListener("pointerdown",e=>{
+  if(!audio.duration)return;
+  isSeeking=true;
+  progressTrack.setPointerCapture?.(e.pointerId);
+  seekFromClientX(e.clientX);
+  e.preventDefault();
+});
+progressTrack.addEventListener("pointermove",e=>{
+  if(!isSeeking)return;
+  seekFromClientX(e.clientX);
+  e.preventDefault();
+});
+progressTrack.addEventListener("pointerup",e=>{
+  if(!isSeeking)return;
+  seekFromClientX(e.clientX);
+  isSeeking=false;
+  progressTrack.releasePointerCapture?.(e.pointerId);
+});
+progressTrack.addEventListener("pointercancel",()=>{isSeeking=false});
+progressTrack.addEventListener("keydown",e=>{
+  if(!audio.duration)return;
+  if(e.key==="ArrowLeft"||e.key==="ArrowRight"){
+    const direction=e.key==="ArrowRight"?1:-1;
+    audio.currentTime=Math.min(audio.duration,Math.max(0,audio.currentTime+(direction*10)));
+    e.preventDefault();
+  }
+  if(e.key==="Home"){audio.currentTime=0;e.preventDefault()}
+  if(e.key==="End"){audio.currentTime=audio.duration;e.preventDefault()}
 });
 document.getElementById("volume-slider").addEventListener("input",e=>{
   audio.volume=parseFloat(e.target.value);
@@ -1824,17 +1883,41 @@ if(Number.isFinite(savedRadioVolume)){
 
 function fmt(s){s=Math.floor(s||0);return Math.floor(s/60)+":"+String(s%60).padStart(2,"0")}
 
-document.querySelectorAll(".filter-pill").forEach(btn=>{
-  btn.addEventListener("click",()=>{
-    activeFilter=btn.dataset.filter;
-    document.querySelectorAll(".filter-pill").forEach(b=>b.classList.remove("active"));
-    btn.classList.add("active");renderGrid();
+function archiveGenreCounts(){
+  const counts=new Map();
+  CASSETTES.forEach(c=>genreList(c).forEach(g=>counts.set(g,(counts.get(g)||0)+1)));
+  return [...counts.entries()].sort((a,b)=>a[0].localeCompare(b[0],undefined,{sensitivity:"base"}));
+}
+
+function populateGenreDropdown(){
+  const select=document.getElementById("genreSelect");
+  archiveGenreCounts().forEach(([genre,count])=>{
+    const option=document.createElement("option");
+    option.value=genre;
+    option.textContent=`${genre} (${count})`;
+    select.appendChild(option);
   });
+}
+
+function setArchiveGenre(genre){
+  activeFilter=genre;
+  document.querySelectorAll(".filter-pill").forEach(btn=>{
+    btn.classList.toggle("active",btn.dataset.filter===genre);
+  });
+  const select=document.getElementById("genreSelect");
+  select.value=genre;
+  renderGrid();
+}
+
+document.querySelectorAll(".filter-pill").forEach(btn=>{
+  btn.addEventListener("click",()=>setArchiveGenre(btn.dataset.filter));
 });
+document.getElementById("genreSelect").addEventListener("change",e=>setArchiveGenre(e.target.value));
 document.getElementById("searchInput").addEventListener("input",e=>{searchQuery=e.target.value.trim();renderGrid()});
 document.getElementById("sortSelect").addEventListener("change",e=>{sortMode=e.target.value;renderGrid()});
 
 document.getElementById("statTotal").textContent=CASSETTES.length;
+populateGenreDropdown();
 // Pre-render the archive and homepage carousel
 renderGrid();
 renderHomeCarousel();
@@ -1843,3 +1926,7 @@ hardenMediaProtection();
 </script>
 </body>
 </html>
+afghan-cassette-archive-genre-dropdown-mobile-player.html
+HTML
+
+
