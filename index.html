@@ -71,12 +71,12 @@ nav a.active{border-bottom:1px solid var(--accent)}
 .cover-viewer.open{display:flex}
 .cover-viewer-stage{position:relative;display:flex;align-items:center;justify-content:center;max-width:100%;max-height:100%;overflow:auto}
 .cover-viewer-image{display:block;width:auto;height:auto;max-width:94vw;max-height:86vh;object-fit:contain;background:#0b0b09;box-shadow:0 26px 90px rgba(0,0,0,.8);-webkit-user-drag:none;user-select:none;-webkit-touch-callout:none}
-.cover-viewer-stage::after{content:'AFGHAN CASSETTE ARCHIVE · PROTECTED PREVIEW';position:absolute;left:50%;top:50%;transform:translate(-50%,-50%) rotate(-24deg);z-index:2;color:rgba(255,255,255,.22);font-family:var(--font-mono);font-size:clamp(18px,4vw,58px);font-weight:700;letter-spacing:.08em;white-space:nowrap;text-shadow:0 1px 2px rgba(0,0,0,.45);pointer-events:none;user-select:none}
+.cover-viewer-stage::after{content:'Afghan Cassette Archive';position:absolute;left:50%;top:50%;transform:translate(-50%,-50%) rotate(-22deg);z-index:2;color:rgba(255,255,255,.42);font-family:var(--font-display);font-size:clamp(34px,7vw,104px);font-weight:500;letter-spacing:.025em;line-height:1;white-space:nowrap;text-shadow:0 2px 7px rgba(0,0,0,.92),0 0 18px rgba(0,0,0,.5);pointer-events:none;user-select:none}
 .cover-viewer-close{position:fixed;top:14px;right:18px;z-index:3;width:42px;height:42px;border:1px solid rgba(245,240,232,.28);background:rgba(245,240,232,.08);color:#fff;font-size:22px;cursor:pointer}
 .cover-viewer-close:hover,.cover-viewer-close:focus-visible{background:rgba(184,92,44,.35);border-color:var(--accent)}
 .cover-viewer-caption{position:fixed;left:50%;bottom:14px;transform:translateX(-50%);z-index:3;max-width:min(760px,86vw);padding:7px 12px;background:rgba(26,21,16,.84);color:rgba(245,240,232,.82);font-size:10px;text-align:center;border:1px solid rgba(245,240,232,.12)}
 .cover-viewer-shield{position:absolute;inset:0;z-index:4;background:transparent;pointer-events:auto}
-@media(max-width:640px){.cover-viewer{padding:56px 12px 44px}.cover-viewer-image{max-width:96vw;max-height:82vh}.cover-viewer-stage::after{font-size:clamp(14px,5vw,30px)}}
+@media(max-width:640px){.cover-viewer{padding:56px 12px 44px}.cover-viewer-image{max-width:96vw;max-height:82vh}.cover-viewer-stage::after{font-size:clamp(26px,8vw,52px);white-space:normal;width:88vw;text-align:center;line-height:1.05}}
 @media print{
   .cover-viewer,.modal-overlay,.cover-carousel,.cassette-grid{display:none!important}
   body::before{content:'Printing and PDF export are disabled for protected archive previews.';display:block;padding:3rem;font-family:var(--font-mono);font-size:16px}
@@ -108,6 +108,30 @@ img,.cover-img,.modal-cover,.radio-cover{-webkit-user-drag:none;user-select:none
 .cassette-card.is-playing{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent),var(--shadow-hover)}
 .cassette-card:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 .tape-visual{aspect-ratio:3/4;background:var(--tape-dark);position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.default-cover{width:100%;height:100%;min-height:0;position:relative;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden;padding:16px;background:
+  radial-gradient(circle at 82% 16%,rgba(232,196,168,.22),transparent 26%),
+  linear-gradient(145deg,#311b0d 0%,#17100a 58%,#0c0906 100%);
+  color:var(--accent-light);box-sizing:border-box;border:1px solid rgba(232,196,168,.16)}
+.default-cover::before{content:'';position:absolute;inset:9px;border:1px solid rgba(232,196,168,.2);pointer-events:none}
+.default-cover::after{content:'ACA';position:absolute;right:-7px;bottom:-17px;font-family:var(--font-display);font-size:74px;font-weight:700;line-height:1;color:rgba(232,196,168,.065);letter-spacing:-.05em;pointer-events:none}
+.default-cover-top,.default-cover-copy,.default-cover-foot{position:relative;z-index:1}
+.default-cover-top{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:8px;letter-spacing:.14em;text-transform:uppercase;color:rgba(232,196,168,.62)}
+.default-cover-seal{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;border:1px solid rgba(232,196,168,.36);font-family:var(--font-display);font-size:13px;color:var(--accent-light)}
+.default-cover-copy{margin:auto 0;padding:12px 3px}
+.default-cover-copy strong{display:block;font-family:var(--font-display);font-size:clamp(18px,2vw,26px);font-weight:400;line-height:1.05;color:var(--accent-light)}
+.default-cover-copy em{display:block;margin-top:7px;font-family:var(--font-display);font-size:12px;line-height:1.25;color:rgba(245,240,232,.54);font-style:italic}
+.default-cover-foot{font-size:7px;letter-spacing:.12em;text-transform:uppercase;color:rgba(245,240,232,.34)}
+.default-cover-card{position:absolute;inset:0}
+.modal-default-cover{display:none;width:100%;aspect-ratio:3/4;min-height:360px;margin-bottom:1.25rem}
+.modal-default-cover.visible{display:flex}
+.modal-cover-link:not(.has-real-cover){cursor:default}
+.modal-cover-link:not(.has-real-cover)::after{content:'Cover not yet available'}
+.modal-cover-link:disabled{opacity:1}
+@media(max-width:600px){
+  .default-cover{padding:13px}
+  .default-cover-copy strong{font-size:19px}
+  .modal-default-cover{min-height:310px}
+}
 .cover-img{width:100%;height:100%;object-fit:cover;display:block}
 .tape-body{width:82%;height:72%;background:var(--tape-brown);border-radius:3px;position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:8px 6px;border:1px solid rgba(255,255,255,.08)}
 .tape-label{width:90%;background:var(--accent-pale);border-radius:2px;padding:5px 4px 4px;text-align:center;border:.5px solid rgba(184,92,44,.3);margin-bottom:6px}
@@ -257,6 +281,17 @@ footer .footer-note{font-size:10px;color:rgba(245,240,232,.3);letter-spacing:.06
 .radio-station-name{font-family:var(--font-display);font-size:14px;text-align:center;color:var(--accent-light)}
 .radio-small-button{justify-self:end;background:transparent;border:1px solid rgba(232,196,168,.28);color:var(--accent-light);font-family:var(--font-mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;padding:7px 10px;border-radius:2px;cursor:pointer}
 .radio-small-button:hover{background:rgba(184,92,44,.2);border-color:var(--accent)}
+
+.radio-protection-note{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:12px 18px;background:#102015;border-bottom:1px solid rgba(212,232,216,.16)}
+.radio-protection-note>div{display:flex;flex-direction:column;gap:2px}
+.radio-protection-note strong{font-family:var(--font-display);font-size:15px;font-weight:400;color:var(--accent-light)}
+.radio-protection-note>span{font-size:9px;line-height:1.5;text-align:right;color:rgba(212,232,216,.65)}
+.radio-protection-note.is-connecting{background:#211506}
+.radio-protection-note.is-error{background:#29100c}
+@media(max-width:760px){
+  .radio-protection-note{align-items:flex-start;flex-direction:column;gap:5px;padding:12px 14px}
+  .radio-protection-note>span{text-align:left}
+}
 .radio-console{display:grid;grid-template-columns:minmax(280px,.78fr) minmax(0,1.22fr);gap:0}
 .radio-cover-wrap{position:relative;min-height:510px;background:#110c08;display:flex;align-items:center;justify-content:center;padding:2.2rem;border-right:1px solid rgba(232,196,168,.13);overflow:hidden}
 .radio-cover-wrap::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 35%,rgba(184,92,44,.22),transparent 60%)}
@@ -513,14 +548,22 @@ body.cafe-mode .radio-station-top{padding:14px 24px}
     <section class="radio-intro">
       <div class="radio-kicker">Afghan Cassette Archive · Continuous listening</div>
       <h1>Archive <em>Radio</em></h1>
-      <p>Play only the hidden radio-exclusive tracks continuously, track by track. These selections stay separate from the public cassette archive and are used only inside the Radio page.</p>
+      <p>Play only the hidden radio-exclusive tracks through an automatically created protected session. The website requests a fresh expiring stream address before each track and does not contain the private R2 object paths.</p>
     </section>
 
     <section class="radio-station" id="radio-station" aria-label="Afghan Cassette Archive Radio player">
       <div class="radio-station-top">
-        <div class="radio-live-mark"><span class="radio-live-dot"></span><span id="radio-live-label">Ready to play</span></div>
+        <div class="radio-live-mark"><span class="radio-live-dot"></span><span id="radio-live-label">Protected radio ready</span></div>
         <div class="radio-station-name">Afghan Cassette Archive Radio</div>
         <button class="radio-small-button" id="radio-cafe-btn" type="button" onclick="toggleCafeMode()">Enter Café Mode</button>
+      </div>
+
+      <div class="radio-protection-note" id="radio-protection-note">
+        <div>
+          <span class="radio-panel-kicker">Private streaming layer</span>
+          <strong>Protected radio session</strong>
+        </div>
+        <span id="radio-protection-status">A temporary listening session will be created automatically.</span>
       </div>
 
       <div class="radio-console">
@@ -586,8 +629,8 @@ body.cafe-mode .radio-station-top{padding:14px 24px}
         <span class="radio-panel-kicker">Restaurant and café use</span>
         <h3>Designed for continuous playback</h3>
         <p>Café Mode enlarges the cover and controls, requests fullscreen, and keeps the display awake where the browser supports it.</p>
-        <p>This version runs directly in each browser and plays only the hidden radio-exclusive tracks. Different restaurants begin their own rotation when they press play; they are not synchronized to the same broadcast moment.</p>
-        <p class="radio-upgrade-note">A future Icecast or AzuraCast stream URL can replace the local rotation when one synchronized station is needed.</p>
+        <p>Each browser receives a temporary session automatically. The private stream address is refreshed before every track, while different restaurants still begin their own rotation when they press play.</p>
+        <p class="radio-upgrade-note">This reduces direct file grabbing but cannot prevent recording of audible sound. A synchronized Icecast or AzuraCast broadcast can still be added later.</p>
       </div>
     </section>
   </main>
@@ -865,7 +908,10 @@ body.cafe-mode .radio-station-top{padding:14px 24px}
       <div class="modal-title" id="modal-title-text">—</div>
       <button class="modal-close" onclick="closeModal()">✕</button>
     </div>
-    <button id="modal-cover-link" class="modal-cover-link" type="button" onclick="openCoverViewer()" aria-label="View complete cassette cover"><img id="modal-cover" class="modal-cover" src="" alt="Cassette cover"></button>
+    <button id="modal-cover-link" class="modal-cover-link" type="button" onclick="openCoverViewer()" aria-label="View complete cassette cover">
+      <img id="modal-cover" class="modal-cover" src="" alt="Cassette cover">
+      <div id="modal-default-cover" class="default-cover modal-default-cover" aria-label="Default cassette cover"></div>
+    </button>
     <div class="modal-meta" id="modal-meta"></div>
     <div class="modal-tags" id="modal-tags"></div>
     <ul class="track-list" id="track-list"></ul>
@@ -907,7 +953,7 @@ body.cafe-mode .radio-station-top{padding:14px 24px}
     <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3A4.5 4.5 0 0 0 14 7.97v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/></svg>
     <input type="range" class="volume-slider" id="volume-slider" min="0" max="1" step="0.02" value="1">
   </div>
-  <audio id="audio-el" preload="none" controlslist="nodownload noplaybackrate noremoteplayback" disablepictureinpicture disableremoteplayback></audio>
+  <audio id="audio-el" preload="none" crossorigin="anonymous" controlslist="nodownload noplaybackrate noremoteplayback" disablepictureinpicture disableremoteplayback></audio>
 </div>
 
 <footer>
@@ -1163,82 +1209,31 @@ let radioRecent=[];
 let radioWakeLock=null;
 let currentRadioItem=null;
 
-const RADIO_ONLY_TRACKS = [
-  {
-    source:"radio-only",
-    radioOnlyId:"jamal-jamalo-instrumental",
-    folder:"Radio Tracks",
-    file:"Jamal jamalo instrumental.mp3",
-    artist:"Jamal Jamalo",
-    album:"Radio Exclusive",
-    trackName:"Instrumental",
-    era:"",
-    language:"",
-    genres:["Radio Exclusive","Instrumental"]
-  },
-  {
-    source:"radio-only",
-    radioOnlyId:"najib-rastagar-flute",
-    folder:"Radio Tracks",
-    file:"Instrumental 1.mp3",
-    artist:"Najib Rastagar",
-    album:"Radio Exclusive",
-    trackName:"Flute",
-    era:"",
-    language:"",
-    genres:["Radio Exclusive","Instrumental","Flute"]
-  },
-  {
-    source:"radio-only",
-    radioOnlyId:"rock-instrumental",
-    folder:"Radio Tracks",
-    file:"Instrumental Rock.mp3",
-    artist:"Afghan Cassette Archive",
-    album:"Radio Exclusive",
-    trackName:"Rock Instrumental",
-    era:"",
-    language:"",
-    genres:["Radio Exclusive","Instrumental","Rock"]
-  },
-  {
-    source:"radio-only",
-    radioOnlyId:"ustad-mahsrar-sitar",
-    folder:"Radio Tracks",
-    file:"Instrumental.mp3",
-    artist:"Ustad Mahsrar",
-    album:"Radio Exclusive",
-    trackName:"Sitar",
-    era:"",
-    language:"Instrumental",
-    genres:["Radio Exclusive","Instrumental","Sitar"]
-  },
-  {
-    source:"radio-only",
-    radioOnlyId:"nashenas-zama-negar-rang-e",
-    folder:"Radio Tracks",
-    file:"Nashenas Zama Negar Rangi Radio.mp3",
-    artist:"Nashenas",
-    album:"Radio Exclusive",
-    trackName:"Zama Negar Rang-e",
-    era:"",
-    language:"",
-    genres:["Radio Exclusive"]
-  },
-  {
-    source:"radio-only",
-    radioOnlyId:"anjali-banerji-agar-bud-baja-bud",
-    folder:"Radio Tracks",
-    file:"Anjali Agar buud baja Bud.mp3",
-    artist:"Anjali Banerji",
-    album:"Radio Exclusive",
-    trackName:"Agar Bud Baja Bud",
-    era:"",
-    language:"",
-    genres:["Radio Exclusive"]
-  }
-];
+const PROTECTED_RADIO_API = "https://REPLACE-WITH-YOUR-WORKER.workers.dev";
+const RADIO_TOKEN_KEY = "acaProtectedRadioToken";
+const RADIO_TOKEN_EXPIRY_KEY = "acaProtectedRadioTokenExpiry";
+let RADIO_PLAYLIST = [];
+let radioPlaylistLoading = null;
 
-const RADIO_PLAYLIST = [...RADIO_ONLY_TRACKS];
+function protectedRadioConfigured(){
+  return /^https:\/\//.test(PROTECTED_RADIO_API)&&!PROTECTED_RADIO_API.includes("REPLACE-WITH");
+}
+
+function protectedRadioToken(){
+  const token=sessionStorage.getItem(RADIO_TOKEN_KEY)||"";
+  const expiry=Number(sessionStorage.getItem(RADIO_TOKEN_EXPIRY_KEY)||0);
+  if(!token||!expiry||Date.now()>=expiry){
+    sessionStorage.removeItem(RADIO_TOKEN_KEY);
+    sessionStorage.removeItem(RADIO_TOKEN_EXPIRY_KEY);
+    return "";
+  }
+  return token;
+}
+
+function protectedRadioHeaders(){
+  const token=protectedRadioToken();
+  return token?{"Authorization":`Bearer ${token}`}:{};
+}
 
 function r2url(folder,file){
   return `${R2}/${encodeURIComponent(folder)}/${encodeURIComponent(file)}`;
@@ -1282,6 +1277,20 @@ document.addEventListener("keydown",e=>{
   if((e.ctrlKey||e.metaKey)&&e.shiftKey&&["i","j","c","s"].includes(key)){e.preventDefault();return;}
   if(key==="f12")e.preventDefault();
 });
+
+function defaultCoverMarkup(c,className=""){
+  return `<div class="default-cover ${className}" aria-label="Default cover for ${c.artist} — ${c.album}">
+    <div class="default-cover-top">
+      <span>Afghan Cassette Archive</span>
+      <span class="default-cover-seal">ACA</span>
+    </div>
+    <div class="default-cover-copy">
+      <strong>${c.artist}</strong>
+      <em>${c.album}</em>
+    </div>
+    <div class="default-cover-foot">Cover not yet available · Archival placeholder</div>
+  </div>`;
+}
 
 function renderHomeCarousel(){
   const track=document.getElementById("cover-carousel-track");
@@ -1334,13 +1343,12 @@ function renderGrid(){
   if(!list.length){grid.innerHTML=`<div class="empty-state"><div class="big">♩</div>No cassettes match.</div>`;return}
   grid.innerHTML=list.map(c=>{
     const playing=currentCassetteId===c.id;
-    const[r1,r2]=reelSizes(c.id);
+    const fallback=defaultCoverMarkup(c,"default-cover-card");
     const visual=c.cover
-      ?`<img class="cover-img" src="${coverUrl(c)}" alt="${c.artist}" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">`
-      :"";
-    const tapeBody=`<div class="tape-body"><div class="tape-label"><span class="tape-label-title">${c.artist}</span><span class="tape-label-sub">${c.album}</span></div><div class="tape-reels"><div class="reel" style="width:${r1}px;height:${r1}px"></div><div class="reel-wire"></div><div class="reel" style="width:${r2}px;height:${r2}px"></div></div><div class="tape-holes"><div class="tape-hole"></div><div class="tape-hole"></div><div class="tape-hole"></div></div></div>`;
+      ?`<img class="cover-img" src="${coverUrl(c)}" alt="${c.artist}" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div style="display:none">${fallback}</div>`
+      :fallback;
     return`<div class="cassette-card${playing?" is-playing":""}" tabindex="0" role="button" aria-label="Open ${c.artist}" onclick="openModal(${c.id})" onkeydown="if(event.key==='Enter'||event.key===' ')openModal(${c.id})">
-      <div class="tape-visual">${visual}<div style="position:absolute;inset:0;display:${c.cover?"none":"flex"};align-items:center;justify-content:center">${tapeBody}</div><div class="tape-side-label">SIDE A/B</div><div class="play-hover"><svg viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg></div><div class="np-badge">▶ Now Playing</div></div>
+      <div class="tape-visual">${visual}<div class="play-hover"><svg viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg></div><div class="np-badge">▶ Now Playing</div></div>
       <div class="card-info"><div class="card-artist">${c.artist}</div><div class="card-album">${c.album}</div><div class="card-tags">${c.era?`<span class="tag tag-era">${c.era}</span>`:""}${genreTags(c)}${c.language?`<span class="tag tag-lang">${c.language}</span>`:""}</div></div>
     </div>`;
   }).join("");
@@ -1355,15 +1363,32 @@ function openModal(id){
   document.getElementById("modal-title-text").textContent=c.artist;
   const cover=document.getElementById("modal-cover");
   const coverLink=document.getElementById("modal-cover-link");
+  const defaultCover=document.getElementById("modal-default-cover");
   if(c.cover){
     const fullCoverUrl=coverUrl(c);
     cover.src=fullCoverUrl;
     cover.alt=`${c.artist} — ${c.album} cassette cover`;
     cover.classList.add("visible");
+    defaultCover.classList.remove("visible");
+    defaultCover.innerHTML="";
+    coverLink.classList.add("has-real-cover");
+    coverLink.disabled=false;
     coverLink.style.display="block";
+    cover.onerror=()=>{
+      cover.classList.remove("visible");
+      defaultCover.innerHTML=defaultCoverMarkup(c).replace(/^<div[^>]*>|<\/div>$/g,"");
+      defaultCover.classList.add("visible");
+      coverLink.classList.remove("has-real-cover");
+      coverLink.disabled=true;
+    };
   }else{
+    cover.removeAttribute("src");
     cover.classList.remove("visible");
-    coverLink.style.display="none";
+    defaultCover.innerHTML=defaultCoverMarkup(c).replace(/^<div[^>]*>|<\/div>$/g,"");
+    defaultCover.classList.add("visible");
+    coverLink.classList.remove("has-real-cover");
+    coverLink.disabled=true;
+    coverLink.style.display="block";
   }
   document.getElementById("modal-meta").innerHTML=`
     <div class="modal-row"><span class="modal-label">Album</span><span class="modal-val">${c.album}</span></div>
@@ -1491,30 +1516,168 @@ function loadArchiveTrack(cassetteId,trackIdx,mode="archive"){
   closeModal();
 }
 
-function loadRadioOnlyTrack(item){
+
+function setRadioConnectionState(state,message=""){
+  const note=document.getElementById("radio-protection-note");
+  const status=document.getElementById("radio-protection-status");
+  note?.classList.toggle("is-connecting",state==="connecting");
+  note?.classList.toggle("is-error",state==="error");
+  if(status){
+    status.textContent=message||(
+      state==="ready"
+        ?"Temporary protected session active. Fresh stream links are created automatically."
+        :state==="connecting"
+          ?"Creating a temporary protected session…"
+          :"The protected radio service is not available."
+    );
+  }
+}
+
+function clearProtectedRadioSession(message="The protected radio session has ended."){
+  sessionStorage.removeItem(RADIO_TOKEN_KEY);
+  sessionStorage.removeItem(RADIO_TOKEN_EXPIRY_KEY);
+  RADIO_PLAYLIST=[];
+  radioQueue=[];
+  radioQueueIndex=-1;
+  currentRadioItem=null;
+  if(playbackMode==="radio"){
+    audio.pause();
+    audio.removeAttribute("src");
+    audio.load();
+    isPlaying=false;
+  }
+  setRadioConnectionState("error",message);
+  updateRadioCounts();
+  updateRadioNowPlaying();
+  updateRadioPlayingState();
+}
+
+async function protectedRadioFetch(path,options={}){
+  if(!protectedRadioConfigured()){
+    throw new Error("The protected Worker URL has not been configured yet.");
+  }
+  const headers=new Headers(options.headers||{});
+  Object.entries(protectedRadioHeaders()).forEach(([key,value])=>headers.set(key,value));
+  const response=await fetch(`${PROTECTED_RADIO_API}${path}`,{
+    ...options,
+    headers,
+    cache:"no-store",
+    referrerPolicy:"no-referrer"
+  });
+  if(response.status===401||response.status===403){
+    sessionStorage.removeItem(RADIO_TOKEN_KEY);
+    sessionStorage.removeItem(RADIO_TOKEN_EXPIRY_KEY);
+  }
+  return response;
+}
+
+async function createAutomaticProtectedSession(){
+  if(protectedRadioToken())return true;
+  if(!protectedRadioConfigured())throw new Error("The protected Worker URL has not been configured yet.");
+
+  setRadioConnectionState("connecting");
+  const response=await fetch(`${PROTECTED_RADIO_API}/api/session`,{
+    method:"POST",
+    headers:{"Content-Type":"application/json"},
+    body:"{}",
+    cache:"no-store",
+    referrerPolicy:"no-referrer"
+  });
+  const data=await response.json().catch(()=>({}));
+  if(!response.ok)throw new Error(data.error||"A temporary radio session could not be created.");
+
+  sessionStorage.setItem(RADIO_TOKEN_KEY,data.token);
+  sessionStorage.setItem(RADIO_TOKEN_EXPIRY_KEY,String(data.expiresAt));
+  setRadioConnectionState("ready");
+  return true;
+}
+
+async function loadProtectedRadioPlaylist(force=false){
+  if(!protectedRadioToken())return false;
+  if(RADIO_PLAYLIST.length&&!force)return true;
+  if(radioPlaylistLoading&&!force)return radioPlaylistLoading;
+
+  radioPlaylistLoading=(async()=>{
+    const response=await protectedRadioFetch("/api/playlist");
+    if(!response.ok){
+      const data=await response.json().catch(()=>({}));
+      throw new Error(data.error||"The protected playlist could not be loaded.");
+    }
+    const data=await response.json();
+    RADIO_PLAYLIST=(data.tracks||[]).map(track=>({
+      ...track,
+      source:"radio-only",
+      genres:Array.isArray(track.genres)?track.genres:[]
+    }));
+    radioQueue=[];
+    radioQueueIndex=-1;
+    buildRadioQueue();
+    updateRadioCounts();
+    return RADIO_PLAYLIST.length>0;
+  })();
+
+  try{
+    return await radioPlaylistLoading;
+  }finally{
+    radioPlaylistLoading=null;
+  }
+}
+
+async function requestProtectedStreamUrl(trackId){
+  const response=await protectedRadioFetch(`/api/track/${encodeURIComponent(trackId)}`);
+  const data=await response.json().catch(()=>({}));
+  if(!response.ok)throw new Error(data.error||"A protected stream could not be created.");
+  return data.url;
+}
+
+async function ensureProtectedRadioReady(){
+  if(!protectedRadioConfigured()){
+    setRadioConnectionState("error","The Worker URL has not been configured. Follow the deployment guide included with the site.");
+    return false;
+  }
+  try{
+    if(!protectedRadioToken())await createAutomaticProtectedSession();
+    const ready=await loadProtectedRadioPlaylist();
+    setRadioConnectionState(ready?"ready":"error",ready
+      ?"Temporary protected session active. Fresh stream access is requested before each track."
+      :"The protected playlist is empty.");
+    return ready;
+  }catch(error){
+    clearProtectedRadioSession(error.message||"The protected playlist could not be loaded.");
+    return false;
+  }
+}
+
+async function loadRadioOnlyTrack(item){
   if(!item||item.source!=="radio-only")return;
   playbackMode="radio";
   currentRadioItem=item;
   currentCassetteId=null;
   currentTrackIdx=0;
-  audio.src=r2url(item.folder,item.file);
-  updateSharedPlayerData({
-    artist:item.artist,
-    album:item.album,
-    trackName:item.trackName
-  });
-  updateRadioNowPlaying();
-  audio.play().then(()=>{
+  const status=document.getElementById("radio-status");
+  if(status)status.textContent="Requesting protected stream access…";
+
+  try{
+    const protectedUrl=await requestProtectedStreamUrl(item.id);
+    audio.src=protectedUrl;
+    updateSharedPlayerData({
+      artist:item.artist,
+      album:item.album,
+      trackName:item.trackName
+    });
+    updateRadioNowPlaying();
+    await audio.play();
     isPlaying=true;
     setPlayIcon(true);
     updateRadioPlayingState();
-  }).catch(()=>{
+    if(status)status.textContent="Protected playback active. The stream address expires automatically.";
+  }catch(error){
     isPlaying=false;
     setPlayIcon(false);
     updateRadioPlayingState();
-    const status=document.getElementById("radio-status");
-    if(status)status.textContent="Playback is ready. Press Start Radio once to allow audio in this browser.";
-  });
+    if(status)status.textContent=error.message||"The protected track could not be played.";
+    if(protectedRadioToken())window.setTimeout(()=>advanceRadio(1),1800);
+  }
   renderGrid();
   closeModal();
 }
@@ -1561,6 +1724,12 @@ function shuffleArray(items){
 }
 
 function buildRadioQueue(){
+  if(!RADIO_PLAYLIST.length){
+    radioQueue=[];
+    radioQueueIndex=-1;
+    updateRadioCounts();
+    return;
+  }
   if(radioOrder==="alphabetical"){
     radioQueue=[...RADIO_PLAYLIST].sort((a,b)=>
       a.artist.localeCompare(b.artist,undefined,{sensitivity:"base"})||
@@ -1574,35 +1743,41 @@ function buildRadioQueue(){
   updateRadioCounts();
 }
 
-function initRadio(){
-  if(!radioQueue.length)buildRadioQueue();
-  const specialTrackCount=RADIO_ONLY_TRACKS.length;
-  const artistCount=new Set(RADIO_ONLY_TRACKS.map(item=>item.artist)).size;
-  const albumEl=document.getElementById("radio-album-count");
-  const trackEl=document.getElementById("radio-track-count");
-  if(albumEl)albumEl.textContent=specialTrackCount;
-  if(trackEl)trackEl.textContent=artistCount;
+async function initRadio(){
   const radioVolume=document.getElementById("radio-volume");
   if(radioVolume)radioVolume.value=audio.volume;
+
+  if(!protectedRadioConfigured()){
+    setRadioConnectionState("error","Configure the protected Worker URL to activate private radio playback.");
+  }else{
+    try{
+      await ensureProtectedRadioReady();
+    }catch(error){
+      clearProtectedRadioSession(error.message||"A protected session could not be created.");
+    }
+  }
+
   updateRadioCounts();
   updateRadioNowPlaying();
   renderRadioRecent();
   updateRadioPlayingState();
 }
 
-function startRadio(){
-  initRadio();
+async function startRadio(){
+  if(!(await ensureProtectedRadioReady()))return;
   if(playbackMode==="radio"&&currentRadioItem){
     if(isPlaying)audio.pause();
     else audio.play().catch(()=>{});
     return;
   }
+  if(!radioQueue.length)buildRadioQueue();
   if(!radioQueue.length)return;
   radioQueueIndex=0;
-  playRadioQueueItem();
+  await playRadioQueueItem();
 }
 
-function playRadioQueueItem(){
+async function playRadioQueueItem(){
+  if(!(await ensureProtectedRadioReady()))return;
   if(!radioQueue.length)buildRadioQueue();
   if(radioQueueIndex<0)radioQueueIndex=0;
   if(radioQueueIndex>=radioQueue.length){
@@ -1615,19 +1790,18 @@ function playRadioQueueItem(){
   radioRecent.unshift({...item,playedAt:new Date()});
   radioRecent=radioRecent.slice(0,10);
   renderRadioRecent();
-  if(item.source==="radio-only")loadRadioOnlyTrack(item);
-  else loadArchiveTrack(item.cassetteId,item.trackIdx,"radio");
+  await loadRadioOnlyTrack(item);
   updateRadioCounts();
 }
 
-function advanceRadio(dir){
-  initRadio();
+async function advanceRadio(dir){
+  if(!(await ensureProtectedRadioReady()))return;
   if(playbackMode!=="radio"||radioQueueIndex<0){
     radioQueueIndex=dir<0?radioQueue.length-1:0;
   }else{
     radioQueueIndex=(radioQueueIndex+dir+radioQueue.length)%radioQueue.length;
   }
-  playRadioQueueItem();
+  await playRadioQueueItem();
 }
 
 function advancePlayback(dir){
@@ -1647,10 +1821,16 @@ function setRadioOrder(order){
 }
 
 function updateRadioCounts(){
+  const albumEl=document.getElementById("radio-album-count");
+  const trackEl=document.getElementById("radio-track-count");
   const queueEl=document.getElementById("radio-queue-count");
-  if(!queueEl)return;
-  const remaining=radioQueueIndex<0?radioQueue.length:Math.max(0,radioQueue.length-radioQueueIndex-1);
-  queueEl.textContent=remaining;
+  const artistCount=new Set(RADIO_PLAYLIST.map(item=>item.artist)).size;
+  if(albumEl)albumEl.textContent=RADIO_PLAYLIST.length;
+  if(trackEl)trackEl.textContent=artistCount;
+  if(queueEl){
+    const remaining=radioQueueIndex<0?radioQueue.length:Math.max(0,radioQueue.length-radioQueueIndex-1);
+    queueEl.textContent=remaining;
+  }
 }
 
 function updateRadioNowPlaying(){
@@ -1691,8 +1871,8 @@ function updateRadioNowPlaying(){
 
   if(!currentCassetteId){
     artistEl.textContent="Press Start Radio";
-    document.getElementById("radio-album").textContent="Hidden radio selections";
-    document.getElementById("radio-track").textContent="Continuous radio-only rotation";
+    document.getElementById("radio-album").textContent=protectedRadioToken()?"Protected radio selections":"Preparing protected radio";
+    document.getElementById("radio-track").textContent=protectedRadioToken()?"Continuous protected rotation":"Temporary session will be created automatically";
     document.getElementById("radio-tags").innerHTML="";
     cover.removeAttribute("src");
     cover.classList.remove("visible");
@@ -1728,9 +1908,11 @@ function updateRadioPlayingState(){
   const liveLabel=document.getElementById("radio-live-label");
   if(station)station.classList.toggle("is-playing",playbackMode==="radio"&&isPlaying);
   if(liveLabel){
-    if(playbackMode==="radio"&&isPlaying)liveLabel.textContent="On air";
-    else if(playbackMode==="radio"&&currentCassetteId)liveLabel.textContent="Radio paused";
-    else liveLabel.textContent="Ready to play";
+    if(!protectedRadioConfigured())liveLabel.textContent="Setup required";
+    else if(!protectedRadioToken())liveLabel.textContent="Creating session";
+    else if(playbackMode==="radio"&&isPlaying)liveLabel.textContent="On air";
+    else if(playbackMode==="radio"&&currentRadioItem)liveLabel.textContent="Radio paused";
+    else liveLabel.textContent="Protected radio ready";
   }
   setPlayIcon(isPlaying);
 }
@@ -1921,12 +2103,8 @@ populateGenreDropdown();
 // Pre-render the archive and homepage carousel
 renderGrid();
 renderHomeCarousel();
-initRadio();
+initRadio().catch(console.error);
 hardenMediaProtection();
 </script>
 </body>
 </html>
-afghan-cassette-archive-genre-dropdown-mobile-player.html
-HTML
-
-
