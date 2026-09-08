@@ -1010,9 +1010,142 @@ footer{background:#182D22;border-top-color:#E3B75F}
   }
 }
 
+
+/* ==========================================================
+   INTRO OPTION B — IMMERSIVE ARCHIVE COVER / MOVING WALL
+   ========================================================== */
+body.aca-gate-b-active{overflow:hidden;background:#10271B}
+body.aca-gate-b-active>header,
+body.aca-gate-b-active>.page-section,
+body.aca-gate-b-active>footer,
+body.aca-gate-b-active>.player-bar{visibility:hidden}
+
+.aca-cover-b{
+  position:fixed;inset:0;z-index:13000;overflow:hidden;background:#10271B;color:#FFF8E8;
+  transition:opacity .85s ease,transform .85s cubic-bezier(.2,.75,.2,1),visibility .85s ease;
+  isolation:isolate
+}
+.aca-cover-b.is-leaving{opacity:0;transform:scale(1.035);visibility:hidden}
+.aca-cover-b-backdrop{
+  position:absolute;inset:-8%;z-index:0;display:flex;flex-direction:column;justify-content:space-around;gap:2.5vh;
+  transform:rotate(-5deg) scale(1.08);opacity:.76
+}
+.aca-cover-b-row{position:relative;width:100%;overflow:hidden;mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);-webkit-mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent)}
+.aca-cover-b-track{display:flex;gap:18px;width:max-content;animation:acaWallLeft 62s linear infinite;will-change:transform}
+.aca-cover-b-row.reverse .aca-cover-b-track{animation-name:acaWallRight;animation-duration:70s}
+.aca-cover-b-row.fast .aca-cover-b-track{animation-duration:54s}
+@keyframes acaWallLeft{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes acaWallRight{from{transform:translateX(-50%)}to{transform:translateX(0)}}
+
+.aca-cover-b-tile{
+  flex:0 0 auto;width:clamp(120px,13vw,186px);aspect-ratio:3/4;overflow:hidden;border-radius:4px;
+  background:#182D22;border:1px solid rgba(244,223,165,.2);
+  box-shadow:0 16px 44px rgba(0,0,0,.45);position:relative
+}
+.aca-cover-b-tile.poster{width:clamp(138px,15vw,210px);aspect-ratio:4/5}
+.aca-cover-b-tile img{width:100%;height:100%;object-fit:cover;display:block;filter:saturate(.94) contrast(1.02)}
+.aca-cover-b-tile::after{content:"";position:absolute;inset:0;background:linear-gradient(145deg,rgba(255,255,255,.07),transparent 35%,rgba(0,0,0,.16));pointer-events:none}
+
+.aca-cover-b-shade{
+  position:absolute;inset:0;z-index:1;
+  background:
+    radial-gradient(ellipse at center,rgba(18,49,33,.1) 0%,rgba(8,24,16,.38) 46%,rgba(6,16,11,.82) 100%),
+    linear-gradient(90deg,rgba(5,16,10,.65),transparent 22%,transparent 78%,rgba(5,16,10,.65));
+}
+.aca-cover-b-center{
+  position:absolute;inset:0;z-index:3;display:grid;place-items:center;padding:24px;
+}
+.aca-cover-b-panel{
+  width:min(780px,calc(100vw - 34px));padding:clamp(2.2rem,6vw,5rem) clamp(1.4rem,5vw,4rem);
+  text-align:center;position:relative;
+}
+.aca-cover-b-panel::before,.aca-cover-b-panel::after{
+  content:"";position:absolute;left:50%;width:min(440px,72%);height:1px;background:linear-gradient(90deg,transparent,#E3B75F,transparent)
+}
+.aca-cover-b-panel::before{top:0;transform:translateX(-50%)}
+.aca-cover-b-panel::after{bottom:0;transform:translateX(-50%)}
+.aca-cover-b-small{
+  font-size:8px;letter-spacing:.25em;text-transform:uppercase;color:#E3B75F;margin-bottom:1.1rem
+}
+.aca-cover-b-title{
+  font-family:var(--font-display);font-size:clamp(2.7rem,7vw,6.4rem);line-height:.9;font-weight:400;
+  letter-spacing:-.035em;color:#FFF8E8;text-shadow:0 4px 30px rgba(0,0,0,.45)
+}
+.aca-cover-b-title span{display:block;color:#F4DFA5;font-style:italic}
+.aca-cover-b-arabic{
+  font-family:var(--font-arabic);font-size:clamp(19px,2.5vw,29px);margin:1.15rem 0 .25rem;
+  color:rgba(255,248,232,.7)
+}
+.aca-cover-b-pashto{
+  font-family:var(--font-arabic);font-size:clamp(17px,2.2vw,25px);margin:0 0 .9rem;
+  color:rgba(244,223,165,.82)
+}
+.aca-cover-b-copy{
+  max-width:590px;margin:0 auto;font-size:12px;line-height:1.8;color:rgba(255,248,232,.72);
+  text-shadow:0 2px 18px rgba(0,0,0,.7)
+}
+.aca-cover-b-enter{
+  margin-top:1.8rem;position:relative;min-width:260px;padding:15px 28px;border:1px solid #F4DFA5;
+  background:rgba(16,39,27,.68);color:#FFF8E8;border-radius:2px;font-family:var(--font-mono);
+  font-size:10px;letter-spacing:.16em;text-transform:uppercase;cursor:pointer;backdrop-filter:blur(10px);
+  transition:background .2s,color .2s,transform .2s,box-shadow .2s
+}
+.aca-cover-b-enter:hover,.aca-cover-b-enter:focus-visible{
+  background:#F4DFA5;color:#173222;transform:translateY(-3px);box-shadow:0 15px 35px rgba(0,0,0,.3);outline:none
+}
+.aca-cover-b-foot{
+  margin-top:1.1rem;font-size:8px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,248,232,.4)
+}
+.aca-cover-b-brand{
+  position:absolute;top:20px;left:24px;z-index:4;font-family:var(--font-display);font-size:14px;color:#F4DFA5;
+  letter-spacing:.04em
+}
+.aca-cover-b-brand small{
+  display:block;font-family:var(--font-arabic);font-size:11px;color:rgba(255,248,232,.5);margin-top:1px
+}
+.aca-cover-b-note{
+  position:absolute;right:24px;bottom:18px;z-index:4;font-size:7px;letter-spacing:.18em;text-transform:uppercase;
+  color:rgba(255,248,232,.32)
+}
+@media(max-width:760px){
+  .aca-cover-b-backdrop{inset:-3%;transform:rotate(-4deg) scale(1.13)}
+  .aca-cover-b-row:nth-child(3){display:none}
+  .aca-cover-b-tile{width:105px}
+  .aca-cover-b-tile.poster{width:118px}
+  .aca-cover-b-brand{top:14px;left:15px}
+  .aca-cover-b-note{display:none}
+}
+@media(prefers-reduced-motion:reduce){
+  .aca-cover-b-track{animation-play-state:paused}
+  .aca-cover-b{transition:none}
+}
+
 </style>
 </head>
-<body>
+<body class="aca-gate-b-active">
+
+<div class="aca-cover-b" id="aca-cover-b" role="dialog" aria-modal="true" aria-labelledby="aca-cover-b-title">
+  <div class="aca-cover-b-brand">Afghan Cassette Archive<small lang="fa" dir="rtl">آرشیف کاست‌های افغان</small></div>
+  <div class="aca-cover-b-backdrop" id="aca-cover-b-backdrop" aria-hidden="true">
+    <div class="aca-cover-b-row"><div class="aca-cover-b-track" data-aca-wall-row="0"></div></div>
+    <div class="aca-cover-b-row reverse"><div class="aca-cover-b-track" data-aca-wall-row="1"></div></div>
+    <div class="aca-cover-b-row fast"><div class="aca-cover-b-track" data-aca-wall-row="2"></div></div>
+  </div>
+  <div class="aca-cover-b-shade"></div>
+  <div class="aca-cover-b-center">
+    <div class="aca-cover-b-panel">
+      <div class="aca-cover-b-small">An independent community archive</div>
+      <h1 class="aca-cover-b-title" id="aca-cover-b-title">Cassettes carry<span>our stories.</span></h1>
+      <div class="aca-cover-b-arabic" lang="fa" dir="rtl">به آرشیف کاست‌های افغان خوش آمدید</div>
+      <div class="aca-cover-b-pashto" lang="ps" dir="rtl">د افغان کاسېټونو آرشیف ته ښه راغلاست</div>
+      <p class="aca-cover-b-copy">Enter a growing collection of Afghan cassette culture — music, radio, regional traditions, diaspora recordings, visual ephemera, and the people whose work lives inside these tapes.</p>
+      <button class="aca-cover-b-enter" id="aca-cover-b-enter" type="button">Enter the Archive&nbsp; →</button>
+      <div class="aca-cover-b-foot">Archive · preserve · listen · remember</div>
+    </div>
+  </div>
+  <div class="aca-cover-b-note">Cassettes · posters · broadcasts · memory</div>
+</div>
+
 <header>
   <div class="header-brand">
     <div class="header-title">Afghan Cassette Archive</div>
@@ -2924,5 +3057,65 @@ initRadio().catch(console.error);
 hardenMediaProtection();
 handleArchiveRoute();
 </script>
+
+<script>
+(function(){
+  const cover=document.getElementById("aca-cover-b");
+  const enter=document.getElementById("aca-cover-b-enter");
+  if(!cover||!enter)return;
+
+  const available=CASSETTES.filter(c=>c.cover);
+  const selected=[];
+  if(available.length){
+    const wanted=22;
+    for(let i=0;i<wanted;i++){
+      const idx=Math.floor((i*(available.length-1))/(wanted-1));
+      selected.push(available[idx]);
+    }
+  }
+
+  const posters=[
+    "https://afghancassettearchive.github.io/afghan-cassette-archive/event-posters/rootstock-composers-golden-era-may-9-2026.png",
+    "https://afghancassettearchive.github.io/afghan-cassette-archive/event-posters/discostan-afghan-cassette-archive-may-16-2026.png"
+  ];
+
+  function cassetteTile(c){
+    return `<div class="aca-cover-b-tile"><img src="${coverUrl(c)}" alt="" draggable="false"></div>`;
+  }
+  function posterTile(src){
+    return `<div class="aca-cover-b-tile poster"><img src="${src}" alt="" draggable="false"></div>`;
+  }
+
+  document.querySelectorAll("[data-aca-wall-row]").forEach((track,rowIndex)=>{
+    let row=selected.filter((_,i)=>i%3===rowIndex);
+    if(row.length<5)row=selected;
+    let markup=row.map(c=>cassetteTile(c)).join("");
+    if(rowIndex===0)markup+=posterTile(posters[0]);
+    if(rowIndex===1)markup=posterTile(posters[1])+markup;
+    if(rowIndex===2)markup+=posterTile(posters[0])+posterTile(posters[1]);
+    track.innerHTML=markup+markup;
+  });
+
+  function enterArchive(){
+    if(cover.classList.contains("is-leaving"))return;
+    cover.classList.add("is-leaving");
+    window.setTimeout(()=>{
+      cover.remove();
+      document.body.classList.remove("aca-gate-b-active");
+      const archiveNav=document.querySelector('[data-page="archive"]');
+      if(typeof showPage==="function")showPage("archive",archiveNav);
+      if(location.hash!=="#archive")history.replaceState(null,"","#archive");
+      window.scrollTo({top:0,behavior:"smooth"});
+    },820);
+  }
+  enter.addEventListener("click",enterArchive);
+  document.addEventListener("keydown",function acaCoverBKey(e){
+    if(e.key==="Enter"&&document.body.contains(cover)){
+      e.preventDefault();enterArchive();
+    }
+  });
+})();
+</script>
+
 </body>
 </html>
