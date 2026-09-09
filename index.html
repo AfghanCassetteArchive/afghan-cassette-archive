@@ -1120,6 +1120,37 @@ body.aca-gate-b-active>.player-bar{visibility:hidden}
   .aca-cover-b{transition:none}
 }
 
+
+/* Radio test-build donor / source notes */
+.radio-source-details{
+  margin-top:.9rem;
+  padding:.8rem .9rem;
+  border-left:2px solid var(--accent);
+  background:rgba(227,183,95,.07);
+  color:var(--ink-mid);
+}
+.radio-source-details[hidden]{display:none}
+.radio-source-donor{
+  margin-bottom:.28rem;
+  font-size:9px;
+  letter-spacing:.11em;
+  text-transform:uppercase;
+  color:var(--accent);
+}
+.radio-source-comment{
+  font-size:10px;
+  line-height:1.65;
+  color:var(--ink-mid);
+}
+
+
+.radio-recent li{display:flex;align-items:center;gap:.75rem}
+.radio-recent-cover{
+  width:46px;height:46px;flex:0 0 46px;object-fit:cover;border-radius:3px;
+  border:1px solid rgba(244,223,165,.18);
+  box-shadow:0 4px 12px rgba(0,0,0,.2)
+}
+
 </style>
 </head>
 <body class="aca-gate-b-active">
@@ -1259,7 +1290,7 @@ body.aca-gate-b-active>.player-bar{visibility:hidden}
 
     <section class="radio-station" id="radio-station" aria-label="Afghan Cassette Archive Radio player">
       <div class="radio-station-top">
-        <div class="radio-live-mark"><span class="radio-live-dot"></span><span id="radio-live-label">Protected radio ready</span></div>
+        <div class="radio-live-mark"><span class="radio-live-dot"></span><span id="radio-live-label">Radio test ready</span></div>
         <div class="radio-station-name">Afghan Cassette Archive Radio</div>
         <button class="radio-small-button" id="radio-cafe-btn" type="button" onclick="toggleCafeMode()">Enter Café Mode</button>
       </div>
@@ -1267,9 +1298,9 @@ body.aca-gate-b-active>.player-bar{visibility:hidden}
       <div class="radio-protection-note" id="radio-protection-note">
         <div>
           <span class="radio-panel-kicker">Archive listening mode</span>
-          <strong>Radio is ready</strong>
+          <strong>Radio Afghanistan test playlist</strong>
         </div>
-        <span id="radio-protection-status">Rare selections will continue automatically in this browser.</span>
+        <span id="radio-protection-status">The expanded ACA radio library is ready for shuffle, A–Z rotation, repeat playback, and newly tagged radio additions.</span>
       </div>
 
       <div class="radio-console">
@@ -1288,9 +1319,13 @@ body.aca-gate-b-active>.player-bar{visibility:hidden}
         <div class="radio-now">
           <div class="radio-now-label">Now playing</div>
           <h2 id="radio-artist">Press Start Radio</h2>
-          <div class="radio-album" id="radio-album">Hidden radio selections</div>
-          <div class="radio-track" id="radio-track">Continuous radio-only rotation</div>
+          <div class="radio-album" id="radio-album">Radio Afghanistan selections</div>
+          <div class="radio-track" id="radio-track">Press Start Radio to begin</div>
           <div class="radio-tags" id="radio-tags"></div>
+          <div class="radio-source-details" id="radio-source-details" hidden>
+            <div class="radio-source-donor" id="radio-source-donor"></div>
+            <div class="radio-source-comment" id="radio-source-comment"></div>
+          </div>
 
           <div class="radio-main-controls">
             <button class="radio-skip-button" type="button" onclick="advanceRadio(-1)" aria-label="Previous radio track">◀</button>
@@ -1301,6 +1336,7 @@ body.aca-gate-b-active>.player-bar{visibility:hidden}
           <div class="radio-options">
             <button class="radio-option-button active" id="radio-shuffle-btn" type="button" onclick="setRadioOrder('shuffle')">Shuffle rotation</button>
             <button class="radio-option-button" id="radio-alpha-btn" type="button" onclick="setRadioOrder('alphabetical')">A–Z rotation</button>
+            <button class="radio-option-button" id="radio-repeat-btn" type="button" onclick="cycleRadioRepeat()">Repeat off</button>
           </div>
 
           <div class="radio-volume-row">
@@ -1336,7 +1372,7 @@ body.aca-gate-b-active>.player-bar{visibility:hidden}
         <h3>Designed for continuous playback</h3>
         <p>Café Mode enlarges the cover and controls, requests fullscreen, and keeps the display awake where the browser supports it.</p>
         <p>Designed for uninterrupted listening at home, exhibitions, cafés, libraries, and cultural programs. Every listener begins an independent rotation when they press play.</p>
-        <p class="radio-upgrade-note">The station is drawn from radio-only selections that remain separate from the public cassette catalogue.</p>
+        <p class="radio-upgrade-note">Test playlist: an expanded set of ACA radio selections with genre tags and rotating cover art. Noor Khan Collection recordings are credited in their individual now-playing notes. These selections remain separate from the cassette catalogue.</p>
       </div>
     </section>
   </main>
@@ -2027,6 +2063,7 @@ let currentCassetteId=null,currentTrackIdx=0,isPlaying=false;
 let activeFilter="all",searchQuery="",sortMode="artist";
 let playbackMode="archive";
 let radioOrder="shuffle";
+let radioRepeatMode="off";
 let radioQueue=[];
 let radioQueueIndex=-1;
 let radioRecent=[];
@@ -2036,7 +2073,960 @@ let currentRadioItem=null;
 const PROTECTED_RADIO_API = "https://REPLACE-WITH-YOUR-WORKER.workers.dev";
 const RADIO_TOKEN_KEY = "acaProtectedRadioToken";
 const RADIO_TOKEN_EXPIRY_KEY = "acaProtectedRadioTokenExpiry";
-let RADIO_PLAYLIST = [];
+const RADIO_TEST_COVER = "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/ACA%20Radio%20Kabul%20recordings.png";
+
+const RADIO_TEST_PLAYLIST = [
+  {
+    "id": "radio-ahmad-wali-be-lata",
+    "artist": "Ahmad Wali",
+    "album": "Radio Afghanistan",
+    "trackName": "Be Lata",
+    "language": "Pashto",
+    "genres": [
+      "Radio",
+      "Pop"
+    ],
+    "donatedBy": "Noor Khan",
+    "comment": "Recording from Radio Afghanistan recorded by adventurer Noor Khan during his stay in Afghanistan.",
+    "url": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/Ahmad%20Wali%20Be%20Lata%20Radio%20Afghanistan%201979.mp3",
+    "source": "radio-only",
+    "coverUrl": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/ACA%20Radio%20Kabul%20recordings.png"
+  },
+  {
+    "id": "radio-ahmad-wali-sta-de-bagro",
+    "artist": "Ahmad Wali",
+    "album": "Radio Afghanistan",
+    "trackName": "Sta De Bagro Shang Shang",
+    "language": "Pashto",
+    "genres": [
+      "Radio",
+      "Pop"
+    ],
+    "donatedBy": "Noor Khan",
+    "comment": "Recording from Radio Afghanistan recorded by adventurer Noor Khan during his stay in Afghanistan.",
+    "url": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/Ahmad%20Wali%20Sta%20da%20baghro%20Shrande%20Radio%20Afghanistan.mp3",
+    "source": "radio-only",
+    "coverUrl": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/ACA%20Radio%20Kabul%20recordings.png"
+  },
+  {
+    "id": "radio-beltoon-stergo-jadugari",
+    "artist": "Ustad Beltoon",
+    "album": "Radio Afghanistan",
+    "trackName": "Stergo Jadugari",
+    "language": "Pashto",
+    "genres": [
+      "Radio",
+      "Folk"
+    ],
+    "donatedBy": "Noor Khan",
+    "comment": "Recording from Radio Afghanistan recorded by adventurer Noor Khan during his stay in Afghanistan.",
+    "url": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/Beltun-Pashtu-Stargu%20Jadugari%20Radio%20Afghnaistan%201979%20.mp3",
+    "source": "radio-only",
+    "coverUrl": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/ACA%20Radio%20Kabul%20recordings.png"
+  },
+  {
+    "id": "radio-beltoon-ranawei",
+    "artist": "Ustad Beltoon",
+    "album": "Radio Afghanistan",
+    "trackName": "Ranawei",
+    "language": "Pashto",
+    "genres": [
+      "Radio",
+      "Folk"
+    ],
+    "donatedBy": "Noor Khan",
+    "comment": "Recording from Radio Afghanistan recorded by adventurer Noor Khan during his stay in Afghanistan.",
+    "url": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/Beltun-Ranawei.mp3",
+    "source": "radio-only",
+    "coverUrl": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/ACA%20Radio%20Kabul%20recordings.png"
+  },
+  {
+    "id": "radio-faiz-mangal-ahange-badakshani",
+    "artist": "Faiz Mangal and song",
+    "album": "Radio Afghanistan",
+    "trackName": "Ahange Badakshani",
+    "language": "Farsi",
+    "genres": [
+      "Radio",
+      "Folk",
+      "Badakshan"
+    ],
+    "donatedBy": "Noor Khan",
+    "comment": "Recording from Radio Afghanistan recorded by adventurer Noor Khan during his stay in Afghanistan.",
+    "url": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/Faiz%20Mangal%20and%20song%20Badakshan%20Radio%20Afghanistan%201979%20.mp3",
+    "source": "radio-only",
+    "coverUrl": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/ACA%20Radio%20Kabul%20recordings.png"
+  },
+  {
+    "id": "radio-habib-sharif-janana-na-raze",
+    "artist": "Habib Sharif",
+    "album": "Radio Afghanistan",
+    "trackName": "Janana Na Raze Khoobona",
+    "language": "Pashto",
+    "genres": [
+      "Radio",
+      "Pop"
+    ],
+    "donatedBy": "Noor Khan",
+    "comment": "Recording from Radio Afghanistan recorded by adventurer Noor Khan during his stay in Afghanistan.",
+    "url": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/Habib%20Sharif-Janana%20Na%20Razee%20Khobuna.mp3",
+    "source": "radio-only",
+    "coverUrl": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/ACA%20Radio%20Kabul%20recordings.png"
+  },
+  {
+    "id": "radio-afghanistan-harmonia-1978",
+    "artist": "Radio Afghanistan",
+    "album": "Radio Afghanistan · 1978",
+    "trackName": "Harmonia Instrumental",
+    "language": "",
+    "genres": [
+      "Radio",
+      "Instrumental",
+      "Harmonia"
+    ],
+    "donatedBy": "Noor Khan",
+    "comment": "Recording from Radio Afghanistan recorded by adventurer Noor Khan during his stay in Afghanistan.",
+    "url": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/Harmonia%20Instrumental%20Radio%20Afghanistan%201978.mp3",
+    "source": "radio-only",
+    "coverUrl": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/ACA%20Radio%20Kabul%20recordings.png"
+  },
+  {
+    "id": "radio-zahir-howaida-du-chasme-tu",
+    "artist": "Zahir Howaida",
+    "album": "Radio Afghanistan",
+    "trackName": "Du Chasme Tu — Radio Version",
+    "language": "",
+    "genres": [
+      "Radio",
+      "Pop"
+    ],
+    "donatedBy": "Noor Khan",
+    "comment": "Recording from Radio Afghanistan recorded by adventurer Noor Khan during his stay in Afghanistan.",
+    "url": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/Zahir%20Howaida%20DU%20chashmentu%20Jane%20Sharab%20Radio%20Afghanistan%201979%20.mp3",
+    "source": "radio-only",
+    "coverUrl": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/ACA%20Radio%20Kabul%20recordings.png"
+  },
+  {
+    "id": "radio-extra-01-ahmad-morid-hargiz-ay-yar",
+    "artist": "Ahmad Morid",
+    "album": "ACA Radio",
+    "trackName": "Hargiz Ay Yar",
+    "language": "",
+    "genres": [
+      "Radio"
+    ],
+    "url": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/HArgiz%20Ay%20yar%20Ahmad%20Morid%202.mp3",
+    "source": "radio-only",
+    "coverUrl": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/ACA%20Radio%20Kabul%20recordings.png"
+  },
+  {
+    "id": "radio-extra-02-rahim-parastoo-mehryar-na-ham-zabaneh",
+    "artist": "Rahim & Parastoo Mehryar",
+    "album": "ACA Radio",
+    "trackName": "Na Ham Zabaneh",
+    "language": "",
+    "genres": [
+      "Radio"
+    ],
+    "url": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/%20Na%20ham%20Zabaneh%20Rahim%20and%20Parastoo%20Mehryar%20.mp3",
+    "source": "radio-only",
+    "coverUrl": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/ACA%20Radio%20Kabul%20recordings.png"
+  },
+  {
+    "id": "radio-extra-03-ahmad-waleed-etemadi-sima-tarana-yarem-goro",
+    "artist": "Ahmad Waleed Etemadi & Sima Tarana",
+    "album": "ACA Radio",
+    "trackName": "Yarem Goro",
+    "language": "",
+    "genres": [
+      "Radio"
+    ],
+    "url": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/Ahmad%20Waleed%20Etemadi%20and%20Sima%20Tarana%20%20Yarem%20goro.mp3",
+    "source": "radio-only",
+    "coverUrl": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/ACA%20Radio%20Kabul%20recordings.png"
+  },
+  {
+    "id": "radio-extra-04-ahmad-waleed-etemadi-sima-tarana-sare-fidaye-tu",
+    "artist": "Ahmad Waleed Etemadi & Sima Tarana",
+    "album": "ACA Radio",
+    "trackName": "Sare Fidaye Tu",
+    "language": "",
+    "genres": [
+      "Radio"
+    ],
+    "url": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/Ahmad%20Waleeed%20Etemadi%20and%20Sima%20Tarana%20Sare%20Fidaye%20Tu%20.mp3",
+    "source": "radio-only",
+    "coverUrl": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/ACA%20Radio%20Kabul%20recordings.png"
+  },
+  {
+    "id": "radio-extra-05-shadkam-ai-del-ai-del",
+    "artist": "Shadkam",
+    "album": "ACA Radio",
+    "trackName": "Ai Del Ai Del",
+    "language": "",
+    "genres": [
+      "Radio"
+    ],
+    "url": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/Ai%20del%20ai%20del%20Shadkam.mp3",
+    "source": "radio-only",
+    "coverUrl": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/ACA%20Radio%20Kabul%20recordings.png"
+  },
+  {
+    "id": "radio-extra-06-anjali-agar-buud-baja-bud",
+    "artist": "Anjali",
+    "album": "ACA Radio",
+    "trackName": "Agar Buud Baja Bud",
+    "language": "",
+    "genres": [
+      "Radio"
+    ],
+    "url": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/Anjali%20Agar%20buud%20baja%20Bud.mp3",
+    "source": "radio-only",
+    "coverUrl": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/ACA%20Radio%20Kabul%20recordings.png"
+  },
+  {
+    "id": "radio-extra-07-ariana-jazz-track-12",
+    "artist": "Ariana Jazz",
+    "album": "ACA Radio",
+    "trackName": "Track 12",
+    "language": "",
+    "genres": [
+      "Radio"
+    ],
+    "url": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/Ariana%20Jaaz%20Track%2012.mp3",
+    "source": "radio-only",
+    "coverUrl": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/ACA%20Radio%20Kabul%20recordings.png"
+  },
+  {
+    "id": "radio-extra-08-ariana-jazz-track-2",
+    "artist": "Ariana Jazz",
+    "album": "ACA Radio",
+    "trackName": "Track 2",
+    "language": "",
+    "genres": [
+      "Radio"
+    ],
+    "url": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/Ariana%20Jaaz%20track%202.mp3",
+    "source": "radio-only",
+    "coverUrl": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/ACA%20Radio%20Kabul%20recordings.png"
+  },
+  {
+    "id": "radio-extra-09-ariana-jazz-track-6",
+    "artist": "Ariana Jazz",
+    "album": "ACA Radio",
+    "trackName": "Track 6",
+    "language": "",
+    "genres": [
+      "Radio"
+    ],
+    "url": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/Ariana%20Jaaz%20track%206%20mp3(1).mp3",
+    "source": "radio-only",
+    "coverUrl": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/ACA%20Radio%20Kabul%20recordings.png"
+  },
+  {
+    "id": "radio-extra-10-salma-jahani-azad-kujaei",
+    "artist": "Salma Jahani",
+    "album": "ACA Radio",
+    "trackName": "Azad Kujaei",
+    "language": "",
+    "genres": [
+      "Radio"
+    ],
+    "url": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/Azad%20Kujaei%20Salma%20Jahani%20.mp3",
+    "source": "radio-only",
+    "coverUrl": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/ACA%20Radio%20Kabul%20recordings.png"
+  },
+  {
+    "id": "radio-extra-11-sarban-ay-negar",
+    "artist": "Sarban",
+    "album": "ACA Radio",
+    "trackName": "Ay Negar",
+    "language": "",
+    "genres": [
+      "Radio"
+    ],
+    "url": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/Ay%20Negar%20Sarban.mp3",
+    "source": "radio-only",
+    "coverUrl": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/ACA%20Radio%20Kabul%20recordings.png"
+  },
+  {
+    "id": "radio-extra-12-mashoor-jamal-bia-bia-dar-bareman",
+    "artist": "Mashoor Jamal",
+    "album": "ACA Radio",
+    "trackName": "Bia Bia Dar Bareman",
+    "language": "",
+    "genres": [
+      "Radio"
+    ],
+    "url": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/Bia%20Bia%20Dar%20Bareman%20Mashoor%20Jamal.mp3",
+    "source": "radio-only",
+    "coverUrl": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/ACA%20Radio%20Kabul%20recordings.png"
+  },
+  {
+    "id": "radio-extra-13-wahid-qasemi-shine-band-boro-boro",
+    "artist": "Wahid Qasemi & Shine Band",
+    "album": "ACA Radio",
+    "trackName": "Boro Boro",
+    "language": "",
+    "genres": [
+      "Radio"
+    ],
+    "url": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/Boro%20Boro%20Wahid%20Qasemi%20and%20Shine%20Band.mp3",
+    "source": "radio-only",
+    "coverUrl": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/ACA%20Radio%20Kabul%20recordings.png"
+  },
+  {
+    "id": "radio-extra-14-various-artists-mix-2-zofaka-siya-chesmak",
+    "artist": "Various Artists",
+    "album": "ACA Radio",
+    "trackName": "Mix 2 — Zofaka / Siya Chesmak",
+    "language": "",
+    "genres": [
+      "Radio"
+    ],
+    "url": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/Copy%20of%20Mix%202%20with%20zofaka%20and%20siya%20chesmak%20.mp3",
+    "source": "radio-only",
+    "coverUrl": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/ACA%20Radio%20Kabul%20recordings.png"
+  },
+  {
+    "id": "radio-extra-15-farid-sami-rang-a-rang",
+    "artist": "Farid Sami",
+    "album": "ACA Radio",
+    "trackName": "Rang a Rang",
+    "language": "",
+    "genres": [
+      "Radio"
+    ],
+    "url": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/Copy%20of%20Multiple%20Songs.mp3",
+    "source": "radio-only",
+    "coverUrl": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/ACA%20Radio%20Kabul%20recordings.png"
+  },
+  {
+    "id": "radio-extra-16-rahim-parastoo-mehryar-deh-shab",
+    "artist": "Rahim & Parastoo Mehryar",
+    "album": "ACA Radio",
+    "trackName": "Deh Shab",
+    "language": "",
+    "genres": [
+      "Radio"
+    ],
+    "url": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/Deh%20Shab%20Rahim%20and%20Parastoo%20Mehryar.mp3",
+    "source": "radio-only",
+    "coverUrl": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/ACA%20Radio%20Kabul%20recordings.png"
+  },
+  {
+    "id": "radio-extra-17-wahid-saberi-eshghe-man",
+    "artist": "Wahid Saberi",
+    "album": "ACA Radio",
+    "trackName": "Eshghe Man",
+    "language": "",
+    "genres": [
+      "Radio"
+    ],
+    "url": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/Eshghe%20Man%20Wahid%20Saberi%20.mp3",
+    "source": "radio-only",
+    "coverUrl": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/ACA%20Radio%20Kabul%20recordings.png"
+  },
+  {
+    "id": "radio-extra-18-zabiullah-amanyar-gul-e-maryam",
+    "artist": "Zabiullah Amanyar",
+    "album": "ACA Radio",
+    "trackName": "Gul E Maryam",
+    "language": "",
+    "genres": [
+      "Radio"
+    ],
+    "url": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/Gul%20E%20Maryam%20Zabiullah%20Amanyar.mp3",
+    "source": "radio-only",
+    "coverUrl": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/ACA%20Radio%20Kabul%20recordings.png"
+  },
+  {
+    "id": "radio-extra-19-hakim-sanei-velaei-leili-title-pending",
+    "artist": "Hakim Sanei & Velaei Leili",
+    "album": "ACA Radio",
+    "trackName": "Title pending",
+    "language": "",
+    "genres": [
+      "Radio"
+    ],
+    "url": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/Hakim%20Sanei%20Va%20Velaei%20Leili.mp3",
+    "source": "radio-only",
+    "coverUrl": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/ACA%20Radio%20Kabul%20recordings.png"
+  },
+  {
+    "id": "radio-extra-20-unknown-artist-instrumental-1",
+    "artist": "Unknown Artist",
+    "album": "ACA Radio",
+    "trackName": "Instrumental 1",
+    "language": "",
+    "genres": [
+      "Radio"
+    ],
+    "url": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/Instrumental%201.mp3",
+    "source": "radio-only",
+    "coverUrl": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/ACA%20Radio%20Kabul%20recordings.png"
+  },
+  {
+    "id": "radio-extra-21-unknown-artist-instrumental-rock",
+    "artist": "Unknown Artist",
+    "album": "ACA Radio",
+    "trackName": "Instrumental Rock",
+    "language": "",
+    "genres": [
+      "Radio"
+    ],
+    "url": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/Instrumental%20Rock.mp3",
+    "source": "radio-only",
+    "coverUrl": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/ACA%20Radio%20Kabul%20recordings.png"
+  },
+  {
+    "id": "radio-extra-22-radio-afghanistan-habib-sharif-jazz-instrumental-funk-",
+    "artist": "Radio Afghanistan / Habib Sharif",
+    "album": "ACA Radio",
+    "trackName": "Jazz Instrumental (Funk) — 1979",
+    "language": "",
+    "genres": [
+      "Radio"
+    ],
+    "url": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/Jaaz%20Instrumental%20(%20Funk)%20Radio%20Afghansiatn%20with%20Habib%20Sharif1979.mp3",
+    "source": "radio-only",
+    "coverUrl": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/ACA%20Radio%20Kabul%20recordings.png"
+  },
+  {
+    "id": "radio-extra-23-unknown-artist-jamal-jamalo-instrumental",
+    "artist": "Unknown Artist",
+    "album": "ACA Radio",
+    "trackName": "Jamal Jamalo — Instrumental",
+    "language": "",
+    "genres": [
+      "Radio"
+    ],
+    "url": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/Jamal%20jamalo%20instrumental.mp3",
+    "source": "radio-only",
+    "coverUrl": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/ACA%20Radio%20Kabul%20recordings.png"
+  },
+  {
+    "id": "radio-extra-24-rohullah-roheen-jan-damaraka",
+    "artist": "Rohullah Roheen",
+    "album": "ACA Radio",
+    "trackName": "Jan Damaraka",
+    "language": "",
+    "genres": [
+      "Radio"
+    ],
+    "url": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/Jan%20Damaraka%20Rohullah%20Roheen.mp3",
+    "source": "radio-only",
+    "coverUrl": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/ACA%20Radio%20Kabul%20recordings.png"
+  },
+  {
+    "id": "radio-extra-25-amanyar-jan-de-sharab",
+    "artist": "Amanyar",
+    "album": "ACA Radio",
+    "trackName": "Jan De Sharab",
+    "language": "",
+    "genres": [
+      "Radio"
+    ],
+    "url": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/Jan%20De%20Sharab%20Amanyar.mp3",
+    "source": "radio-only",
+    "coverUrl": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/ACA%20Radio%20Kabul%20recordings.png"
+  },
+  {
+    "id": "radio-extra-26-sarban-leila-leila",
+    "artist": "Sarban",
+    "album": "ACA Radio",
+    "trackName": "Leila Leila",
+    "language": "",
+    "genres": [
+      "Radio"
+    ],
+    "url": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/Leila%20Leila%20Sarban.mp3",
+    "source": "radio-only",
+    "coverUrl": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/ACA%20Radio%20Kabul%20recordings.png"
+  },
+  {
+    "id": "radio-extra-27-shadkam-leili-leili-boodi",
+    "artist": "Shadkam",
+    "album": "ACA Radio",
+    "trackName": "Leili Leili Boodi",
+    "language": "",
+    "genres": [
+      "Radio"
+    ],
+    "url": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/Leili%20Leili%20Boodi%20Shadkam%20.mp3",
+    "source": "radio-only",
+    "coverUrl": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/ACA%20Radio%20Kabul%20recordings.png"
+  },
+  {
+    "id": "radio-extra-28-radio-afghanistan-logari-instrumental-2-1979",
+    "artist": "Radio Afghanistan",
+    "album": "ACA Radio",
+    "trackName": "Logari Instrumental 2 — 1979",
+    "language": "",
+    "genres": [
+      "Radio"
+    ],
+    "url": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/Logari%20Instrumental%20Radio%20Afghanistan%201979%202.mp3",
+    "source": "radio-only",
+    "coverUrl": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/ACA%20Radio%20Kabul%20recordings.png",
+    "donatedBy": "Noor Khan",
+    "comment": "Part of the Noor Khan Collection."
+  },
+  {
+    "id": "radio-extra-29-radio-afghanistan-logari-instrumental-1979",
+    "artist": "Radio Afghanistan",
+    "album": "ACA Radio",
+    "trackName": "Logari Instrumental — 1979",
+    "language": "",
+    "genres": [
+      "Radio"
+    ],
+    "url": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/Logari%20Instrumental%20Radio%20Afghanistan%201979.mp3",
+    "source": "radio-only",
+    "coverUrl": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/ACA%20Radio%20Kabul%20recordings.png",
+    "donatedBy": "Noor Khan",
+    "comment": "Part of the Noor Khan Collection."
+  },
+  {
+    "id": "radio-extra-30-mahawash-marwan-mi-frayda-ya-mustafa-radio-afghanistan",
+    "artist": "Mahawash & Marwan",
+    "album": "ACA Radio",
+    "trackName": "Mi Frayda / Ya Mustafa — Radio Afghanistan 1978",
+    "language": "",
+    "genres": [
+      "Radio"
+    ],
+    "url": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/Mahawash-Marwan%20Mi%20Frayda-Ya%20Mustafa(Eng)%20Radio%20Afghanistan%201978.mp3",
+    "source": "radio-only",
+    "coverUrl": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/ACA%20Radio%20Kabul%20recordings.png",
+    "donatedBy": "Noor Khan",
+    "comment": "Part of the Noor Khan Collection."
+  },
+  {
+    "id": "radio-extra-31-wahid-saberi-majoon-ajab",
+    "artist": "Wahid Saberi",
+    "album": "ACA Radio",
+    "trackName": "Majoon Ajab",
+    "language": "",
+    "genres": [
+      "Radio"
+    ],
+    "url": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/Majoon%20Ajab%20%20Wahid%20Saberi%20%20.mp3",
+    "source": "radio-only",
+    "coverUrl": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/ACA%20Radio%20Kabul%20recordings.png"
+  },
+  {
+    "id": "radio-extra-32-mashoor-jamal-wafaya-wafaya-radio-afghanistan-1978",
+    "artist": "Mashoor Jamal",
+    "album": "ACA Radio",
+    "trackName": "Wafaya Wafaya — Radio Afghanistan 1978",
+    "language": "",
+    "genres": [
+      "Radio"
+    ],
+    "url": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/Mashoor%20Jamal%20%20Wafaya%20Wafaya%20Radio%20Afghanistan%201978.mp3",
+    "source": "radio-only",
+    "coverUrl": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/ACA%20Radio%20Kabul%20recordings.png"
+  },
+  {
+    "id": "radio-extra-33-mashoor-jamal-agar-bijaye",
+    "artist": "Mashoor Jamal",
+    "album": "ACA Radio",
+    "trackName": "Agar Bijaye",
+    "language": "",
+    "genres": [
+      "Radio"
+    ],
+    "url": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/Mashoor%20Jamal%20Agar%20BIjaye.mp3",
+    "source": "radio-only",
+    "coverUrl": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/ACA%20Radio%20Kabul%20recordings.png"
+  },
+  {
+    "id": "radio-extra-34-ahmad-morid-mena-ye-man",
+    "artist": "Ahmad Morid",
+    "album": "ACA Radio",
+    "trackName": "Mena Ye Man",
+    "language": "",
+    "genres": [
+      "Radio"
+    ],
+    "url": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/Mena%20Ye%20Man%20Ahmad%20Morid%20.mp3",
+    "source": "radio-only",
+    "coverUrl": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Ahmad%20Morid%20Afghan%20Music%201/Ahmad%20Morid%20Afghan%20Music%201.jpg"
+  },
+  {
+    "id": "radio-extra-35-music-center-jazz-track-funk",
+    "artist": "Music Center",
+    "album": "ACA Radio",
+    "trackName": "Jazz Track (Funk)",
+    "language": "",
+    "genres": [
+      "Radio"
+    ],
+    "url": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/Music%20center%20Jaaz%20Track%20(Funk).mp3",
+    "source": "radio-only",
+    "coverUrl": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/ACA%20Radio%20Kabul%20recordings.png"
+  },
+  {
+    "id": "radio-extra-36-nashenas-zama-negar-rangi-radio",
+    "artist": "Nashenas",
+    "album": "ACA Radio",
+    "trackName": "Zama Negar Rangi — Radio",
+    "language": "",
+    "genres": [
+      "Radio"
+    ],
+    "url": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/Nashenas%20Zama%20Negar%20Rangi%20Radio.mp3",
+    "source": "radio-only",
+    "coverUrl": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Nashenas%20Radio%20Cassette/IMG_20260720_0027.jpg"
+  },
+  {
+    "id": "radio-extra-37-ahmad-waleed-etemadi-sima-tarana-nazi-jan-delbare",
+    "artist": "Ahmad Waleed Etemadi & Sima Tarana",
+    "album": "ACA Radio",
+    "trackName": "Nazi Jan Delbare",
+    "language": "",
+    "genres": [
+      "Radio"
+    ],
+    "url": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/Nazi%20jan%20Delbare%20Ahmad%20Waleed%20Etemadi%20and%20SIma%20Tarana.mp3",
+    "source": "radio-only",
+    "coverUrl": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/ACA%20Radio%20Kabul%20recordings.png"
+  },
+  {
+    "id": "radio-extra-38-parastoo-mehryar-mange-me-warka-radio-afghanistan-1979",
+    "artist": "Parastoo Mehryar",
+    "album": "ACA Radio",
+    "trackName": "Mange Me Warka — Radio Afghanistan 1979",
+    "language": "",
+    "genres": [
+      "Radio"
+    ],
+    "url": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/Parastoo%20Mehryar%20Mange%20Me%20warka%20Radio%20Afghanistan%201979.mp3",
+    "source": "radio-only",
+    "coverUrl": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/ACA%20Radio%20Kabul%20recordings.png"
+  },
+  {
+    "id": "radio-extra-39-rahim-ghamzadah-masto-khomar-dei-radio-afghanistan-197",
+    "artist": "Rahim Ghamzadah",
+    "album": "ACA Radio",
+    "trackName": "Masto Khomar Dei — Radio Afghanistan 1979",
+    "language": "",
+    "genres": [
+      "Radio"
+    ],
+    "url": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/Rahim%20Ghamzadah%20Masto%20Khomar%20Dei%20Radio%20Afghanistan%201979.mp3",
+    "source": "radio-only",
+    "coverUrl": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/ACA%20Radio%20Kabul%20recordings.png",
+    "donatedBy": "Noor Khan",
+    "comment": "Part of the Noor Khan Collection."
+  },
+  {
+    "id": "radio-extra-40-wahid-qasemi-shine-band-rasha-ningahar",
+    "artist": "Wahid Qasemi & Shine Band",
+    "album": "ACA Radio",
+    "trackName": "Rasha Ningahar",
+    "language": "",
+    "genres": [
+      "Radio"
+    ],
+    "url": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/Rasha%20Ningahar%20Wahid%20Qasemi%20and%20Shine%20Band.mp3",
+    "source": "radio-only",
+    "coverUrl": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/ACA%20Radio%20Kabul%20recordings.png"
+  },
+  {
+    "id": "radio-extra-41-sadiq-mobin-song-title-pending",
+    "artist": "Sadiq Mobin",
+    "album": "ACA Radio",
+    "trackName": "Song — title pending",
+    "language": "",
+    "genres": [
+      "Radio"
+    ],
+    "url": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/Sadiq%20Mobin%20Song%20.mp3",
+    "source": "radio-only",
+    "coverUrl": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/ACA%20Radio%20Kabul%20recordings.png",
+    "donatedBy": "Noor Khan",
+    "comment": "Part of the Noor Khan Collection."
+  },
+  {
+    "id": "radio-extra-42-nashenas-sagam-ba-tu-1984",
+    "artist": "Nashenas",
+    "album": "ACA Radio",
+    "trackName": "Sagam Ba Tu — 1984",
+    "language": "",
+    "genres": [
+      "Radio"
+    ],
+    "url": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/Sagam%20Ba%20Tu%20nashenas%201984.mp3",
+    "source": "radio-only",
+    "coverUrl": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Nashenas%20and%20Anjaloi%20Banerji%20Afghan%20Music/IMG_20260720_0009.jpg"
+  },
+  {
+    "id": "radio-extra-43-salma-jahani-khanda-ko",
+    "artist": "Salma Jahani",
+    "album": "ACA Radio",
+    "trackName": "Khanda Ko",
+    "language": "",
+    "genres": [
+      "Radio"
+    ],
+    "url": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/Salma%20Jahani%20Khanda%20Ko%20%20.mp3",
+    "source": "radio-only",
+    "coverUrl": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/ACA%20Radio%20Kabul%20recordings.png"
+  },
+  {
+    "id": "radio-extra-44-salma-jahani-jigi-jigi-naro-naro",
+    "artist": "Salma Jahani",
+    "album": "ACA Radio",
+    "trackName": "Jigi Jigi Naro Naro",
+    "language": "",
+    "genres": [
+      "Radio"
+    ],
+    "url": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/Salma%20Jahani%20jigi%20Jigi%20Naro%20naro%20.mp3",
+    "source": "radio-only",
+    "coverUrl": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/ACA%20Radio%20Kabul%20recordings.png"
+  },
+  {
+    "id": "radio-extra-45-rohullah-roheen-sanama",
+    "artist": "Rohullah Roheen",
+    "album": "ACA Radio",
+    "trackName": "Sanama",
+    "language": "",
+    "genres": [
+      "Radio"
+    ],
+    "url": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/Sanama%20Rohullah%20Roheen.mp3",
+    "source": "radio-only",
+    "coverUrl": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/ACA%20Radio%20Kabul%20recordings.png"
+  },
+  {
+    "id": "radio-extra-46-ahmad-morid-saqi-khilwat",
+    "artist": "Ahmad Morid",
+    "album": "ACA Radio",
+    "trackName": "Saqi Khilwat",
+    "language": "",
+    "genres": [
+      "Radio"
+    ],
+    "url": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/Saqi%20Khilwat%20Ahmad%20Morid.mp3",
+    "source": "radio-only",
+    "coverUrl": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/ACA%20Radio%20Kabul%20recordings.png"
+  },
+  {
+    "id": "radio-extra-47-shamel-track-1-2",
+    "artist": "Shamel",
+    "album": "ACA Radio",
+    "trackName": "Track 1-2",
+    "language": "",
+    "genres": [
+      "Radio"
+    ],
+    "url": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/Shamel%20Track%201-2.mp3",
+    "source": "radio-only",
+    "coverUrl": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/ACA%20Radio%20Kabul%20recordings.png"
+  },
+  {
+    "id": "radio-extra-48-shamel-track-2",
+    "artist": "Shamel",
+    "album": "ACA Radio",
+    "trackName": "Track 2",
+    "language": "",
+    "genres": [
+      "Radio"
+    ],
+    "url": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/Shamel%20Track%202.mp3",
+    "source": "radio-only",
+    "coverUrl": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/ACA%20Radio%20Kabul%20recordings.png"
+  },
+  {
+    "id": "radio-extra-49-shamel-track-3-am-2",
+    "artist": "Shamel",
+    "album": "ACA Radio",
+    "trackName": "Track 3 AM 2",
+    "language": "",
+    "genres": [
+      "Radio"
+    ],
+    "url": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/Shamel%20trac%20k%203%20am%202.mp3",
+    "source": "radio-only",
+    "coverUrl": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/ACA%20Radio%20Kabul%20recordings.png"
+  },
+  {
+    "id": "radio-extra-50-ustad-ghulam-nabi-radio-afghanistan-1978",
+    "artist": "Ustad Ghulam Nabi",
+    "album": "ACA Radio",
+    "trackName": "Radio Afghanistan 1978",
+    "language": "",
+    "genres": [
+      "Radio"
+    ],
+    "url": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/Ustad%20Ghulam%20Nabi%20Radio%20Afghanistan%201978.mp3",
+    "source": "radio-only",
+    "coverUrl": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/ACA%20Radio%20Kabul%20recordings.png",
+    "donatedBy": "Noor Khan",
+    "comment": "Part of the Noor Khan Collection."
+  },
+  {
+    "id": "radio-extra-51-ustad-natu-radio-afghanistan-1978",
+    "artist": "Ustad Natu",
+    "album": "ACA Radio",
+    "trackName": "Radio Afghanistan 1978",
+    "language": "",
+    "genres": [
+      "Radio"
+    ],
+    "url": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/Ustad%20Natu%20Radio%20Afghanistan%201978.mp3",
+    "source": "radio-only",
+    "coverUrl": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/ACA%20Radio%20Kabul%20recordings.png",
+    "donatedBy": "Noor Khan",
+    "comment": "Part of the Noor Khan Collection."
+  },
+  {
+    "id": "radio-extra-b2-01-gorohe-payam-salam-bar-ishq",
+    "artist": "Gorohe Payam",
+    "album": "ACA Radio",
+    "trackName": "Salam Bar Ishq",
+    "language": "Farsi",
+    "genres": [
+      "Radio",
+      "Pop",
+      "New Wave",
+      "Synth Pop"
+    ],
+    "url": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/Salam%20Bar%20Ishq%20Gorohe%20Payam.mp3",
+    "source": "radio-only",
+    "coverUrl": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/ACA%20Radio%20Kabul%20recordings.png"
+  },
+  {
+    "id": "radio-extra-b2-02-gorohe-payam-en-rooz",
+    "artist": "Gorohe Payam",
+    "album": "ACA Radio",
+    "trackName": "En Rooz",
+    "language": "Farsi",
+    "genres": [
+      "Radio",
+      "Pop",
+      "New Wave",
+      "Synth Pop"
+    ],
+    "url": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/En%20rooz%20Gorohe%20Payam.mp3",
+    "source": "radio-only",
+    "coverUrl": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/ACA%20Radio%20Kabul%20recordings.png"
+  },
+  {
+    "id": "radio-extra-b2-03-khan-qarabaghi-shinkhalei",
+    "artist": "Khan Qarabaghi",
+    "album": "ACA Radio",
+    "trackName": "Shinkhalei",
+    "language": "Pashto",
+    "genres": [
+      "Radio",
+      "Folk (Mahali)",
+      "Pashto Folk"
+    ],
+    "url": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/Shinkhalei%20Khan%20Qarabaghi.mp3",
+    "source": "radio-only",
+    "coverUrl": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/ACA%20Radio%20Kabul%20recordings.png"
+  },
+  {
+    "id": "radio-extra-b2-04-khan-qarabaghi-torpikei-da-ban",
+    "artist": "Khan Qarabaghi",
+    "album": "ACA Radio",
+    "trackName": "Torpikei Da Ban",
+    "language": "Pashto",
+    "genres": [
+      "Radio",
+      "Folk (Mahali)",
+      "Pashto Folk"
+    ],
+    "url": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/Torpikei%20Da%20Ban%20Khan%20Qarabaghai.mp3",
+    "source": "radio-only",
+    "coverUrl": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/ACA%20Radio%20Kabul%20recordings.png"
+  },
+  {
+    "id": "radio-extra-b2-05-qataghani-gichak",
+    "artist": "Unknown Artist",
+    "album": "ACA Radio",
+    "trackName": "Qataghani Gichak",
+    "language": "",
+    "genres": [
+      "Radio",
+      "Instrumental",
+      "Folk (Mahali)",
+      "Gichak"
+    ],
+    "url": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/02%20Qataghani%20Gichak%20AM.mp3",
+    "source": "radio-only",
+    "coverUrl": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/ACA%20Radio%20Kabul%20recordings.png"
+  },
+  {
+    "id": "radio-extra-b2-06-bangicha-najiba-qiling-yor",
+    "artist": "Bangicha & Najiba",
+    "album": "Afghan Music",
+    "trackName": "Qiling Yor",
+    "language": "Uzbek",
+    "genres": [
+      "Radio",
+      "Folk (Mahali)",
+      "Female",
+      "Duet"
+    ],
+    "url": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/Bangicha%20wa%20najiba%20Qiling%20Yor%20ozbek%20song_01(2).mp3",
+    "source": "radio-only",
+    "coverUrl": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Bangicha%20and%20Najiba%20Afghan%20Music/Bangicha%20and%20Najiba%20Afghan%20Music_Scan%20326%282%29.jpg"
+  },
+  {
+    "id": "radio-extra-b2-07-fawad-ramez-gorohe-lalar-instrumental",
+    "artist": "Fawad Ramez & Gorohe Lalar",
+    "album": "Be Gofto Go",
+    "trackName": "Instrumental",
+    "language": "",
+    "genres": [
+      "Radio",
+      "Instrumental",
+      "Synth Pop",
+      "New Wave"
+    ],
+    "url": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/Instrumental%20Fawad%20Ramez%20and%20gorohe%20lalar%20(1)_01(1).mp3",
+    "source": "radio-only",
+    "coverUrl": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Fawad%20Ramez%20Farhad%20Music/Fawad%20Ramez%20Farhad%20Music_Fawad%20Ramez%20Farhad%20Music.jpg"
+  },
+  {
+    "id": "radio-extra-b2-08-zahir-howaida-naro-naro-bia-bia",
+    "artist": "Zahir Howaida",
+    "album": "Afghan Music Vol. 4",
+    "trackName": "Naro Naro Bia Bia",
+    "language": "Farsi",
+    "genres": [
+      "Radio",
+      "Pop",
+      "Psychedelic"
+    ],
+    "url": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/Naro%20Naro%20Bia%20Bia%20Zahir%20Howaida%20_01.mp3",
+    "source": "radio-only",
+    "coverUrl": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Zahir%20Howaida%20Album%204%20Afghan%20Music/Scan%20145%281%29.jpg"
+  },
+  {
+    "id": "radio-extra-b2-09-qamar-gula-shah-wali-gudar-ta-rwaraw",
+    "artist": "Qamar Gula & Shah Wali",
+    "album": "Afghan Music Vol. 1",
+    "trackName": "Gudar Ta Rwaraw",
+    "language": "Pashto",
+    "genres": [
+      "Radio",
+      "Folk (Mahali)",
+      "Female",
+      "Duet"
+    ],
+    "url": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/Gudar%20Ta%20Rwaraw%20Qamar%20Gula%20Aw%20Shah%20Wali%20AM(1).mp3",
+    "source": "radio-only",
+    "coverUrl": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Shah%20Wali%20and%20Qamar%20Gula/Shah%20Wali%20and%20Qamar%20Gula_Scan%20133.jpg"
+  }
+];
+
+let RADIO_PLAYLIST = RADIO_TEST_PLAYLIST.map(item=>({...item}));
 let radioPlaylistLoading = null;
 
 function protectedRadioConfigured(){
@@ -2604,11 +3594,10 @@ async function loadRadioOnlyTrack(item){
   currentCassetteId=null;
   currentTrackIdx=0;
   const status=document.getElementById("radio-status");
-  if(status)status.textContent="Requesting protected stream access…";
+  if(status)status.textContent="Loading Radio Afghanistan recording…";
 
   try{
-    const protectedUrl=await requestProtectedStreamUrl(item.id);
-    audio.src=protectedUrl;
+    audio.src=item.url;
     updateSharedPlayerData({
       artist:item.artist,
       album:item.album,
@@ -2619,13 +3608,12 @@ async function loadRadioOnlyTrack(item){
     isPlaying=true;
     setPlayIcon(true);
     updateRadioPlayingState();
-    if(status)status.textContent="Protected playback active. The stream address expires automatically.";
+    if(status)status.textContent="Radio is playing. The next selection will continue automatically.";
   }catch(error){
     isPlaying=false;
     setPlayIcon(false);
     updateRadioPlayingState();
-    if(status)status.textContent=error.message||"The protected track could not be played.";
-    if(protectedRadioToken())window.setTimeout(()=>advanceRadio(1),1800);
+    if(status)status.textContent="This radio track could not be played. Check the R2 file URL or browser audio permissions.";
   }
   renderGrid();
   closeModal();
@@ -2696,29 +3684,32 @@ async function initRadio(){
   const radioVolume=document.getElementById("radio-volume");
   if(radioVolume)radioVolume.value=audio.volume;
 
-  if(!protectedRadioConfigured()){
-    setRadioConnectionState("error","Configure the protected Worker URL to activate private radio playback.");
-  }else{
-    try{
-      await ensureProtectedRadioReady();
-    }catch(error){
-      clearProtectedRadioSession(error.message||"A protected session could not be created.");
-    }
-  }
+  RADIO_PLAYLIST=RADIO_TEST_PLAYLIST.map(item=>({...item}));
+  radioQueue=[];
+  radioQueueIndex=-1;
+  buildRadioQueue();
+  setRadioConnectionState("ready","Public test playlist loaded — 8 Radio Afghanistan selections are ready to play.");
+
+  const liveLabel=document.getElementById("radio-live-label");
+  if(liveLabel)liveLabel.textContent="Radio test ready";
+
+  const protectionTitle=document.querySelector("#radio-protection-note strong");
+  if(protectionTitle)protectionTitle.textContent="Radio test playlist loaded";
 
   updateRadioCounts();
   updateRadioNowPlaying();
   renderRadioRecent();
   updateRadioPlayingState();
+  updateRadioRepeatButton();
 }
 
 async function startRadio(){
-  if(!(await ensureProtectedRadioReady()))return;
   if(playbackMode==="radio"&&currentRadioItem){
     if(isPlaying)audio.pause();
     else audio.play().catch(()=>{});
     return;
   }
+  if(!RADIO_PLAYLIST.length)RADIO_PLAYLIST=RADIO_TEST_PLAYLIST.map(item=>({...item}));
   if(!radioQueue.length)buildRadioQueue();
   if(!radioQueue.length)return;
   radioQueueIndex=0;
@@ -2726,7 +3717,7 @@ async function startRadio(){
 }
 
 async function playRadioQueueItem(){
-  if(!(await ensureProtectedRadioReady()))return;
+  if(!RADIO_PLAYLIST.length)RADIO_PLAYLIST=RADIO_TEST_PLAYLIST.map(item=>({...item}));
   if(!radioQueue.length)buildRadioQueue();
   if(radioQueueIndex<0)radioQueueIndex=0;
   if(radioQueueIndex>=radioQueue.length){
@@ -2744,7 +3735,9 @@ async function playRadioQueueItem(){
 }
 
 async function advanceRadio(dir){
-  if(!(await ensureProtectedRadioReady()))return;
+  if(!RADIO_PLAYLIST.length)RADIO_PLAYLIST=RADIO_TEST_PLAYLIST.map(item=>({...item}));
+  if(!radioQueue.length)buildRadioQueue();
+  if(!radioQueue.length)return;
   if(playbackMode!=="radio"||radioQueueIndex<0){
     radioQueueIndex=dir<0?radioQueue.length-1:0;
   }else{
@@ -2768,6 +3761,66 @@ function setRadioOrder(order){
     ?"Shuffle rotation is ready. The full library will play before a new shuffle is created."
     :"A–Z rotation is ready, ordered by artist, album, and cassette side.";
 }
+
+
+function updateRadioRepeatButton(){
+  const btn=document.getElementById("radio-repeat-btn");
+  if(!btn)return;
+  const labels={
+    off:"Repeat off",
+    one:"Repeat track",
+    all:"Repeat rotation"
+  };
+  btn.textContent=labels[radioRepeatMode]||"Repeat off";
+  btn.classList.toggle("active",radioRepeatMode!=="off");
+  btn.setAttribute("aria-pressed",radioRepeatMode!=="off"?"true":"false");
+}
+
+function cycleRadioRepeat(){
+  radioRepeatMode=radioRepeatMode==="off"?"one":radioRepeatMode==="one"?"all":"off";
+  updateRadioRepeatButton();
+  const status=document.getElementById("radio-status");
+  if(!status)return;
+  if(radioRepeatMode==="one"){
+    status.textContent="Repeat Track is on. The current radio selection will replay until you change tracks or turn repeat off.";
+  }else if(radioRepeatMode==="all"){
+    status.textContent="Repeat Rotation is on. The full radio queue will restart when it reaches the end.";
+  }else{
+    status.textContent="Repeat is off. The radio will stop after the current queue finishes.";
+  }
+}
+
+function handleAudioEnded(){
+  if(playbackMode!=="radio"){
+    advancePlayback(1);
+    return;
+  }
+
+  if(radioRepeatMode==="one"){
+    audio.currentTime=0;
+    audio.play().catch(()=>{});
+    const status=document.getElementById("radio-status");
+    if(status)status.textContent="Repeating the current radio selection.";
+    return;
+  }
+
+  if(radioRepeatMode==="all"){
+    advanceRadio(1);
+    return;
+  }
+
+  if(radioQueue.length && radioQueueIndex>=radioQueue.length-1){
+    isPlaying=false;
+    setPlayIcon(false);
+    updateRadioPlayingState();
+    const status=document.getElementById("radio-status");
+    if(status)status.textContent="The radio rotation is complete. Press Start Radio to begin again, or turn on Repeat Rotation.";
+    return;
+  }
+
+  advanceRadio(1);
+}
+
 
 function updateRadioCounts(){
   const albumEl=document.getElementById("radio-album-count");
@@ -2797,6 +3850,28 @@ function updateRadioNowPlaying(){
       `${(item.genres||[]).map(g=>`<span class="tag tag-genre">${g}</span>`).join("")}`+
       `${item.language?`<span class="tag tag-lang">${item.language}</span>`:""}`;
 
+    const sourceDetails=document.getElementById("radio-source-details");
+    const sourceDonor=document.getElementById("radio-source-donor");
+    const sourceComment=document.getElementById("radio-source-comment");
+    if(sourceDetails){
+      const hasDetails=Boolean(item.donatedBy||item.comment);
+      sourceDetails.hidden=!hasDetails;
+      if(sourceDonor)sourceDonor.textContent=item.donatedBy?`Donated to ACA by: ${item.donatedBy}`:"";
+      if(sourceComment)sourceComment.textContent=item.comment||"";
+    }
+
+    if(item.coverUrl){
+      cover.src=item.coverUrl;
+      cover.alt="Afghan Cassette Archive Radio Kabul recordings";
+      cover.classList.add("visible");
+      placeholder.style.display="none";
+      cover.onerror=()=>{
+        cover.classList.remove("visible");
+        placeholder.style.display="flex";
+      };
+      return;
+    }
+
     if(item.source==="archive"){
       const c=CASSETTES.find(x=>x.id===item.cassetteId);
       if(c&&c.cover){
@@ -2823,6 +3898,8 @@ function updateRadioNowPlaying(){
     document.getElementById("radio-album").textContent=protectedRadioToken()?"Protected radio selections":"Preparing protected radio";
     document.getElementById("radio-track").textContent=protectedRadioToken()?"Continuous protected rotation":"Temporary session will be created automatically";
     document.getElementById("radio-tags").innerHTML="";
+    const sourceDetails=document.getElementById("radio-source-details");
+    if(sourceDetails)sourceDetails.hidden=true;
     cover.removeAttribute("src");
     cover.classList.remove("visible");
     placeholder.style.display="flex";
@@ -2836,6 +3913,8 @@ function updateRadioNowPlaying(){
   document.getElementById("radio-album").textContent=c.album+(c.recorded?" · "+c.recorded:"");
   document.getElementById("radio-track").textContent=track.name;
   document.getElementById("radio-tags").innerHTML=`${genreTags(c)}${c.language?`<span class="tag tag-lang">${c.language}</span>`:""}`;
+  const sourceDetails=document.getElementById("radio-source-details");
+  if(sourceDetails)sourceDetails.hidden=true;
   if(c.cover){
     cover.src=coverUrl(c);
     cover.alt=`${c.artist} — ${c.album} cassette cover`;
@@ -2857,11 +3936,9 @@ function updateRadioPlayingState(){
   const liveLabel=document.getElementById("radio-live-label");
   if(station)station.classList.toggle("is-playing",playbackMode==="radio"&&isPlaying);
   if(liveLabel){
-    if(!protectedRadioConfigured())liveLabel.textContent="Setup required";
-    else if(!protectedRadioToken())liveLabel.textContent="Creating session";
-    else if(playbackMode==="radio"&&isPlaying)liveLabel.textContent="On air";
+    if(playbackMode==="radio"&&isPlaying)liveLabel.textContent="On air";
     else if(playbackMode==="radio"&&currentRadioItem)liveLabel.textContent="Radio paused";
-    else liveLabel.textContent="Protected radio ready";
+    else liveLabel.textContent="Radio test ready";
   }
   setPlayIcon(isPlaying);
 }
@@ -2875,6 +3952,7 @@ function renderRadioRecent(){
   }
   list.innerHTML=radioRecent.map(item=>`
     <li>
+      ${item.coverUrl?`<img class="radio-recent-cover" src="${item.coverUrl}" alt="" draggable="false">`:""}
       <div class="radio-recent-main">
         <div class="radio-recent-artist">${item.artist}</div>
         <div class="radio-recent-track">${item.album} · ${item.trackName}</div>
@@ -2940,7 +4018,7 @@ audio.addEventListener("timeupdate",()=>{
   progressTrack.setAttribute("aria-valuenow",String(Math.round(percent)));
   progressTrack.setAttribute("aria-valuetext",`${fmt(audio.currentTime)} of ${fmt(audio.duration)}`);
 });
-audio.addEventListener("ended",()=>advancePlayback(1));
+audio.addEventListener("ended",handleAudioEnded);
 audio.addEventListener("error",()=>{
   if(playbackMode!=="radio")return;
   const status=document.getElementById("radio-status");
