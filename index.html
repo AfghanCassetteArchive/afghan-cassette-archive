@@ -6,6 +6,8 @@
 <title>Afghan Cassette Archive — آرشیف کاست‌های افغان</title>
 <meta name="description" content="Preserving Afghan music and cassette culture. An independent archive of Afghan cassettes from the 1960s–2000s.">
 <meta name="theme-color" content="#274131">
+<link rel="preconnect" href="https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev" crossorigin>
+<link rel="dns-prefetch" href="//pub-f07cb91ee11b43d294b20611220aadd5.r2.dev">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&family=Noto+Naskh+Arabic:wght@400;600&display=swap" rel="stylesheet">
 <style>
@@ -296,7 +298,7 @@ footer .footer-note{font-size:10px;color:rgba(245,240,232,.3);letter-spacing:.06
 .radio-console{display:grid;grid-template-columns:minmax(280px,.78fr) minmax(0,1.22fr);gap:0}
 .radio-cover-wrap{position:relative;min-height:510px;background:#110c08;display:flex;align-items:center;justify-content:center;padding:2.2rem;border-right:1px solid rgba(232,196,168,.13);overflow:hidden}
 .radio-cover-wrap::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 35%,rgba(184,92,44,.22),transparent 60%)}
-.radio-cover{position:relative;z-index:1;display:none;width:min(100%,370px);max-height:470px;aspect-ratio:3/4;object-fit:contain;border-radius:4px;box-shadow:0 24px 60px rgba(0,0,0,.55);background:#0b0b09;padding:10px;box-sizing:border-box}
+.radio-cover{position:relative;z-index:1;display:none;width:min(100%,370px);height:auto;max-height:470px;aspect-ratio:3/4;object-fit:cover;object-position:center;border-radius:4px;box-shadow:0 24px 60px rgba(0,0,0,.55);background:#0b0b09;padding:0;box-sizing:border-box}
 .radio-cover.visible{display:block}
 .radio-cover-placeholder{position:relative;z-index:1;width:min(100%,330px);aspect-ratio:3/4;border:1px solid rgba(232,196,168,.22);background:linear-gradient(145deg,#34200d,#160e07);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;color:rgba(232,196,168,.42);text-align:center;font-family:var(--font-display);font-size:17px;font-style:italic}
 .radio-cover-placeholder svg{width:88px;height:88px}
@@ -1151,6 +1153,82 @@ body.aca-gate-b-active>.player-bar{visibility:hidden}
   box-shadow:0 4px 12px rgba(0,0,0,.2)
 }
 
+
+/* Intro Archive Radio mini-player */
+.aca-intro-radio{
+  width:min(610px,100%);margin:1.35rem auto .55rem;padding:.72rem .78rem;
+  display:grid;grid-template-columns:58px minmax(0,1fr) auto;gap:.8rem;align-items:center;
+  border:1px solid rgba(244,223,165,.28);background:rgba(7,25,16,.72);
+  box-shadow:0 16px 42px rgba(0,0,0,.25);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  text-align:left;position:relative;z-index:6
+}
+.aca-intro-radio-cover{width:58px;height:58px;object-fit:cover;border:1px solid rgba(244,223,165,.25);display:block}
+.aca-intro-radio-meta{min-width:0}
+.aca-intro-radio-kicker{font-family:var(--font-mono);font-size:7px;letter-spacing:.17em;text-transform:uppercase;color:#E3B75F;margin-bottom:.2rem}
+.aca-intro-radio-title{font-family:var(--font-display);font-size:19px;line-height:1.05;color:#FFF8E8;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.aca-intro-radio-artist{font-family:var(--font-mono);font-size:8px;color:rgba(255,248,232,.62);margin-top:.18rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.aca-intro-radio-progress{height:2px;background:rgba(255,255,255,.13);margin-top:.52rem;overflow:hidden}
+.aca-intro-radio-progress span{display:block;width:0;height:100%;background:#E3B75F}
+.aca-intro-radio-times{display:flex;justify-content:space-between;margin-top:.18rem;font-family:var(--font-mono);font-size:6px;color:rgba(255,248,232,.36)}
+.aca-intro-radio-controls{display:flex;align-items:center;gap:.32rem}
+.aca-intro-radio-btn{
+  width:34px;height:34px;border-radius:50%;border:1px solid rgba(244,223,165,.33);background:rgba(255,255,255,.04);
+  color:#F4DFA5;display:grid;place-items:center;cursor:pointer;font-size:10px;transition:background .2s,transform .2s,color .2s
+}
+.aca-intro-radio-btn:hover,.aca-intro-radio-btn:focus-visible{background:rgba(244,223,165,.16);transform:translateY(-1px);outline:none}
+.aca-intro-radio-btn.primary{width:40px;height:40px;background:#E3B75F;color:#173222;border-color:#E3B75F;font-size:12px}
+.aca-intro-radio-btn.primary:hover{background:#F4DFA5}
+.aca-intro-autoplay-note{font-family:var(--font-mono);font-size:6.5px;letter-spacing:.05em;color:rgba(255,248,232,.38);line-height:1.5;margin:.25rem auto .2rem;max-width:560px}
+@media(max-width:620px){
+  .aca-intro-radio{grid-template-columns:48px minmax(0,1fr);padding:.62rem;gap:.62rem}
+  .aca-intro-radio-cover{width:48px;height:48px}
+  .aca-intro-radio-controls{grid-column:1/-1;justify-content:center;margin-top:.08rem}
+  .aca-intro-radio-title{font-size:17px}
+  .aca-cover-b-panel{padding-top:2.2rem;padding-bottom:2.2rem}
+}
+
+
+/* Cassette thumbnail fit: fill boxes cleanly while the full-cover viewer still shows the complete scan. */
+.cover-slide img,.cover-img,.latest-cover img,.featured-object-cover,.modal-cover,.radio-cover{
+  object-fit:cover;
+  object-position:center;
+}
+
+/* Image-loading performance */
+.cover-slide img,.cover-img,.latest-cover img,.featured-object-cover,.event-poster-img,.history-thumb img{
+  content-visibility:auto;
+}
+
+
+.radio-filter-row{
+  display:flex;align-items:end;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:0 0 1.25rem
+}
+.radio-filter-label{display:flex;flex-direction:column;gap:5px;min-width:min(100%,250px)}
+.radio-filter-label>span{
+  font-size:8px;letter-spacing:.12em;text-transform:uppercase;color:rgba(244,223,165,.58)
+}
+.radio-genre-filter{
+  min-width:230px;max-width:100%;background:rgba(255,255,255,.055);border:1px solid rgba(244,223,165,.2);
+  color:#FFF8E8;border-radius:3px;padding:9px 32px 9px 10px;font-family:var(--font-mono);font-size:9px;
+  outline:none;cursor:pointer
+}
+.radio-genre-filter:focus{border-color:#E3B75F}
+.radio-genre-filter option{color:#182D22;background:#F4F0E3}
+.radio-full-album-button{
+  border:1px solid rgba(244,223,165,.35);background:rgba(227,183,95,.1);color:#F4DFA5;
+  border-radius:3px;padding:9px 12px;font-family:var(--font-mono);font-size:8px;letter-spacing:.08em;
+  text-transform:uppercase;cursor:pointer;transition:.2s
+}
+.radio-full-album-button:hover,.radio-full-album-button:focus-visible{
+  background:#E3B75F;color:#173222;outline:none;transform:translateY(-1px)
+}
+.radio-full-album-button[hidden]{display:none}
+@media(max-width:760px){
+  .radio-filter-row{align-items:stretch}
+  .radio-filter-label,.radio-genre-filter,.radio-full-album-button{width:100%}
+  .radio-genre-filter{min-width:0}
+}
+
 </style>
 </head>
 <body class="aca-gate-b-active">
@@ -1170,8 +1248,26 @@ body.aca-gate-b-active>.player-bar{visibility:hidden}
       <div class="aca-cover-b-arabic" lang="fa" dir="rtl">به آرشیف کاست‌های افغان خوش آمدید</div>
       <div class="aca-cover-b-pashto" lang="ps" dir="rtl">د افغان کاسېټونو آرشیف ته ښه راغلاست</div>
       <p class="aca-cover-b-copy">Enter a growing collection of Afghan cassette culture — music, radio, regional traditions, diaspora recordings, visual ephemera, and the people whose work lives inside these tapes.</p>
+
+      <div class="aca-intro-radio" id="aca-intro-radio" aria-label="Archive Radio intro player">
+        <img class="aca-intro-radio-cover" id="aca-intro-radio-cover" src="https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/ACA%20Radio%20Kabul%20recordings.png" alt="ACA Radio Kabul recordings" draggable="false" decoding="async" fetchpriority="high">
+        <div class="aca-intro-radio-meta">
+          <div class="aca-intro-radio-kicker">Archive Radio · Now Playing</div>
+          <div class="aca-intro-radio-title" id="aca-intro-radio-title">Dilroba Saaz</div>
+          <div class="aca-intro-radio-artist" id="aca-intro-radio-artist">Ustad Nabi Gol</div>
+          <div class="aca-intro-radio-progress"><span id="aca-intro-radio-progress-fill"></span></div>
+          <div class="aca-intro-radio-times"><span id="aca-intro-radio-current">0:00</span><span id="aca-intro-radio-total">0:00</span></div>
+        </div>
+        <div class="aca-intro-radio-controls">
+          <button type="button" class="aca-intro-radio-btn" id="aca-intro-radio-prev" aria-label="Previous radio track">◀</button>
+          <button type="button" class="aca-intro-radio-btn primary" id="aca-intro-radio-play" aria-label="Play or pause radio">▶</button>
+          <button type="button" class="aca-intro-radio-btn" id="aca-intro-radio-next" aria-label="Next radio track">▶</button>
+        </div>
+      </div>
+      <div class="aca-intro-autoplay-note" id="aca-intro-autoplay-note">Dilroba Saaz will start automatically when your browser allows it. Otherwise, tap play or enter the archive.</div>
+
       <button class="aca-cover-b-enter" id="aca-cover-b-enter" type="button">Enter the Archive&nbsp; →</button>
-      <div class="aca-cover-b-foot">Archive · preserve · listen · remember</div>
+      <div class="aca-cover-b-foot">Click anywhere outside the player to enter · Archive · preserve · listen · remember</div>
     </div>
   </div>
   <div class="aca-cover-b-note">Cassettes · posters · broadcasts · memory</div>
@@ -1300,7 +1396,7 @@ body.aca-gate-b-active>.player-bar{visibility:hidden}
           <span class="radio-panel-kicker">Archive listening mode</span>
           <strong>Radio Afghanistan test playlist</strong>
         </div>
-        <span id="radio-protection-status">The expanded ACA radio library is ready for shuffle, A–Z rotation, repeat playback, and newly tagged radio additions.</span>
+        <span id="radio-protection-status">The expanded ACA radio library is ready for shuffle, A–Z rotation, repeat playback, album links, and genre-filtered listening.</span>
       </div>
 
       <div class="radio-console">
@@ -1339,6 +1435,16 @@ body.aca-gate-b-active>.player-bar{visibility:hidden}
             <button class="radio-option-button" id="radio-repeat-btn" type="button" onclick="cycleRadioRepeat()">Repeat off</button>
           </div>
 
+          <div class="radio-filter-row">
+            <label class="radio-filter-label" for="radio-genre-filter">
+              <span>Filter radio by genre</span>
+              <select id="radio-genre-filter" class="radio-genre-filter" onchange="setRadioGenreFilter(this.value)">
+                <option value="all">All radio genres</option>
+              </select>
+            </label>
+            <button class="radio-full-album-button" id="radio-full-album-button" type="button" hidden>Open full cassette →</button>
+          </div>
+
           <div class="radio-volume-row">
             <span>Volume</span>
             <input type="range" id="radio-volume" min="0" max="1" step="0.02" value="1" aria-label="Radio volume">
@@ -1372,7 +1478,7 @@ body.aca-gate-b-active>.player-bar{visibility:hidden}
         <h3>Designed for continuous playback</h3>
         <p>Café Mode enlarges the cover and controls, requests fullscreen, and keeps the display awake where the browser supports it.</p>
         <p>Designed for uninterrupted listening at home, exhibitions, cafés, libraries, and cultural programs. Every listener begins an independent rotation when they press play.</p>
-        <p class="radio-upgrade-note">Test playlist: an expanded set of ACA radio selections with genre tags and rotating cover art. Noor Khan Collection recordings are credited in their individual now-playing notes. These selections remain separate from the cassette catalogue.</p>
+        <p class="radio-upgrade-note">The radio can now be filtered by genre. When a radio selection is tied to a cassette already in the Archive, use “Open full cassette” to jump directly to that album and continue listening to the complete cassette. Noor Khan Collection recordings retain their individual donor notes.</p>
       </div>
     </section>
   </main>
@@ -1652,7 +1758,7 @@ body.aca-gate-b-active>.player-bar{visibility:hidden}
           <div class="event-details">RootStock Arts Center · Oakland, California</div>
           <p class="event-description">An evening devoted to the composers, arrangements, studios, and cassette releases that shaped Afghanistan’s modern musical golden era.</p>
           <a class="event-poster-link" href="event-posters/rootstock-composers-golden-era-may-9-2026.png" target="_blank" rel="noopener noreferrer" aria-label="Open the full-size Composers of the Golden Era event poster">
-            <img class="event-poster-img" src="event-posters/rootstock-composers-golden-era-may-9-2026.png" alt="Poster for Composers of the Golden Era at RootStock Arts Center in Oakland on May 9, 2026" loading="lazy">
+            <img class="event-poster-img" src="event-posters/rootstock-composers-golden-era-may-9-2026.png" alt="Poster for Composers of the Golden Era at RootStock Arts Center in Oakland on May 9, 2026" loading="lazy" decoding="async" fetchpriority="low">
             <span class="event-poster-caption"><span>Event poster</span><span>View full size ↗</span></span>
           </a>
         </div>
@@ -1667,7 +1773,7 @@ body.aca-gate-b-active>.player-bar{visibility:hidden}
           <div class="event-details">2220 Arts + Archives · Los Angeles, California</div>
           <p class="event-description">A guided journey through Afghan cassette history followed by a live OMJVinyls set, moving from archival listening into folk, pop, ghazal, and forgotten electronic sounds.</p>
           <a class="event-poster-link" href="event-posters/discostan-afghan-cassette-archive-may-16-2026.png" target="_blank" rel="noopener noreferrer" aria-label="Open the full-size Discostan event poster">
-            <img class="event-poster-img" src="event-posters/discostan-afghan-cassette-archive-may-16-2026.png" alt="Poster for An Afternoon with Afghan Cassette Archive, May 16 at 2220 Arts and Archives" loading="lazy">
+            <img class="event-poster-img" src="event-posters/discostan-afghan-cassette-archive-may-16-2026.png" alt="Poster for An Afternoon with Afghan Cassette Archive, May 16 at 2220 Arts and Archives" loading="lazy" decoding="async" fetchpriority="low">
             <span class="event-poster-caption"><span>Event poster</span><span>View full size ↗</span></span>
           </a>
         </div>
@@ -1795,7 +1901,7 @@ function initHistory(){
   const chapters=document.getElementById("history-chapters");
   chapters.innerHTML=HISTORY_CHAPTERS.map((c,i)=>`<button class="history-chapter" type="button" data-chapter="${i}" onclick="goHistorySlide(${c.start})">${c.label}</button>`).join("");
   const thumbs=document.getElementById("history-thumbs");
-  thumbs.innerHTML=HISTORY_SLIDES.map((s,i)=>`<button class="history-thumb" type="button" data-history-thumb="${i}" onclick="goHistorySlide(${i})" aria-label="Go to slide ${i+1}: ${escapeHistoryHtml(s.title)}"><img src="${s.file}" alt="" loading="lazy"><span>${i+1}</span></button>`).join("");
+  thumbs.innerHTML=HISTORY_SLIDES.map((s,i)=>`<button class="history-thumb" type="button" data-history-thumb="${i}" onclick="goHistorySlide(${i})" aria-label="Go to slide ${i+1}: ${escapeHistoryHtml(s.title)}"><img src="${s.file}" alt="" loading="lazy" decoding="async" fetchpriority="low"><span>${i+1}</span></button>`).join("");
   updateHistorySlide(false);
 }
 function escapeHistoryHtml(value){return String(value).replace(/[&<>"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]))}
@@ -2064,6 +2170,7 @@ let activeFilter="all",searchQuery="",sortMode="artist";
 let playbackMode="archive";
 let radioOrder="shuffle";
 let radioRepeatMode="off";
+let radioGenreFilter="all";
 let radioQueue=[];
 let radioQueueIndex=-1;
 let radioRecent=[];
@@ -3023,6 +3130,520 @@ const RADIO_TEST_PLAYLIST = [
     "url": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/Gudar%20Ta%20Rwaraw%20Qamar%20Gula%20Aw%20Shah%20Wali%20AM(1).mp3",
     "source": "radio-only",
     "coverUrl": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Shah%20Wali%20and%20Qamar%20Gula/Shah%20Wali%20and%20Qamar%20Gula_Scan%20133.jpg"
+  },
+  {
+    "id": "radio-ahmad-wali-bia-wajo-music-center",
+    "artist": "Ahmad Wali",
+    "album": "Music Center, Kabul",
+    "trackName": "Bia Wajo",
+    "language": "Farsi",
+    "genres": [
+      "Pop",
+      "Classical"
+    ],
+    "donatedBy": "",
+    "comment": "Radio feature track added to the ACA rotation.",
+    "url": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/Radio%20tracks%202/%20Bia%20Wajo%20Music%20Center%20Ahmad%20Wali.mp3",
+    "source": "radio-only",
+    "coverUrl": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Ahmad%20Walio%20Music%20Center%201/Ahmad%20Walio%20Music%20Center%201_Scan%20276.jpg"
+  },
+  {
+    "id": "radio-ustad-taransaaz-mutahid-shawid",
+    "artist": "Ustad Shah Wali Taransaaz",
+    "album": "Nilab Album 1",
+    "trackName": "Mutahid Shawid",
+    "language": "Farsi",
+    "genres": [
+      "Pop",
+      "Folk (Mahali)",
+      "Diaspora Music"
+    ],
+    "donatedBy": "",
+    "comment": "Radio feature track added to the ACA rotation.",
+    "url": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/Radio%20tracks%202/%20Mutahid%20Shawid%20Ustad%20Taransaaz.mp3",
+    "source": "radio-only",
+    "coverUrl": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Ustad%20Taransaaz%20Album%201%20Nilab%20Music/IMG_20260810_0064.jpg"
+  },
+  {
+    "id": "radio-bakht-zamina-zolfare-ma-rana-de-bakht",
+    "artist": "Bakht Zamina",
+    "album": "Afghan Music Vol. 2",
+    "trackName": "Zolfare Ma Rana De Bakht",
+    "language": "Pashto",
+    "genres": [
+      "Folk",
+      "Female",
+      "Pop"
+    ],
+    "donatedBy": "",
+    "comment": "Radio feature track added to the ACA rotation.",
+    "url": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/Radio%20tracks%202/%20Zolfare%20ma%20rana%20de%20bakht%20Zamina.mp3",
+    "source": "radio-only",
+    "coverUrl": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Bakht%20Zamina%20Afghan%20Music%202/Bakht%20Zamina%20Afghan%20Music%202_Bakht%20Zamina%20Afghan%20Music%202.jpg"
+  },
+  {
+    "id": "radio-mahwash-farhad-darya-a-yena-yare",
+    "artist": "Ustad Mahwash & Farhad Darya",
+    "album": "Qalbeh Ishq",
+    "trackName": "A Yena Yare",
+    "language": "Farsi",
+    "genres": [
+      "Pop",
+      "Female",
+      "Duet"
+    ],
+    "donatedBy": "",
+    "comment": "Radio feature track added to the ACA rotation.",
+    "url": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/Radio%20tracks%202/A%20YENA%20YARE%20USTAD%20MAHWASH%20AND%20FARHAD%20DARYA%20-2.mp3",
+    "source": "radio-only",
+    "coverUrl": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Farhad%20Darya%20Qalbeh%20Ishq/IMG_20260208_0003.jpg"
+  },
+  {
+    "id": "radio-akbar-ramesh-ba-khudah-ke-murda-basha",
+    "artist": "Akbar Ramesh",
+    "album": "Rang-a-Rang",
+    "trackName": "Ba Khudah Ke Murda Basha",
+    "language": "Farsi",
+    "genres": [
+      "Pop",
+      "Diaspora Music"
+    ],
+    "donatedBy": "",
+    "comment": "Radio feature track added to the ACA rotation.",
+    "url": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/Radio%20tracks%202/AKBAR%20RAMESH%20BA%20KHUDAH%20KE%20MURDA%20BASHA.mp3",
+    "source": "radio-only",
+    "coverUrl": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Akbar%20Ramesh%20Taraneh/IMG_20260720_0002.jpg"
+  },
+  {
+    "id": "radio-habib-qaderi-bala-sare-dukhtar",
+    "artist": "Habib Qaderi",
+    "album": "Album 2",
+    "trackName": "Bala Sare Dukhtar",
+    "language": "Farsi",
+    "genres": [
+      "Radio",
+      "Pop",
+      "Diaspora Music"
+    ],
+    "url": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/Radio%20tracks%202/Bala%20Sare%20Dukhtar%20Habib%20Qaderi%20album%202.mp3",
+    "source": "radio-only",
+    "coverUrl": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/ACA%20Radio%20Kabul%20recordings.png"
+  },
+  {
+    "id": "radio-ustad-nabi-gol-dilroba-saaz",
+    "artist": "Ustad Nabi Gol",
+    "album": "Dilroba Saaz",
+    "trackName": "Dilroba Saaz",
+    "language": "Instrumental",
+    "genres": [
+      "Radio",
+      "Instrumental",
+      "Classical",
+      "Dilroba"
+    ],
+    "url": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/Radio%20tracks%202/DILROBA%20SAAZ%20.mp3",
+    "source": "radio-only",
+    "coverUrl": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/ACA%20Radio%20Kabul%20recordings.png",
+    "cassetteId": 129
+  },
+  {
+    "id": "radio-delagha-bishkana",
+    "artist": "Delagha",
+    "album": "Mahali Album",
+    "trackName": "Bishkana",
+    "language": "",
+    "genres": [
+      "Radio",
+      "Folk (Mahali)",
+      "Dambora"
+    ],
+    "url": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/Radio%20tracks%202/Delagha%20Surood%20Bishkana.mp3",
+    "source": "radio-only",
+    "coverUrl": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/delagha%20Surood/IMG_20260810_0034.jpg",
+    "cassetteId": 166
+  },
+  {
+    "id": "radio-ahmad-wali-hangama-du-shab-labam",
+    "artist": "Ahmad Wali & Hangama",
+    "album": "Afghan Music",
+    "trackName": "Du Shab Labam",
+    "language": "Farsi",
+    "genres": [
+      "Radio",
+      "Female",
+      "Duet",
+      "Pop",
+      "Funk",
+      "Psychedelic"
+    ],
+    "url": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/Radio%20tracks%202/Du%20Shab%20Labam%20Ahmad%20Wali%20and%20Hangama.mp3",
+    "source": "radio-only",
+    "coverUrl": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Hangama%20and%20Ahmad%20Wali%20Afghan%20Music/70927321_2618016394948658_3272372734289510400_n%20copy%281%29.jpeg",
+    "cassetteId": 30
+  },
+  {
+    "id": "radio-habib-qaderi-dukhtare-kakul",
+    "artist": "Habib Qaderi",
+    "album": "Album 2",
+    "trackName": "Dukhtare Kakul",
+    "language": "Farsi",
+    "genres": [
+      "Radio",
+      "Pop",
+      "Diaspora Music"
+    ],
+    "url": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/Radio%20tracks%202/Dukhatare%20Kakul%20Habib%20Qadeir%20Album%202.mp3",
+    "source": "radio-only",
+    "coverUrl": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/ACA%20Radio%20Kabul%20recordings.png"
+  },
+  {
+    "id": "radio-farhad-darya-alama",
+    "artist": "Farhad Darya",
+    "album": "Qalbeh Ishq",
+    "trackName": "Alama",
+    "language": "Farsi",
+    "genres": [
+      "Radio",
+      "Pop"
+    ],
+    "url": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/Radio%20tracks%202/FARHAD%20DARYA%20ALAMA%20%20.mp3",
+    "source": "radio-only",
+    "coverUrl": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Farhad%20Darya%20Qalbeh%20Ishq/IMG_20260208_0003.jpg",
+    "cassetteId": 18
+  },
+  {
+    "id": "radio-shahla-zaland-gul-dast-dast",
+    "artist": "Shahla Zaland",
+    "album": "Hatera",
+    "trackName": "Gul Dast Dast",
+    "language": "Farsi",
+    "genres": [
+      "Radio",
+      "Pop",
+      "Female",
+      "Diaspora Music"
+    ],
+    "url": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/Radio%20tracks%202/Gul%20Dast%20Dast%20Shala%20Zaland%20%20.mp3",
+    "source": "radio-only",
+    "coverUrl": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Shahla%20Zaland/IMG_20260720_0005.jpg",
+    "cassetteId": 73
+  },
+  {
+    "id": "radio-bakht-zamina-jang-kaseda",
+    "artist": "Bakht Zamina",
+    "album": "Afghan Music Vol. 2",
+    "trackName": "Jang Kaseda",
+    "language": "Pashto",
+    "genres": [
+      "Radio",
+      "Folk",
+      "Female"
+    ],
+    "url": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/Radio%20tracks%202/Jang%20kaseda%20bakht%20zamina%20.mp3",
+    "source": "radio-only",
+    "coverUrl": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Bakht%20Zamina%20Afghan%20Music%202/Bakht%20Zamina%20Afghan%20Music%202_Bakht%20Zamina%20Afghan%20Music%202.jpg",
+    "cassetteId": 126
+  },
+  {
+    "id": "radio-habib-qaderi-khosh-khabar",
+    "artist": "Habib Qaderi",
+    "album": "Chadare Gul-e-Anar",
+    "trackName": "Khosh Khabar",
+    "language": "Farsi",
+    "genres": [
+      "Radio",
+      "Pop",
+      "Diaspora Music"
+    ],
+    "url": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/Radio%20tracks%202/KHOSH%20KHABAR%20AKA%20KHABAR%20YAR.mp3",
+    "source": "radio-only",
+    "coverUrl": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Habib%20Qaderi%20Album%201/Habib%20Qaderi%20Album%201.jpg",
+    "cassetteId": 140
+  },
+  {
+    "id": "radio-farid-rastagar-gule-surkh-khamosh",
+    "artist": "Farid Rastagar & Gorohe Gul-e-Surkh",
+    "album": "ACA Radio",
+    "trackName": "Khamosh",
+    "language": "Farsi",
+    "genres": [
+      "Radio",
+      "Pop",
+      "New Wave"
+    ],
+    "url": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/Radio%20tracks%202/Khamosh%20Farid%20Rastagar%20and%20Gul%20e%20surkh.mp3",
+    "source": "radio-only",
+    "coverUrl": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Wajiha%20Rastagar%20/Wajiha%20and%20Farid%20rastagar%20_edited.jpg",
+    "cassetteId": 116
+  },
+  {
+    "id": "radio-wajiha-farid-gule-surkh-khashke",
+    "artist": "Wajiha & Farid Rastagar & Gorohe Gul-e-Surkh",
+    "album": "ACA Radio",
+    "trackName": "Khashke",
+    "language": "Farsi",
+    "genres": [
+      "Radio",
+      "Pop",
+      "New Wave",
+      "Female"
+    ],
+    "url": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/Radio%20tracks%202/Khashke%20Wajiha%20and%20Farid%20Rastagar%20and%20Gul%20e%20surkh.mp3",
+    "source": "radio-only",
+    "coverUrl": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Wajiha%20Rastagar%20/Wajiha%20and%20Farid%20rastagar%20_edited.jpg",
+    "cassetteId": 116
+  },
+  {
+    "id": "radio-omar-shekib-shine-man-qisaye-del-goyam",
+    "artist": "Omar Shekib & Gorohe Shine",
+    "album": "Best Hits",
+    "trackName": "Man Qisaye Del Goyam",
+    "language": "Farsi",
+    "genres": [
+      "Radio",
+      "Pop",
+      "New Wave"
+    ],
+    "url": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/Radio%20tracks%202/Man%20Qisaye%20Del%20goyam%20Omar%20Shekib%20and%20Go%20%20rohe%20SHine%20.mp3",
+    "source": "radio-only",
+    "coverUrl": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Omar%20Shekib%20Best%20Hits/IMG_20260205_0005.jpg",
+    "cassetteId": 135
+  },
+  {
+    "id": "radio-rahim-parastoo-mano-badakshani",
+    "artist": "Rahim & Parastoo Mehryar",
+    "album": "ACA Radio",
+    "trackName": "Mano Badakshani",
+    "language": "Farsi",
+    "era": "1992",
+    "genres": [
+      "Radio",
+      "Pop",
+      "Duet",
+      "Diaspora Music"
+    ],
+    "url": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/Radio%20tracks%202/Mano%20badakshani.mp3",
+    "source": "radio-only",
+    "coverUrl": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/ACA%20Radio%20Kabul%20recordings.png"
+  },
+  {
+    "id": "radio-taransaaz-o-sabza-banar",
+    "artist": "Ustad Shah Wali Taransaaz",
+    "album": "Nilab Album 1",
+    "trackName": "O Sabza Banar",
+    "language": "Farsi",
+    "genres": [
+      "Radio",
+      "Pop",
+      "Folk (Mahali)",
+      "Diaspora Music"
+    ],
+    "url": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/Radio%20tracks%202/O%20sabza%20Banar%20Ustad%20Taransaaz%20NM%201%20.mp3",
+    "source": "radio-only",
+    "coverUrl": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Ustad%20Taransaaz%20Album%201%20Nilab%20Music/IMG_20260810_0064.jpg",
+    "cassetteId": 155
+  },
+  {
+    "id": "radio-omar-shekib-doostat-nadaram",
+    "artist": "Omar Shekib",
+    "album": "Best Hits",
+    "trackName": "Doostat Nadaram",
+    "language": "Farsi",
+    "genres": [
+      "Radio",
+      "Pop"
+    ],
+    "url": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/Radio%20tracks%202/Omar%20Shekib%20Doostat%20Nadaram.mp3",
+    "source": "radio-only",
+    "coverUrl": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Omar%20Shekib%20Best%20Hits/IMG_20260205_0005.jpg",
+    "cassetteId": 135
+  },
+  {
+    "id": "radio-ahmad-wali-range-labana",
+    "artist": "Ahmad Wali",
+    "album": "Rang-e Labanah Ba Del Neshata",
+    "trackName": "Range Labana",
+    "language": "Farsi",
+    "genres": [
+      "Radio",
+      "Classical",
+      "Pop"
+    ],
+    "url": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/Radio%20tracks%202/Range%20Labana%20Ahmad%20Wali%20Music%20Center%201.mp3",
+    "source": "radio-only",
+    "coverUrl": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Ahmad%20Walio%20Music%20Center%201/Ahmad%20Walio%20Music%20Center%201_Scan%20276.jpg",
+    "cassetteId": 9
+  },
+  {
+    "id": "radio-taransaaz-ta-yak-nafar-afghan-ast",
+    "artist": "Ustad Shah Wali Taransaaz",
+    "album": "Nilab Album 1",
+    "trackName": "Ta Yak Nafar Afghan Ast",
+    "language": "Farsi",
+    "genres": [
+      "Radio",
+      "Pop",
+      "Folk (Mahali)",
+      "Diaspora Music"
+    ],
+    "url": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/Radio%20tracks%202/Ta%20Yak%20Nafar%20Afghan%20Ast%20Ustad%20Taransaaz%20Nilab%20music%201.mp3",
+    "source": "radio-only",
+    "coverUrl": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Ustad%20Taransaaz%20Album%201%20Nilab%20Music/IMG_20260810_0064.jpg",
+    "cassetteId": 155
+  },
+  {
+    "id": "radio-rahim-parastoo-yar-e-to-astom",
+    "artist": "Rahim & Parastoo Mehryar",
+    "album": "ACA Radio",
+    "trackName": "Yar-e To Astom",
+    "language": "Farsi",
+    "era": "1992",
+    "genres": [
+      "Radio",
+      "Pop",
+      "Duet",
+      "Diaspora Music"
+    ],
+    "url": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/Radio%20tracks%202/Yar%20e%20To%20Astoom.mp3",
+    "source": "radio-only",
+    "coverUrl": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/ACA%20Radio%20Kabul%20recordings.png"
+  },
+  {
+    "id": "radio-omar-shekib-zen-hama-khoban",
+    "artist": "Omar Shekib",
+    "album": "Best Hits",
+    "trackName": "Zen Hama Khoban",
+    "language": "Farsi",
+    "genres": [
+      "Radio",
+      "Pop"
+    ],
+    "url": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/Radio%20tracks%202/Zen%20Hama%20Khoban%20Omar%20Shekib.mp3",
+    "source": "radio-only",
+    "coverUrl": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Omar%20Shekib%20Best%20Hits/IMG_20260205_0005.jpg",
+    "cassetteId": 135
+  },
+  {
+    "id": "radio-delagha-zori-zori",
+    "artist": "Delagha",
+    "album": "Mahali Album",
+    "trackName": "Zori Zori",
+    "language": "",
+    "genres": [
+      "Radio",
+      "Folk (Mahali)",
+      "Dambora"
+    ],
+    "url": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/Radio%20tracks%202/Zori%20Zori%20Delagha%20Surood%20.mp3",
+    "source": "radio-only",
+    "coverUrl": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/delagha%20Surood/IMG_20260810_0034.jpg",
+    "cassetteId": 166
+  },
+  {
+    "id": "radio-salma-jahani-bia-aye-negara",
+    "artist": "Salma Jahani",
+    "album": "Female Radio Singers",
+    "trackName": "Bia Aye Negara",
+    "language": "Farsi",
+    "genres": [
+      "Radio",
+      "Female",
+      "Pop"
+    ],
+    "url": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/Radio%20tracks%202/bia%20aye%20negara%20salma.mp3",
+    "source": "radio-only",
+    "coverUrl": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Female%20Radio%20Singers/IMG_20260205_0004_edited.jpg",
+    "cassetteId": 20
+  },
+  {
+    "id": "radio-qader-eshpari-maida-maida",
+    "artist": "Qader Eshpari",
+    "album": "ACA Radio",
+    "trackName": "Maida Maida",
+    "language": "",
+    "era": "1998",
+    "genres": [
+      "Radio",
+      "Pop",
+      "Diaspora Music"
+    ],
+    "url": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/Radio%20tracks%202/maida%20maida%20qader%20eshpari%201998.mp3",
+    "source": "radio-only",
+    "coverUrl": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/ACA%20Radio%20Kabul%20recordings.png"
+  },
+  {
+    "id": "radio-ahmad-wali-ustad-mahwash-shab-kuja-bude",
+    "artist": "Ahmad Wali & Ustad Mahwash",
+    "album": "ACA Radio",
+    "trackName": "Shab Kuja Bude",
+    "language": "Farsi",
+    "genres": [
+      "Radio",
+      "Pop",
+      "Duet"
+    ],
+    "url": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/Radio%20tracks%202/Ahmad%20Wali%20and%20Ustad%20Mahwash%20Shab%20Kuja%20Bude.mp3",
+    "source": "radio-only",
+    "coverUrl": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/ACA%20Radio%20Kabul%20recordings.png"
+  },
+  {
+    "id": "radio-farhad-darya-leila-nawrooz-ast",
+    "artist": "Farhad Darya",
+    "album": "ACA Radio",
+    "trackName": "Leila Nawrooz Ast",
+    "language": "Farsi",
+    "genres": [
+      "Radio",
+      "Pop",
+      "New Wave"
+    ],
+    "url": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/Radio%20tracks%202/Leila%20Nawrooz%20Ast%20Farhad%20Darya.mp3",
+    "source": "radio-only",
+    "coverUrl": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/ACA%20Radio%20Kabul%20recordings.png"
+  },
+  {
+    "id": "radio-nashenas-adeki-more",
+    "artist": "Nashenas",
+    "album": "Afghan Music Vol. 3",
+    "trackName": "Adeki More",
+    "language": "Pashto",
+    "genres": [
+      "Radio"
+    ],
+    "url": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/Radio%20tracks%202/NASHENAS%20ADEKI%20MORE.mp3",
+    "source": "radio-only",
+    "coverUrl": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Nashenas%20Music%20Center%203%20Album/nashenas%20afghan%20music%203.jpg",
+    "cassetteId": 46
+  },
+  {
+    "id": "radio-nashenas-leila",
+    "artist": "Nashenas",
+    "album": "Afghan Music Vol. 3",
+    "trackName": "Leila",
+    "language": "Pashto",
+    "genres": [
+      "Radio"
+    ],
+    "url": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/Radio%20tracks%202/NASHENAS%20LEILA.mp3",
+    "source": "radio-only",
+    "coverUrl": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Nashenas%20Music%20Center%203%20Album/nashenas%20afghan%20music%203.jpg",
+    "cassetteId": 46
+  },
+  {
+    "id": "radio-mashal-malik-jana",
+    "artist": "Mashal",
+    "album": "Afghan Geet Mela",
+    "trackName": "Malik Jana",
+    "language": "Pashto",
+    "genres": [
+      "Radio",
+      "Pop",
+      "Diaspora Music"
+    ],
+    "url": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Radio%20Tracks/Radio%20tracks%202/mashal%20malik%20jana.mp3",
+    "source": "radio-only",
+    "coverUrl": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Gulcheen%20Geet%20mela%20/Vol%2063%20SMC%20.jpg",
+    "cassetteId": 24
   }
 ];
 
@@ -3109,7 +3730,7 @@ function defaultCoverMarkup(c,className=""){
 
 function homeCoverVisual(c){
   if(c.cover){
-    return `<img src="${coverUrl(c)}" alt="${c.artist} — ${c.album} cassette cover" draggable="false">`;
+    return `<img src="${coverUrl(c)}" alt="${c.artist} — ${c.album} cassette cover" draggable="false" loading="lazy" decoding="async" fetchpriority="low">`;
   }
   return defaultCoverMarkup(c);
 }
@@ -3124,7 +3745,7 @@ function renderHomeEditorial(){
   if(featureEl&&feature){
     featureEl.innerHTML=`<article class="featured-object">
       ${feature.cover
-        ?`<img class="featured-object-cover" src="${coverUrl(feature)}" alt="${feature.artist} — ${feature.album}" draggable="false">`
+        ?`<img class="featured-object-cover" src="${coverUrl(feature)}" alt="${feature.artist} — ${feature.album}" draggable="false" loading="lazy" decoding="async">`
         :`<div class="featured-object-cover">${defaultCoverMarkup(feature)}</div>`}
       <div class="featured-object-copy">
         <span class="featured-object-kicker">Featured archive object</span>
@@ -3156,14 +3777,28 @@ function exploreGenre(genre){
 function renderHomeCarousel(){
   const track=document.getElementById("cover-carousel-track");
   if(!track)return;
-  const featured=CASSETTES.filter(c=>c.cover).sort((a,b)=>a.artist.localeCompare(b.artist,undefined,{sensitivity:"base"})||a.album.localeCompare(b.album,undefined,{sensitivity:"base"}));
-  if(!featured.length){
+  const allFeatured=CASSETTES.filter(c=>c.cover).sort((a,b)=>a.artist.localeCompare(b.artist,undefined,{sensitivity:"base"})||a.album.localeCompare(b.album,undefined,{sensitivity:"base"}));
+  if(!allFeatured.length){
     document.getElementById("cover-carousel").style.display="none";
     return;
   }
+
+  // Keep the visual richness of the moving wall without downloading every
+  // archival scan at once. Sample up to 24 covers across the full catalogue.
+  const maxCarouselCovers=24;
+  const featured=[];
+  if(allFeatured.length<=maxCarouselCovers){
+    featured.push(...allFeatured);
+  }else{
+    for(let i=0;i<maxCarouselCovers;i++){
+      const idx=Math.round(i*(allFeatured.length-1)/(maxCarouselCovers-1));
+      featured.push(allFeatured[idx]);
+    }
+  }
+
   const makeSlides=(isClone=false)=>featured.map(c=>`
     <button class="cover-slide" type="button" ${isClone?'tabindex="-1" aria-hidden="true"':''} aria-label="Open ${c.artist} — ${c.album}" onclick="openModal(${c.id})">
-      <img src="${coverUrl(c)}" alt="${c.artist} — ${c.album} cassette cover" loading="${isClone?'lazy':'eager'}" onerror="this.closest('.cover-slide').style.display='none'">
+      <img src="${coverUrl(c)}" alt="${c.artist} — ${c.album} cassette cover" loading="lazy" decoding="async" fetchpriority="low" onerror="this.closest('.cover-slide').style.display='none'">
       <span class="cover-slide-action" aria-hidden="true">↗</span>
       <span class="cover-slide-overlay"><span class="cover-slide-artist">${c.artist}</span><span class="cover-slide-album">${c.album}</span></span>
     </button>`).join("");
@@ -3185,6 +3820,14 @@ function closeSiteNav(){
   if(button){button.setAttribute("aria-expanded","false");button.textContent="☰"}
 }
 
+let homeContentRendered=false;
+function ensureHomeContent(){
+  if(homeContentRendered)return;
+  renderHomeEditorial();
+  renderHomeCarousel();
+  homeContentRendered=true;
+}
+
 function showPage(name,el,updateHistory=true){
   const section=document.getElementById("page-"+name);
   if(!section)return;
@@ -3194,7 +3837,9 @@ function showPage(name,el,updateHistory=true){
   const navLink=el||document.querySelector(`[data-page="${name}"]`);
   if(navLink)navLink.classList.add("active");
   closeSiteNav();
-  if(name==="archive")renderGrid();
+  const introGateActive=document.body.classList.contains("aca-gate-b-active");
+  if(name==="home"&&!introGateActive)ensureHomeContent();
+  if(name==="archive"&&!introGateActive)renderGrid();
   if(name==="history")initHistory();
   if(name==="radio")initRadio();
   if(updateHistory&&location.hash!==`#${name}`)history.pushState({page:name},"",`#${name}`);
@@ -3230,7 +3875,7 @@ function renderGrid(){
     const playing=currentCassetteId===c.id;
     const fallback=defaultCoverMarkup(c,"default-cover-card");
     const visual=c.cover
-      ?`<img class="cover-img" src="${coverUrl(c)}" alt="${c.artist}" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div style="display:none">${fallback}</div>`
+      ?`<img class="cover-img" src="${coverUrl(c)}" alt="${c.artist}" loading="lazy" decoding="async" fetchpriority="low" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div style="display:none">${fallback}</div>`
       :fallback;
     return`<div class="cassette-card${playing?" is-playing":""}" tabindex="0" role="button" aria-label="Open ${c.artist}" onclick="openModal(${c.id})" onkeydown="if(event.key==='Enter'||event.key===' ')openModal(${c.id})">
       <div class="tape-visual">${visual}<div class="play-hover"><svg viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg></div><div class="np-badge">▶ Now Playing</div></div>
@@ -3624,7 +4269,7 @@ function playTrack(cassetteId,trackIdx){
 }
 
 function togglePlay(){
-  if(playbackMode==="radio"&&currentRadioItem){
+  if(playbackMode==="radio"&&currentRadioItem&&radioItemMatchesGenre(currentRadioItem)){
     if(isPlaying)audio.pause();
     else audio.play().catch(()=>{});
     return;
@@ -3660,6 +4305,122 @@ function shuffleArray(items){
   return list;
 }
 
+
+function radioLinkedCassette(item){
+  if(!item)return null;
+  if(Number.isInteger(item.cassetteId)){
+    const direct=CASSETTES.find(c=>c.id===item.cassetteId);
+    if(direct)return direct;
+  }
+
+  // Tracks that already use an Archive cassette cover inherit that cassette's
+  // genres/language and receive a full-album link automatically.
+  if(item.coverUrl){
+    const coverMatch=CASSETTES.find(c=>c.cover&&coverUrl(c)===item.coverUrl);
+    if(coverMatch){
+      item.cassetteId=coverMatch.id;
+      return coverMatch;
+    }
+  }
+  return null;
+}
+
+function enrichRadioMetadataFromArchive(){
+  RADIO_TEST_PLAYLIST.forEach(item=>{
+    const linked=radioLinkedCassette(item);
+    const mergedGenres=[];
+    const addGenre=g=>{
+      if(g&&!mergedGenres.some(x=>x.toLowerCase()===String(g).toLowerCase()))mergedGenres.push(String(g));
+    };
+
+    (item.genres||[]).forEach(addGenre);
+    if(linked){
+      genreList(linked).forEach(addGenre);
+      if(!item.language&&linked.language)item.language=linked.language;
+      if((!item.album||item.album==="ACA Radio")&&linked.album)item.album=linked.album;
+    }
+    addGenre("Radio");
+    item.genres=mergedGenres;
+  });
+}
+
+function radioItemMatchesGenre(item){
+  return radioGenreFilter==="all"||
+    (item.genres||[]).some(g=>g.toLowerCase()===radioGenreFilter.toLowerCase());
+}
+
+function filteredRadioPlaylist(){
+  return RADIO_PLAYLIST.filter(radioItemMatchesGenre);
+}
+
+function radioGenreCounts(){
+  const counts=new Map();
+  RADIO_PLAYLIST.forEach(item=>{
+    (item.genres||[]).forEach(g=>counts.set(g,(counts.get(g)||0)+1));
+  });
+  return [...counts.entries()].sort((a,b)=>a[0].localeCompare(b[0],undefined,{sensitivity:"base"}));
+}
+
+function populateRadioGenreFilter(){
+  const select=document.getElementById("radio-genre-filter");
+  if(!select)return;
+  const current=radioGenreFilter;
+  select.innerHTML='<option value="all">All radio genres ('+RADIO_PLAYLIST.length+')</option>';
+  radioGenreCounts().forEach(([genre,count])=>{
+    const option=document.createElement("option");
+    option.value=genre;
+    option.textContent=`${genre} (${count})`;
+    select.appendChild(option);
+  });
+  select.value=[...select.options].some(o=>o.value===current)?current:"all";
+}
+
+async function setRadioGenreFilter(genre){
+  radioGenreFilter=genre||"all";
+  buildRadioQueue();
+
+  const select=document.getElementById("radio-genre-filter");
+  if(select)select.value=radioGenreFilter;
+
+  const visible=filteredRadioPlaylist();
+  const status=document.getElementById("radio-status");
+  if(status){
+    status.textContent=radioGenreFilter==="all"
+      ?`Showing all ${visible.length} radio selections.`
+      :`${visible.length} ${radioGenreFilter} radio selection${visible.length===1?"":"s"} ready.`;
+  }
+
+  // If the station is currently playing a track outside the newly selected
+  // genre, move smoothly to the first track that matches.
+  if(isPlaying&&currentRadioItem&&!radioItemMatchesGenre(currentRadioItem)&&visible.length){
+    radioQueueIndex=0;
+    await playRadioQueueItem();
+  }
+  updateRadioCounts();
+}
+
+function openRadioAlbum(cassetteId){
+  const cassette=CASSETTES.find(c=>c.id===cassetteId);
+  if(!cassette)return;
+  const archiveNav=document.querySelector('[data-page="archive"]');
+  showPage("archive",archiveNav);
+  window.setTimeout(()=>openModal(cassetteId),80);
+}
+
+function updateRadioAlbumLink(item){
+  const button=document.getElementById("radio-full-album-button");
+  if(!button)return;
+  const linked=radioLinkedCassette(item);
+  if(!linked){
+    button.hidden=true;
+    button.onclick=null;
+    return;
+  }
+  button.hidden=false;
+  button.textContent=`Open full cassette: ${linked.album} →`;
+  button.onclick=()=>openRadioAlbum(linked.id);
+}
+
 function buildRadioQueue(){
   if(!RADIO_PLAYLIST.length){
     radioQueue=[];
@@ -3667,14 +4428,15 @@ function buildRadioQueue(){
     updateRadioCounts();
     return;
   }
+  const availableRadio=filteredRadioPlaylist();
   if(radioOrder==="alphabetical"){
-    radioQueue=[...RADIO_PLAYLIST].sort((a,b)=>
+    radioQueue=[...availableRadio].sort((a,b)=>
       a.artist.localeCompare(b.artist,undefined,{sensitivity:"base"})||
       a.album.localeCompare(b.album,undefined,{sensitivity:"base"})||
       (a.trackIdx??0)-(b.trackIdx??0)
     );
   }else{
-    radioQueue=shuffleArray(RADIO_PLAYLIST);
+    radioQueue=shuffleArray(availableRadio);
   }
   radioQueueIndex=-1;
   updateRadioCounts();
@@ -3684,17 +4446,19 @@ async function initRadio(){
   const radioVolume=document.getElementById("radio-volume");
   if(radioVolume)radioVolume.value=audio.volume;
 
+  enrichRadioMetadataFromArchive();
   RADIO_PLAYLIST=RADIO_TEST_PLAYLIST.map(item=>({...item}));
+  populateRadioGenreFilter();
   radioQueue=[];
   radioQueueIndex=-1;
   buildRadioQueue();
-  setRadioConnectionState("ready","Public test playlist loaded — 8 Radio Afghanistan selections are ready to play.");
+  setRadioConnectionState("ready",`${RADIO_TEST_PLAYLIST.length} ACA radio selections are ready to play.`);
 
   const liveLabel=document.getElementById("radio-live-label");
   if(liveLabel)liveLabel.textContent="Radio test ready";
 
   const protectionTitle=document.querySelector("#radio-protection-note strong");
-  if(protectionTitle)protectionTitle.textContent="Radio test playlist loaded";
+  if(protectionTitle)protectionTitle.textContent="Expanded ACA radio library loaded";
 
   updateRadioCounts();
   updateRadioNowPlaying();
@@ -3826,8 +4590,9 @@ function updateRadioCounts(){
   const albumEl=document.getElementById("radio-album-count");
   const trackEl=document.getElementById("radio-track-count");
   const queueEl=document.getElementById("radio-queue-count");
-  const artistCount=new Set(RADIO_PLAYLIST.map(item=>item.artist)).size;
-  if(albumEl)albumEl.textContent=RADIO_PLAYLIST.length;
+  const visibleRadio=filteredRadioPlaylist();
+  const artistCount=new Set(visibleRadio.map(item=>item.artist)).size;
+  if(albumEl)albumEl.textContent=visibleRadio.length;
   if(trackEl)trackEl.textContent=artistCount;
   if(queueEl){
     const remaining=radioQueueIndex<0?radioQueue.length:Math.max(0,radioQueue.length-radioQueueIndex-1);
@@ -3849,6 +4614,8 @@ function updateRadioNowPlaying(){
     document.getElementById("radio-tags").innerHTML=
       `${(item.genres||[]).map(g=>`<span class="tag tag-genre">${g}</span>`).join("")}`+
       `${item.language?`<span class="tag tag-lang">${item.language}</span>`:""}`;
+
+    updateRadioAlbumLink(item);
 
     const sourceDetails=document.getElementById("radio-source-details");
     const sourceDonor=document.getElementById("radio-source-donor");
@@ -3900,6 +4667,7 @@ function updateRadioNowPlaying(){
     document.getElementById("radio-tags").innerHTML="";
     const sourceDetails=document.getElementById("radio-source-details");
     if(sourceDetails)sourceDetails.hidden=true;
+    updateRadioAlbumLink(null);
     cover.removeAttribute("src");
     cover.classList.remove("visible");
     placeholder.style.display="flex";
@@ -3915,6 +4683,7 @@ function updateRadioNowPlaying(){
   document.getElementById("radio-tags").innerHTML=`${genreTags(c)}${c.language?`<span class="tag tag-lang">${c.language}</span>`:""}`;
   const sourceDetails=document.getElementById("radio-source-details");
   if(sourceDetails)sourceDetails.hidden=true;
+  updateRadioAlbumLink({cassetteId:c.id});
   if(c.cover){
     cover.src=coverUrl(c);
     cover.alt=`${c.artist} — ${c.album} cassette cover`;
@@ -3952,7 +4721,7 @@ function renderRadioRecent(){
   }
   list.innerHTML=radioRecent.map(item=>`
     <li>
-      ${item.coverUrl?`<img class="radio-recent-cover" src="${item.coverUrl}" alt="" draggable="false">`:""}
+      ${item.coverUrl?`<img class="radio-recent-cover" src="${item.coverUrl}" alt="" draggable="false" loading="lazy" decoding="async" fetchpriority="low">`:""}
       <div class="radio-recent-main">
         <div class="radio-recent-artist">${item.artist}</div>
         <div class="radio-recent-track">${item.album} · ${item.trackName}</div>
@@ -4127,10 +4896,10 @@ document.getElementById("sortSelect").addEventListener("change",e=>{sortMode=e.t
 
 document.getElementById("statTotal").textContent=CASSETTES.length;
 populateGenreDropdown();
-// Pre-render the archive and homepage carousel
-renderGrid();
-renderHomeEditorial();
-renderHomeCarousel();
+
+// Keep first paint light: the intro is the only visible experience at startup.
+// The archive grid is rendered after entry, and the homepage's editorial/carousel
+// content is rendered only if/when the visitor opens Home.
 initRadio().catch(console.error);
 hardenMediaProtection();
 handleArchiveRoute();
@@ -4140,12 +4909,23 @@ handleArchiveRoute();
 (function(){
   const cover=document.getElementById("aca-cover-b");
   const enter=document.getElementById("aca-cover-b-enter");
+  const introPlayer=document.getElementById("aca-intro-radio");
+  const introPlay=document.getElementById("aca-intro-radio-play");
+  const introPrev=document.getElementById("aca-intro-radio-prev");
+  const introNext=document.getElementById("aca-intro-radio-next");
+  const introTitle=document.getElementById("aca-intro-radio-title");
+  const introArtist=document.getElementById("aca-intro-radio-artist");
+  const introCover=document.getElementById("aca-intro-radio-cover");
+  const introProgress=document.getElementById("aca-intro-radio-progress-fill");
+  const introCurrent=document.getElementById("aca-intro-radio-current");
+  const introTotal=document.getElementById("aca-intro-radio-total");
+  const autoplayNote=document.getElementById("aca-intro-autoplay-note");
   if(!cover||!enter)return;
 
   const available=CASSETTES.filter(c=>c.cover);
   const selected=[];
   if(available.length){
-    const wanted=22;
+    const wanted=12;
     for(let i=0;i<wanted;i++){
       const idx=Math.floor((i*(available.length-1))/(wanted-1));
       selected.push(available[idx]);
@@ -4153,20 +4933,20 @@ handleArchiveRoute();
   }
 
   const posters=[
-    "https://afghancassettearchive.github.io/afghan-cassette-archive/event-posters/rootstock-composers-golden-era-may-9-2026.png",
-    "https://afghancassettearchive.github.io/afghan-cassette-archive/event-posters/discostan-afghan-cassette-archive-may-16-2026.png"
+    "event-posters/rootstock-composers-golden-era-may-9-2026.png",
+    "event-posters/discostan-afghan-cassette-archive-may-16-2026.png"
   ];
 
   function cassetteTile(c){
-    return `<div class="aca-cover-b-tile"><img src="${coverUrl(c)}" alt="" draggable="false"></div>`;
+    return `<div class="aca-cover-b-tile"><img src="${coverUrl(c)}" alt="" draggable="false" loading="eager" decoding="async"></div>`;
   }
   function posterTile(src){
-    return `<div class="aca-cover-b-tile poster"><img src="${src}" alt="" draggable="false"></div>`;
+    return `<div class="aca-cover-b-tile poster"><img src="${src}" alt="" draggable="false" loading="eager" decoding="async"></div>`;
   }
 
   document.querySelectorAll("[data-aca-wall-row]").forEach((track,rowIndex)=>{
     let row=selected.filter((_,i)=>i%3===rowIndex);
-    if(row.length<5)row=selected;
+    if(row.length<3)row=selected;
     let markup=row.map(c=>cassetteTile(c)).join("");
     if(rowIndex===0)markup+=posterTile(posters[0]);
     if(rowIndex===1)markup=posterTile(posters[1])+markup;
@@ -4174,8 +4954,95 @@ handleArchiveRoute();
     track.innerHTML=markup+markup;
   });
 
-  function enterArchive(){
+  function fmtIntro(sec){
+    if(!Number.isFinite(sec))return "0:00";
+    const m=Math.floor(sec/60);
+    const s=Math.floor(sec%60).toString().padStart(2,"0");
+    return `${m}:${s}`;
+  }
+
+  function syncIntroPlayer(){
+    if(!currentRadioItem)return;
+    if(introTitle)introTitle.textContent=currentRadioItem.trackName||"Archive Radio";
+    if(introArtist)introArtist.textContent=currentRadioItem.artist||"Afghan Cassette Archive";
+    if(introCover){
+      introCover.src=currentRadioItem.coverUrl||RADIO_TEST_COVER;
+      introCover.alt=`${currentRadioItem.artist||"ACA Radio"} — ${currentRadioItem.trackName||"radio selection"}`;
+    }
+    if(introPlay)introPlay.textContent=isPlaying?"Ⅱ":"▶";
+    if(introCurrent)introCurrent.textContent=fmtIntro(audio.currentTime||0);
+    if(introTotal)introTotal.textContent=fmtIntro(audio.duration||0);
+    if(introProgress){
+      const pct=audio.duration?Math.min(100,Math.max(0,(audio.currentTime/audio.duration)*100)):0;
+      introProgress.style.width=pct+"%";
+    }
+  }
+
+  function prepareIntroRadioTrack(){
+    enrichRadioMetadataFromArchive();
+    RADIO_PLAYLIST=RADIO_TEST_PLAYLIST.map(item=>({...item}));
+    populateRadioGenreFilter();
+    const introTrack=RADIO_PLAYLIST.find(item=>item.id==="radio-ustad-nabi-gol-dilroba-saaz");
+    if(!introTrack)return null;
+
+    const rest=shuffleArray(RADIO_PLAYLIST.filter(item=>item.id!==introTrack.id));
+    radioOrder="shuffle";
+    radioGenreFilter="all";
+    radioQueue=[introTrack,...rest];
+    radioQueueIndex=0;
+    currentRadioItem=introTrack;
+    playbackMode="radio";
+    currentCassetteId=null;
+    currentTrackIdx=0;
+    audio.src=introTrack.url;
+    updateSharedPlayerData({artist:introTrack.artist,album:introTrack.album,trackName:introTrack.trackName});
+    updateRadioNowPlaying();
+    updateRadioCounts();
+    syncIntroPlayer();
+    return introTrack;
+  }
+
+  async function tryIntroAutoplay(fromUserGesture=false){
+    if(!currentRadioItem)prepareIntroRadioTrack();
+    if(!currentRadioItem)return false;
+    if(audio.src!==currentRadioItem.url)audio.src=currentRadioItem.url;
+    try{
+      await audio.play();
+      if(autoplayNote)autoplayNote.textContent="Archive Radio is playing. Use the controls here, or enter the archive and continue listening from the bottom player.";
+      syncIntroPlayer();
+      return true;
+    }catch(error){
+      if(autoplayNote)autoplayNote.textContent=fromUserGesture
+        ?"Tap the play button to start Archive Radio."
+        :"Your browser paused autoplay. Tap play or enter the archive to start Dilroba Saaz.";
+      syncIntroPlayer();
+      return false;
+    }
+  }
+
+  async function introTogglePlay(event){
+    event?.stopPropagation();
+    if(!currentRadioItem)prepareIntroRadioTrack();
+    if(isPlaying)audio.pause();
+    else await tryIntroAutoplay(true);
+    syncIntroPlayer();
+  }
+
+  async function introStep(dir,event){
+    event?.stopPropagation();
+    if(!radioQueue.length)prepareIntroRadioTrack();
+    await advanceRadio(dir);
+    syncIntroPlayer();
+  }
+
+  function enterArchive(event){
+    if(event?.target?.closest?.(".aca-intro-radio"))return;
     if(cover.classList.contains("is-leaving"))return;
+
+    // Entering the site counts as a user gesture, so use it to start the
+    // opening radio selection when normal autoplay was blocked.
+    if(!isPlaying)tryIntroAutoplay(true);
+
     cover.classList.add("is-leaving");
     window.setTimeout(()=>{
       cover.remove();
@@ -4186,12 +5053,37 @@ handleArchiveRoute();
       window.scrollTo({top:0,behavior:"smooth"});
     },820);
   }
+
+  // The mini-player must not dismiss the intro when visitors use its controls.
+  introPlayer?.addEventListener("click",e=>e.stopPropagation());
+  introPlay?.addEventListener("click",introTogglePlay);
+  introPrev?.addEventListener("click",e=>introStep(-1,e));
+  introNext?.addEventListener("click",e=>introStep(1,e));
   enter.addEventListener("click",enterArchive);
+
+  // Clicking anywhere else on the cinematic cover enters the archive.
+  cover.addEventListener("click",event=>{
+    if(event.target.closest(".aca-intro-radio")||event.target.closest(".aca-cover-b-enter"))return;
+    enterArchive(event);
+  });
+
+  // Keep the intro display synchronized with the same global audio element
+  // that powers the site-wide player after entry.
+  ["play","pause","loadedmetadata","durationchange","timeupdate"].forEach(type=>{
+    audio.addEventListener(type,syncIntroPlayer);
+  });
+
   document.addEventListener("keydown",function acaCoverBKey(e){
-    if(e.key==="Enter"&&document.body.contains(cover)){
-      e.preventDefault();enterArchive();
+    if(e.key==="Enter"&&document.body.contains(cover) && !e.target.closest?.("button")){
+      e.preventDefault();
+      enterArchive(e);
     }
   });
+
+  prepareIntroRadioTrack();
+  // Modern browsers may block audible autoplay; this attempt succeeds where
+  // allowed and cleanly falls back to the first user click/tap where blocked.
+  window.setTimeout(()=>tryIntroAutoplay(false),120);
 })();
 </script>
 
