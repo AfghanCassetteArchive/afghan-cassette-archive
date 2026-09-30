@@ -2537,6 +2537,461 @@ body.aca-gate-b-active>.player-bar{visibility:hidden}
   }
 }
 
+
+/* ===== Expanded Mohammad Hassan "Kaka Zmarai" Collection page ===== */
+.zmarai-profile-wrap{
+  max-width:1180px;
+  margin:0 auto;
+  padding:4rem 2rem 2rem;
+}
+.zmarai-profile-hero{
+  position:relative;
+  overflow:hidden;
+  display:grid;
+  grid-template-columns:minmax(0,1.08fr) minmax(280px,.72fr);
+  gap:clamp(1.8rem,5vw,4rem);
+  align-items:stretch;
+  min-height:540px;
+  padding:clamp(2rem,5vw,4.6rem);
+  color:#FFF8E8;
+  background:
+    radial-gradient(circle at 84% 15%,rgba(227,183,95,.18),transparent 25rem),
+    linear-gradient(125deg,#17271E 0%,#294234 62%,#1A2C22 100%);
+  border:1px solid rgba(244,223,165,.18);
+}
+.zmarai-profile-hero:after{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background:repeating-linear-gradient(117deg,transparent 0 22px,rgba(255,255,255,.014) 22px 23px);
+}
+.zmarai-profile-copy,
+.zmarai-profile-photo-wrap{
+  position:relative;
+  z-index:1;
+}
+.zmarai-profile-copy{
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  min-width:0;
+}
+.zmarai-profile-hero h1{
+  max-width:700px;
+  margin:.45rem 0 1.1rem;
+  font-family:var(--font-display);
+  font-size:clamp(3rem,6.2vw,6rem);
+  line-height:.9;
+  letter-spacing:-.04em;
+  font-weight:500;
+}
+.zmarai-profile-lead{
+  max-width:660px;
+  margin:0;
+  color:rgba(255,248,232,.78);
+  font-size:13px;
+  line-height:1.75;
+}
+.zmarai-profile-photo-wrap{
+  min-height:390px;
+  overflow:hidden;
+  border:1px solid rgba(244,223,165,.24);
+  background:#17271E;
+  box-shadow:0 26px 60px rgba(8,20,14,.25);
+}
+.zmarai-profile-photo{
+  width:100%;
+  height:100%;
+  min-height:390px;
+  object-fit:cover;
+  display:block;
+}
+.zmarai-profile-photo-label{
+  position:absolute;
+  left:12px;
+  bottom:12px;
+  z-index:2;
+  padding:7px 9px;
+  background:rgba(20,33,25,.78);
+  color:#F4DFA5;
+  font-family:var(--font-mono);
+  font-size:7px;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+}
+.zmarai-profile-stats{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:1px;
+  margin-top:2rem;
+  border:1px solid rgba(244,223,165,.17);
+  background:rgba(244,223,165,.17);
+}
+.zmarai-profile-stats>div{
+  min-height:78px;
+  padding:13px 14px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  background:rgba(27,45,34,.93);
+}
+.zmarai-profile-stats strong{
+  color:#F4DFA5;
+  font-family:var(--font-display);
+  font-size:22px;
+  font-weight:500;
+}
+.zmarai-profile-stats span{
+  margin-top:3px;
+  color:rgba(255,248,232,.50);
+  font-family:var(--font-mono);
+  font-size:6px;
+  letter-spacing:.09em;
+  text-transform:uppercase;
+}
+.zmarai-story-shell{
+  margin-top:1rem;
+  border:1px solid rgba(23,37,28,.10);
+  background:#FFFDF6;
+}
+.zmarai-story-tabs{
+  display:flex;
+  gap:7px;
+  flex-wrap:wrap;
+  padding:13px;
+  border-bottom:1px solid rgba(23,37,28,.10);
+  background:#EEF0E6;
+}
+.zmarai-story-tab{
+  min-height:38px;
+  padding:8px 12px;
+  border:1px solid rgba(23,37,28,.13);
+  border-radius:999px;
+  background:transparent;
+  color:#68746C;
+  font-family:var(--font-mono);
+  font-size:7px;
+  letter-spacing:.04em;
+  cursor:pointer;
+}
+.zmarai-story-tab:hover,
+.zmarai-story-tab.active{
+  border-color:#8F6B2E;
+  background:#F3E6C3;
+  color:#63491E;
+}
+.zmarai-story-panel{
+  display:none;
+  padding:clamp(1.35rem,4vw,3rem);
+}
+.zmarai-story-panel.active{
+  display:block;
+}
+.zmarai-story-grid{
+  display:grid;
+  grid-template-columns:minmax(0,1.12fr) minmax(260px,.78fr);
+  gap:clamp(1.5rem,4vw,3.5rem);
+  align-items:start;
+}
+.zmarai-story-panel h2{
+  margin:.35rem 0 1.1rem;
+  max-width:760px;
+  color:#22342A;
+  font-family:var(--font-display);
+  font-size:clamp(2rem,4.5vw,3.4rem);
+  font-weight:500;
+  line-height:1;
+}
+.zmarai-story-copy{
+  color:#56645B;
+  font-size:11px;
+  line-height:1.82;
+}
+.zmarai-story-copy p{
+  margin:0 0 1rem;
+}
+.zmarai-story-copy strong{
+  color:#263A2D;
+}
+.zmarai-story-photo{
+  width:100%;
+  max-height:430px;
+  object-fit:cover;
+  display:block;
+  border:1px solid rgba(23,37,28,.11);
+}
+.zmarai-pullquote{
+  margin:1.2rem 0;
+  padding:4px 0 4px 18px;
+  border-left:3px solid #B89552;
+  color:#2B3A30;
+  font-family:var(--font-display);
+  font-size:20px;
+  line-height:1.42;
+}
+.zmarai-pullquote small{
+  display:block;
+  margin-top:9px;
+  color:#778179;
+  font-family:var(--font-mono);
+  font-size:7px;
+  line-height:1.5;
+  letter-spacing:.03em;
+}
+.zmarai-fact-card,
+.zmarai-editorial-note,
+.zmarai-support-card{
+  padding:16px;
+  border:1px solid rgba(23,37,28,.10);
+  background:#EEF0E6;
+}
+.zmarai-fact-card{
+  color:#526158;
+  font-size:9px;
+  line-height:1.7;
+}
+.zmarai-fact-card strong{
+  color:#293B30;
+}
+.zmarai-editorial-note{
+  margin-top:1.3rem;
+  color:#657168;
+  font-size:8px;
+  line-height:1.7;
+}
+.zmarai-collection-types{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:9px;
+  margin-top:1.5rem;
+}
+.zmarai-type-card{
+  min-height:135px;
+  padding:15px;
+  background:#283B30;
+  color:#FFF8E8;
+  border:1px solid rgba(23,37,28,.10);
+}
+.zmarai-type-card:before{
+  content:"";
+  display:block;
+  width:100%;
+  height:6px;
+  margin-bottom:17px;
+  background:#B89552;
+}
+.zmarai-type-card strong{
+  display:block;
+  font-family:var(--font-display);
+  font-size:16px;
+  font-weight:500;
+}
+.zmarai-type-card p{
+  margin:.45rem 0 0;
+  color:rgba(255,248,232,.57);
+  font-size:8px;
+  line-height:1.55;
+}
+.zmarai-preservation-grid{
+  display:grid;
+  grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);
+  gap:clamp(1.5rem,4vw,3.5rem);
+}
+.zmarai-preservation-steps{
+  border-top:1px solid rgba(23,37,28,.12);
+}
+.zmarai-preservation-step{
+  display:grid;
+  grid-template-columns:34px minmax(0,1fr);
+  gap:11px;
+  padding:13px 0;
+  border-bottom:1px solid rgba(23,37,28,.10);
+}
+.zmarai-preservation-step>span{
+  color:#98763A;
+  font-family:var(--font-mono);
+  font-size:7px;
+}
+.zmarai-preservation-step strong{
+  display:block;
+  margin-bottom:4px;
+  color:#293B30;
+  font-family:var(--font-display);
+  font-size:16px;
+  font-weight:600;
+}
+.zmarai-preservation-step p{
+  margin:0;
+  color:#627067;
+  font-size:9px;
+  line-height:1.65;
+}
+.zmarai-support-card{
+  margin-top:1.3rem;
+  background:#F7F0DD;
+  border-color:#D9BC79;
+}
+.zmarai-support-card h3{
+  margin:0 0 7px;
+  color:#63491E;
+  font-family:var(--font-display);
+  font-size:19px;
+  font-weight:600;
+}
+.zmarai-support-card p{
+  margin:0;
+  color:#645942;
+  font-size:9px;
+  line-height:1.7;
+}
+.zmarai-photo-stage{
+  overflow:hidden;
+  background:#22352A;
+  border:1px solid rgba(23,37,28,.12);
+}
+.zmarai-photo-stage img{
+  display:block;
+  width:100%;
+  max-height:600px;
+  object-fit:contain;
+  background:#22352A;
+}
+.zmarai-photo-caption{
+  padding:11px 13px;
+  color:#647068;
+  background:#F5F3EA;
+  font-size:8px;
+  line-height:1.6;
+}
+.zmarai-photo-thumbs{
+  display:grid;
+  grid-template-columns:repeat(6,minmax(0,1fr));
+  gap:7px;
+  margin-top:9px;
+}
+.zmarai-photo-thumb{
+  min-height:86px;
+  padding:0;
+  overflow:hidden;
+  border:2px solid transparent;
+  background:#DDE1D6;
+  cursor:pointer;
+}
+.zmarai-photo-thumb.active{
+  border-color:#8F6B2E;
+}
+.zmarai-photo-thumb img{
+  width:100%;
+  height:86px;
+  object-fit:cover;
+  display:block;
+}
+.zmarai-sources{
+  margin-top:1rem;
+  padding:16px;
+  border-top:1px solid rgba(23,37,28,.10);
+  background:#F5F3EA;
+}
+.zmarai-sources ul{
+  margin:.6rem 0 0;
+  padding-left:1.1rem;
+  color:#69746D;
+  font-size:8px;
+  line-height:1.7;
+}
+.zmarai-importance{
+  max-width:1180px;
+  margin:0 auto;
+  padding:0 2rem 3.5rem;
+}
+.zmarai-importance-inner{
+  padding:clamp(1.5rem,4vw,2.7rem);
+  background:#274131;
+  color:#FFF8E8;
+}
+.zmarai-importance-inner h2{
+  max-width:800px;
+  margin:.4rem 0 .9rem;
+  font-family:var(--font-display);
+  font-size:clamp(2rem,4vw,3.5rem);
+  font-weight:500;
+  line-height:1;
+}
+.zmarai-importance-inner p{
+  max-width:850px;
+  margin:0;
+  color:rgba(255,248,232,.72);
+  font-size:10px;
+  line-height:1.8;
+}
+.zmarai-importance-inner strong{
+  color:#F4DFA5;
+}
+@media(max-width:850px){
+  .zmarai-profile-hero,
+  .zmarai-story-grid,
+  .zmarai-preservation-grid{
+    grid-template-columns:1fr;
+  }
+  .zmarai-profile-photo-wrap,
+  .zmarai-profile-photo{
+    min-height:300px;
+  }
+  .zmarai-collection-types{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+  .zmarai-photo-thumbs{
+    grid-template-columns:repeat(3,minmax(0,1fr));
+  }
+}
+@media(max-width:600px){
+  .zmarai-profile-wrap,
+  .zmarai-importance{
+    padding-left:1rem;
+    padding-right:1rem;
+  }
+  .zmarai-profile-wrap{
+    padding-top:2.3rem;
+  }
+  .zmarai-profile-hero{
+    padding:1.2rem;
+    min-height:auto;
+  }
+  .zmarai-profile-hero h1{
+    font-size:3rem;
+  }
+  .zmarai-profile-stats{
+    grid-template-columns:1fr;
+  }
+  .zmarai-story-tabs{
+    padding:9px;
+  }
+  .zmarai-story-tab{
+    flex:1 1 calc(50% - 7px);
+  }
+  .zmarai-collection-types{
+    grid-template-columns:1fr;
+  }
+  .zmarai-photo-thumbs{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+}
+
+
+.zmarai-inline-photo-credit{
+  margin-top:6px;
+  color:#7A837C;
+  font-family:var(--font-mono);
+  font-size:7px;
+  line-height:1.4;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+}
+.zmarai-inline-photo-wrap{
+  display:block;
+}
+
 </style>
 </head>
 <body class="aca-gate-b-active">
@@ -2940,48 +3395,200 @@ body.aca-gate-b-active>.player-bar{visibility:hidden}
 </div>
 
 
+
 <div id="page-zmarai" class="page-section">
   <main class="zmarai-page">
-    <section class="zmarai-hero">
-      <div class="zmarai-hero-copy">
-        <div class="home-kicker">Collection spotlight · Pakistan</div>
-        <h1>Mohammad Hassan Zmarai Collection</h1>
-        <p class="zmarai-lead">A growing digital collection of Afghan cassettes preserved by Mohammad Hassan Zmarai, a longtime Afghan cassette collector living in Pakistan. These tapes document decades of listening, copying, circulation, displacement, and musical memory.</p>
-        <div class="zmarai-hero-actions">
-          <button class="hero-btn" type="button" onclick="document.getElementById('zmarai-catalogue').scrollIntoView({behavior:'smooth'})">Browse the collection</button>
-          <button class="hero-btn secondary" type="button" onclick="openZmaraiInArchive()">Open in full Archive</button>
-        </div>
-        <div class="zmarai-stats">
-          <div><strong id="zmarai-count">0</strong><span>digitized tapes on ACA</span></div>
-          <div><strong>Pakistan</strong><span>collection location</span></div>
-          <div><strong>Community</strong><span>collector-led preservation</span></div>
-        </div>
-      </div>
-      <div class="zmarai-cover-stack" id="zmarai-cover-stack" aria-label="Selection of cassette covers from the Zmarai Collection"></div>
-    </section>
 
-    <section class="zmarai-context">
-      <div class="zmarai-context-intro">
-        <div class="home-kicker">Why this collection matters</div>
-        <h2>More than individual albums.</h2>
-        <p>Zmarai’s tapes preserve evidence of how Afghan music actually moved between listeners: through commercial releases, copied cassettes, radio recordings, unofficial editions, refugee communities, and personal exchange.</p>
-      </div>
-      <div class="zmarai-context-grid">
-        <article>
-          <span>01</span>
-          <h3>Circulation</h3>
-          <p>The collection documents recordings that traveled between Afghanistan, Pakistan, Central Asia, and the wider diaspora.</p>
+    <div class="zmarai-profile-wrap">
+      <section class="zmarai-profile-hero">
+        <div class="zmarai-profile-copy">
+          <div>
+            <div class="home-kicker">Afghan Cassette Archive · Collection 01</div>
+            <h1>Mohammad Hassan<br>“Kaka Zmarai”</h1>
+            <p class="zmarai-profile-lead">One collector, thousands of cassettes, and a lifetime spent keeping Afghan music alive through exile, displacement, instability, changing technology, and loss.</p>
+            <div class="zmarai-hero-actions">
+              <button class="hero-btn" type="button" onclick="document.getElementById('zmarai-catalogue').scrollIntoView({behavior:'smooth'})">Browse the collection</button>
+              <button class="hero-btn secondary" type="button" onclick="openZmaraiInArchive()">Open in full Archive</button>
+            </div>
+          </div>
+
+          <div class="zmarai-profile-stats">
+            <div><strong>Thousands</strong><span>of cassettes preserved</span></div>
+            <div><strong id="zmarai-count">0</strong><span>digitized tapes on ACA</span></div>
+            <div><strong>Ongoing</strong><span>ACA preservation partnership</span></div>
+          </div>
+        </div>
+
+        <figure class="zmarai-profile-photo-wrap">
+          <img class="zmarai-profile-photo" src="https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/KAKA%20ZMARAI/PHOTO-2025-09-18-23-01-55.jpg.jpeg" alt="Mohammad Hassan Kaka Zmarai" loading="eager" decoding="async">
+          <figcaption class="zmarai-profile-photo-label">Kaka Zmarai · Peshawar · Photo: Saad Salarzai</figcaption>
+          <div class="zmarai-inline-photo-credit" style="position:absolute;right:12px;bottom:12px;color:#F4DFA5;background:rgba(20,33,25,.78);padding:7px 9px;z-index:2">Photo: Saad Salarzai</div>
+        </figure>
+      </section>
+
+      <section class="zmarai-story-shell" aria-label="Mohammad Hassan Zmarai collection story">
+        <div class="zmarai-story-tabs" role="tablist" aria-label="Collection story sections">
+          <button class="zmarai-story-tab active" type="button" role="tab" aria-selected="true" data-zmarai-story="meet" onclick="setZmaraiStoryTab('meet',this)">Meet Kaka Zmarai</button>
+          <button class="zmarai-story-tab" type="button" role="tab" aria-selected="false" data-zmarai-story="struggle" onclick="setZmaraiStoryTab('struggle',this)">His Struggle</button>
+          <button class="zmarai-story-tab" type="button" role="tab" aria-selected="false" data-zmarai-story="shop" onclick="setZmaraiStoryTab('shop',this)">The Shop &amp; Tapes</button>
+          <button class="zmarai-story-tab" type="button" role="tab" aria-selected="false" data-zmarai-story="partnership" onclick="setZmaraiStoryTab('partnership',this)">ACA Partnership</button>
+          <button class="zmarai-story-tab" type="button" role="tab" aria-selected="false" data-zmarai-story="photos" onclick="setZmaraiStoryTab('photos',this)">Photo Essay</button>
+        </div>
+
+        <article class="zmarai-story-panel active" data-zmarai-panel="meet">
+          <div class="zmarai-story-grid">
+            <div>
+              <div class="home-kicker">Collector biography</div>
+              <h2>A personal archive built one cassette at a time.</h2>
+              <div class="zmarai-story-copy">
+                <p><strong>Mohammad Hassan Zmarai</strong>, affectionately known as <strong>Kaka Zmarai</strong>, is an Afghan cassette collector, recording producer, and cultural custodian based in Peshawar, Pakistan. For decades, his life has revolved around Afghan music: collecting tapes, identifying singers and musicians, recording artists, distributing cassettes, and preserving recordings that might otherwise have disappeared.</p>
+                <p>His collection contains <strong>thousands of Afghan cassettes</strong> spanning popular music, folk and regional traditions, refugee recordings made in Pakistan, rare radio material, private and majlis recordings, cassette artwork, handwritten labels, and information about musicians and recording sessions.</p>
+                <p>But the importance of Kaka Zmarai cannot be measured by cassette numbers alone. His knowledge of artists, labels, studios, musicians, recording histories, and refugee musical networks often provides context that cannot be recovered from a cassette sleeve or audio file.</p>
+                <p>For the Afghan Cassette Archive, his contribution is <strong>imperative</strong>. He is not simply a collection holder. He is a living source of musical history whose memory helps ACA identify recordings, correct incomplete metadata, understand how albums circulated, and reconnect tapes with the communities and musicians that produced them.</p>
+              </div>
+            </div>
+            <aside>
+              <div class="zmarai-inline-photo-wrap">
+                <img class="zmarai-story-photo" src="https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/KAKA%20ZMARAI/PHOTO-2025-11-17-08-14-46.jpg.jpeg" alt="Kaka Zmarai" loading="lazy" decoding="async">
+                <div class="zmarai-inline-photo-credit">Photo: Saad Salarzai</div>
+              </div>
+              <div class="zmarai-pullquote">“The tapes matter, but so does the person who remembers where they came from.”</div>
+              <div class="zmarai-fact-card">
+                <div class="home-kicker">At a glance</div><br>
+                <strong>Role:</strong> Collector · Recording Producer · Cultural Custodian<br>
+                <strong>Based in:</strong> Peshawar, Pakistan<br>
+                <strong>Collection:</strong> Thousands of Afghan cassettes<br>
+                <strong>Material:</strong> Popular · Folk · Regional · Broadcast · Refugee · Majlis<br>
+                <strong>ACA role:</strong> Collection holder, advisor, oral-history source, and preservation collaborator
+              </div>
+            </aside>
+          </div>
         </article>
-        <article>
-          <span>02</span>
-          <h3>Refugee musical life</h3>
-          <p>The tapes preserve music as it continued to be collected, copied, shared, and heard through years of displacement.</p>
+
+        <article class="zmarai-story-panel" data-zmarai-panel="struggle">
+          <div class="zmarai-story-grid">
+            <div>
+              <div class="home-kicker">Life, displacement &amp; uncertainty</div>
+              <h2>Preserving music while living with instability.</h2>
+              <div class="zmarai-story-copy">
+                <p>Kaka Zmarai’s archive was built under circumstances very different from those of a university library or national institution. He has preserved Afghan music while living as a refugee in Pakistan, often without the stable storage, funding, institutional protection, or long-term security that formal archives take for granted.</p>
+                <p>His family’s future in Pakistan has remained uncertain, while changing policies affecting Afghan refugees have made it increasingly difficult to know whether the life and archive he built in Peshawar can remain secure.</p>
+                <p>The collection itself has already suffered major loss. According to oral-history information gathered through ACA, an earlier shop was demolished and <strong>thousands of cassettes were lost</strong>. The surviving archive therefore represents not just decades of collecting, but what endured after displacement, physical loss, economic hardship, and repeated uncertainty.</p>
+                <p>International reporting has also documented the wider pressures facing Afghan musicians and cultural workers in Pakistan as deportations and forced returns increased. For Kaka Zmarai, the possibility of return carries an additional fear: his identity and livelihood are inseparable from music, while musical activity has faced severe repression under Taliban rule.</p>
+              </div>
+              <div class="zmarai-editorial-note"><strong>ACA editorial note:</strong> Existing documentation contains differing accounts of exactly when Zmarai first settled in Pakistan. Until this chronology is confirmed directly with him, ACA describes him as having lived and worked in Pakistan for decades rather than assigning a precise migration year.</div>
+            </div>
+            <aside>
+              <div class="zmarai-inline-photo-wrap">
+                <img class="zmarai-story-photo" src="https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/KAKA%20ZMARAI/PHOTO-2026-01-17-01-15-40.jpg.jpeg" alt="Kaka Zmarai and the collection" loading="lazy" decoding="async">
+                <div class="zmarai-inline-photo-credit">Photo: Saad Salarzai</div>
+              </div>
+              <div class="zmarai-pullquote">“I cannot bring them to Afghanistan because the Taliban will torch them.”<small>— Kaka Zmarai, quoted in The New York Times, January 2026</small></div>
+            </aside>
+          </div>
         </article>
-        <article>
-          <span>03</span>
-          <h3>Preservation</h3>
-          <p>Some original editions are now rare or difficult to locate. Digitization helps keep both the recordings and their circulation histories accessible.</p>
+
+        <article class="zmarai-story-panel" data-zmarai-panel="shop">
+          <div class="zmarai-story-grid">
+            <div>
+              <div class="home-kicker">The physical archive</div>
+              <h2>The shop became an informal archive for Afghan music in exile.</h2>
+              <div class="zmarai-story-copy">
+                <p>Kaka Zmarai’s collection was not assembled as a museum exhibition. It grew through the everyday circulation of Afghan music: albums purchased from cassette sellers, recordings brought by musicians, copies exchanged between listeners, radio-derived material, private tapes, and music produced within refugee communities.</p>
+                <p>His shop and recording activities became part of the informal infrastructure that helped Afghan musical life continue outside Afghanistan. Musicians could record, cassette sellers could circulate new material, listeners could find familiar voices, and displaced communities could remain connected to music from home.</p>
+                <p>This makes the collection especially valuable to ACA because it documents <strong>how music actually moved</strong> — between Kabul, Peshawar, refugee neighborhoods, cassette studios, private gatherings, and eventually the worldwide Afghan diaspora.</p>
+                <p>The collection continues beyond older commercial releases. Zmarai has also supported and documented Afghan refugee musicians, including recordings connected to newer waves of displacement. In that sense, the archive preserves both what Afghans carried with them and what they created after leaving home.</p>
+              </div>
+            </div>
+            <aside>
+              <div class="zmarai-inline-photo-wrap">
+              <img class="zmarai-story-photo" src="https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/KAKA%20ZMARAI/PHOTO-2026-01-17-01-15-41.jpg.jpeg" alt="Kaka Zmarai in Peshawar" loading="lazy" decoding="async">
+              <div class="zmarai-inline-photo-credit">Photo: Saad Salarzai</div>
+            </div>
+            </aside>
+          </div>
+
+          <div class="zmarai-collection-types">
+            <div class="zmarai-type-card"><strong>Commercial releases</strong><p>Afghan cassette labels, Kabul studios, and widely circulated albums.</p></div>
+            <div class="zmarai-type-card"><strong>Refugee recordings</strong><p>Music created, recorded, and circulated in Pakistan.</p></div>
+            <div class="zmarai-type-card"><strong>Mahali / Folk</strong><p>Regional performers, local repertoires, and musical traditions.</p></div>
+            <div class="zmarai-type-card"><strong>Radio &amp; Majlis</strong><p>Broadcast-derived, private, social, and informal recordings.</p></div>
+          </div>
         </article>
+
+        <article class="zmarai-story-panel" data-zmarai-panel="partnership">
+          <div class="home-kicker">Kaka Zmarai × Afghan Cassette Archive</div>
+          <h2>Supporting the collector while preserving the collection.</h2>
+
+          <div class="zmarai-preservation-grid">
+            <div>
+              <div class="zmarai-inline-photo-wrap">
+              <img class="zmarai-story-photo" src="https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/KAKA%20ZMARAI/PHOTO-2026-03-26-10-50-35.jpg.jpeg" alt="Kaka Zmarai" loading="lazy" decoding="async">
+              <div class="zmarai-inline-photo-credit">Photo: Saad Salarzai</div>
+            </div>
+              <div class="zmarai-story-copy" style="margin-top:1.1rem">
+                <p>The Afghan Cassette Archive is working directly with Kaka Zmarai to make sure this collection is not lost. The goal is not to simply take recordings from his shelves and place them online. ACA’s approach is to work <strong>with him as a preservation partner</strong>.</p>
+                <p>Zmarai contributes first-hand knowledge about artists, cassette labels, recording sessions, studios, musicians, regional repertoires, and refugee music networks. In many cases, his memory supplies information that does not exist anywhere else in written form. That makes his contribution essential to the accuracy and historical value of the Afghan Cassette Archive.</p>
+                <p>Supporting Kaka Zmarai means supporting the archive itself. His knowledge cannot simply be recreated later from digital files. Preserving his oral history, involving him in cataloging decisions, and helping him continue the work are as important as transferring the audio.</p>
+              </div>
+            </div>
+
+            <div>
+              <div class="zmarai-preservation-steps">
+                <div class="zmarai-preservation-step"><span>01</span><div><strong>Practical support</strong><p>ACA is working to provide equipment, preservation materials, logistical assistance, direct support where possible, and help identifying grants, donors, and cultural institutions that can assist Zmarai and the collection.</p></div></div>
+                <div class="zmarai-preservation-step"><span>02</span><div><strong>Build locally</strong><p>Establish a safe digitization station in Pakistan and train people on the ground so preservation can continue locally rather than depend on occasional outside visits.</p></div></div>
+                <div class="zmarai-preservation-step"><span>03</span><div><strong>Digitize</strong><p>Create preservation-quality transfers of vulnerable recordings while keeping the physical cassette and its artwork connected to the digital record.</p></div></div>
+                <div class="zmarai-preservation-step"><span>04</span><div><strong>Document his knowledge</strong><p>Record Zmarai’s first-hand information about musicians, studios, cassette companies, recording circumstances, and refugee musical life.</p></div></div>
+                <div class="zmarai-preservation-step"><span>05</span><div><strong>Preserve for future generations</strong><p>Build stronger metadata, preservation copies, contextual writing, and long-term storage so future listeners inherit more than anonymous audio files.</p></div></div>
+              </div>
+
+              <div class="zmarai-support-card">
+                <h3>An imperative contribution</h3>
+                <p>Kaka Zmarai is not simply the source of a group of tapes. He is one of the people who makes the Afghan Cassette Archive possible. His decades of collecting, recording, identifying, and safeguarding Afghan music — together with the knowledge he continues to share — form an indispensable part of the archive itself.</p>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="zmarai-story-panel" data-zmarai-panel="photos">
+          <div class="home-kicker">Photo essay</div>
+          <h2>Kaka Zmarai, his collection, and the world around the tapes.</h2>
+          <div class="zmarai-editorial-note" style="margin-top:0;margin-bottom:1rem"><strong>Photography:</strong> Saad Salarzai</div>
+
+          <div class="zmarai-photo-stage">
+            <img id="zmarai-main-photo" src="https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/KAKA%20ZMARAI/PHOTO-2026-09-01-12-38-11.jpg.jpeg" alt="Kaka Zmarai photo essay" loading="lazy" decoding="async">
+            <div class="zmarai-photo-caption" id="zmarai-photo-caption">Kaka Zmarai and the living archive he has maintained through decades of displacement. Photo: Saad Salarzai.</div>
+          </div>
+
+          <div class="zmarai-photo-thumbs" aria-label="Kaka Zmarai photo gallery">
+            <button class="zmarai-photo-thumb" type="button" data-photo="https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/KAKA%20ZMARAI/PHOTO-2025-09-18-23-01-55.jpg.jpeg" data-caption="Mohammad Hassan “Kaka Zmarai”. Photo: Saad Salarzai." onclick="selectZmaraiPhoto(this)"><img src="https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/KAKA%20ZMARAI/PHOTO-2025-09-18-23-01-55.jpg.jpeg" alt="Kaka Zmarai portrait" loading="lazy"></button>
+            <button class="zmarai-photo-thumb" type="button" data-photo="https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/KAKA%20ZMARAI/PHOTO-2025-11-17-08-14-46.jpg.jpeg" data-caption="Kaka Zmarai and the archive he has safeguarded in Peshawar. Photo: Saad Salarzai." onclick="selectZmaraiPhoto(this)"><img src="https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/KAKA%20ZMARAI/PHOTO-2025-11-17-08-14-46.jpg.jpeg" alt="Kaka Zmarai" loading="lazy"></button>
+            <button class="zmarai-photo-thumb" type="button" data-photo="https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/KAKA%20ZMARAI/PHOTO-2026-01-17-01-15-40.jpg.jpeg" data-caption="A collection built through decades of Afghan musical life and displacement. Photo: Saad Salarzai." onclick="selectZmaraiPhoto(this)"><img src="https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/KAKA%20ZMARAI/PHOTO-2026-01-17-01-15-40.jpg.jpeg" alt="Kaka Zmarai archive photograph" loading="lazy"></button>
+            <button class="zmarai-photo-thumb" type="button" data-photo="https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/KAKA%20ZMARAI/PHOTO-2026-01-17-01-15-41.jpg.jpeg" data-caption="The Zmarai Collection exists within the wider history of Afghan refugee musical life in Pakistan. Photo: Saad Salarzai." onclick="selectZmaraiPhoto(this)"><img src="https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/KAKA%20ZMARAI/PHOTO-2026-01-17-01-15-41.jpg.jpeg" alt="Kaka Zmarai in Peshawar" loading="lazy"></button>
+            <button class="zmarai-photo-thumb" type="button" data-photo="https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/KAKA%20ZMARAI/PHOTO-2026-03-26-10-50-35.jpg.jpeg" data-caption="ACA treats Kaka Zmarai as a preservation collaborator whose knowledge is part of the archive itself. Photo: Saad Salarzai." onclick="selectZmaraiPhoto(this)"><img src="https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/KAKA%20ZMARAI/PHOTO-2026-03-26-10-50-35.jpg.jpeg" alt="Kaka Zmarai preservation photograph" loading="lazy"></button>
+            <button class="zmarai-photo-thumb active" type="button" data-photo="https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/KAKA%20ZMARAI/PHOTO-2026-09-01-12-38-11.jpg.jpeg" data-caption="Kaka Zmarai and the living archive he has maintained through decades of displacement. Photo: Saad Salarzai." onclick="selectZmaraiPhoto(this)"><img src="https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/KAKA%20ZMARAI/PHOTO-2026-09-01-12-38-11.jpg.jpeg" alt="Kaka Zmarai recent photograph" loading="lazy"></button>
+          </div>
+        </article>
+
+        <div class="zmarai-sources">
+          <div class="home-kicker">Sources &amp; documentation</div>
+          <ul>
+            <li>Mohammad Hassan Zmarai / Afghan Cassette Archive project documentation and oral history.</li>
+            <li>ARTE Reportage — <em>Pakistan: Guardians of Afghan Music</em> (2025).</li>
+            <li>The New York Times — <em>A Refuge for Afghan Music Is at Risk of Falling Silent</em> (January 17, 2026).</li>
+            <li>ACA documentation concerning Zmarai’s collecting, recording work, refugee music networks, and the loss of part of the earlier collection.</li>
+            <li>Preservation planning developed collaboratively between Kaka Zmarai and the Afghan Cassette Archive.</li>
+            <li>Photography: Saad Salarzai.</li>
+          </ul>
+        </div>
+      </section>
+    </div>
+
+    <section class="zmarai-importance">
+      <div class="zmarai-importance-inner">
+        <div class="home-kicker">Why his contribution matters</div>
+        <h2>The archive is not only the recordings. It is also the knowledge required to understand them.</h2>
+        <p>Through his decades of collecting and recording, Kaka Zmarai preserves information about people, places, studios, cassette companies, musical networks, and refugee communities that may never have been formally documented. <strong>ACA is committed to preserving both the tapes and the knowledge of the person who kept them.</strong></p>
       </div>
     </section>
 
@@ -3005,8 +3612,9 @@ body.aca-gate-b-active>.player-bar{visibility:hidden}
 
     <section class="zmarai-credit">
       <div class="home-kicker">Collection credit</div>
-      <p>These recordings are digitized from the collection of <strong>Mohammad Hassan Zmarai</strong> by the <strong>Afghan Cassette Archive</strong>. We extend our sincere thanks to Zmarai for allowing material from his collection to be digitized, documented, and preserved for future listeners and researchers.</p>
+      <p>These recordings are digitized from the collection of <strong>Mohammad Hassan Zmarai</strong> by the <strong>Afghan Cassette Archive</strong>. We extend our sincere thanks to Kaka Zmarai for allowing material from his collection to be documented and preserved, and for contributing the first-hand knowledge needed to understand the artists, recordings, labels, studios, and musical networks represented within it.</p>
     </section>
+
   </main>
 </div>
 
@@ -12327,6 +12935,36 @@ function zmaraiCardMarkup(c){
       <div class="card-tags"><span class="tag tag-collection">Zmarai Collection</span></div>
     </div>
   </div>`;
+}
+
+
+function setZmaraiStoryTab(key,button){
+  document.querySelectorAll(".zmarai-story-tab").forEach(btn=>{
+    const active=btn.dataset.zmaraiStory===key;
+    btn.classList.toggle("active",active);
+    btn.setAttribute("aria-selected",active?"true":"false");
+  });
+  document.querySelectorAll(".zmarai-story-panel").forEach(panel=>{
+    panel.classList.toggle("active",panel.dataset.zmaraiPanel===key);
+  });
+  if(button)button.focus({preventScroll:true});
+  hardenMediaProtection();
+}
+
+function selectZmaraiPhoto(button){
+  if(!button)return;
+  const stage=document.getElementById("zmarai-main-photo");
+  const caption=document.getElementById("zmarai-photo-caption");
+  if(stage&&button.dataset.photo){
+    stage.src=button.dataset.photo;
+  }
+  if(caption){
+    caption.textContent=button.dataset.caption||"";
+  }
+  document.querySelectorAll(".zmarai-photo-thumb").forEach(btn=>
+    btn.classList.toggle("active",btn===button)
+  );
+  hardenMediaProtection();
 }
 
 function renderZmaraiCollection(){
