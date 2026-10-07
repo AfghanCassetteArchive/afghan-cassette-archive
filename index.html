@@ -3299,17 +3299,26 @@ body.aca-gate-b-active>.player-bar{visibility:hidden}
   width:100%;
   padding:0;
   border:0;
-  background:transparent;
+  background:#26392D;
   cursor:zoom-in;
+  overflow:hidden;
+  border-radius:3px;
+  box-shadow:0 18px 38px rgba(17,29,22,.13);
 }
 .cassette-detail-cover{
   width:100%;
   aspect-ratio:1/1;
-  object-fit:contain;
+  object-fit:cover;
+  object-position:center;
   display:block;
   background:#26392D;
   border:1px solid rgba(31,47,36,.14);
-  box-shadow:0 18px 38px rgba(17,29,22,.13);
+  transform:scale(1.14);
+  transform-origin:center center;
+}
+.cassette-detail-cover.rotated-cover{
+  object-fit:cover !important;
+  transform:rotate(90deg) scale(1.16);
 }
 .cassette-detail-cover-placeholder .default-cover{aspect-ratio:1/1;min-height:330px}
 .cassette-detail-cover-note{
@@ -3598,6 +3607,43 @@ body.aca-gate-b-active>.player-bar{visibility:hidden}
 .cassette-detail-share-note strong{
   color:#2A3A30;
 }
+
+
+/* ===== Related ACA page links inside metadata ===== */
+.archive-metadata-link{
+  color:#76531D;
+  text-decoration:underline;
+  text-decoration-thickness:1px;
+  text-underline-offset:3px;
+  font-weight:600;
+}
+.archive-metadata-link:hover,
+.archive-metadata-link:focus-visible{
+  color:#2B4A36;
+}
+
+
+/* ===== Archive cover loading performance ===== */
+.cassette-card{
+  content-visibility:auto;
+  contain-intrinsic-size:300px 470px;
+}
+.cover-img.archive-cover-loading{
+  background:
+    linear-gradient(110deg,rgba(255,255,255,.025) 8%,rgba(255,255,255,.09) 18%,rgba(255,255,255,.025) 33%),
+    #24382C;
+  background-size:220% 100%;
+  animation:archiveCoverPulse 1.35s linear infinite;
+  opacity:.08;
+  transition:opacity .22s ease,transform .22s ease;
+}
+.cover-img.archive-cover-loading.is-loaded{
+  opacity:1;
+  animation:none;
+  background:#24382C;
+}
+@keyframes archiveCoverPulse{to{background-position-x:-220%}}
+@media(prefers-reduced-motion:reduce){.cover-img.archive-cover-loading{animation:none}}
 
 </style>
 </head>
@@ -4532,7 +4578,7 @@ body.aca-gate-b-active>.player-bar{visibility:hidden}
           <img id="cassette-page-cover" class="cassette-detail-cover" src="" alt="Cassette cover" hidden>
           <div id="cassette-page-cover-placeholder" class="cassette-detail-cover-placeholder"></div>
         </button>
-        <div class="cassette-detail-cover-note" id="cassette-page-cover-note">Select cover for protected archival preview</div>
+        <div class="cassette-detail-cover-note" id="cassette-page-cover-note">Select cover to view the protected archival preview</div>
       </div>
 
       <div>
@@ -5016,11 +5062,11 @@ const CASSETTES = [
     "tracks": [
       {
         "name": "Side A",
-        "file": "gylcheen logar_01.mp3"
+        "file": "gylcheen logar_02.mp3"
       },
       {
         "name": "Side B",
-        "file": "gylcheen logar_02.mp3"
+        "file": "gylcheen logar_01.mp3"
       }
     ],
     "genres": [
@@ -5714,7 +5760,9 @@ const CASSETTES = [
       },
       {
         "label": "Early group",
-        "value": "Gorohe Baran — گروه باران"
+        "value": "Gorohe Baran — گروه باران",
+        "url": "https://www.afghancassettearchive.org/gorohe-baraan",
+        "linkTitle": "Open the Gorohe Baraan page"
       },
       {
         "label": "Roles",
@@ -5884,7 +5932,11 @@ const CASSETTES = [
     "genres": [
       "Radio",
       "Female"
-    ]
+    ],
+    "collections": [
+      "M.N. Karimi Archive"
+    ],
+    "recordingProvenance": "This album was donated to the Afghan Cassette Archive by Samia Karimi as part of the archive of her late father, M.N. Karimi."
   },
   {
     "id": 21,
@@ -6215,7 +6267,11 @@ const CASSETTES = [
         "name": "Side B",
         "file": "Hangama and Ahmad Wali Album Afghan Music Nainawaz_01_02.mp3"
       }
-    ]
+    ],
+    "collections": [
+      "M.N. Karimi Archive"
+    ],
+    "recordingProvenance": "This album was donated to the Afghan Cassette Archive by Samia Karimi as part of the archive of her late father, M.N. Karimi."
   },
   {
     "id": 31,
@@ -6432,7 +6488,11 @@ const CASSETTES = [
       }
     ],
     "recordingDescription": "Musician and production credits documented for this cassette release.",
-    "albumSectionHeading": "Musician & Production Credits"
+    "albumSectionHeading": "Musician & Production Credits",
+    "collections": [
+      "M.N. Karimi Archive"
+    ],
+    "recordingProvenance": "This album was donated to the Afghan Cassette Archive by Samia Karimi as part of the archive of her late father, M.N. Karimi."
   },
   {
     "id": 39,
@@ -6650,7 +6710,11 @@ const CASSETTES = [
     "bioSources": [
       "Early career information is drawn in part from the contemporary Sabawoon Magazine feature “Naghma Dar Khana” (نغمه در خانه / “Naghma at Home”).",
       "Additional biographical information is drawn from later interviews and documentation of Naghma’s career."
-    ]
+    ],
+    "collections": [
+      "M.N. Karimi Archive"
+    ],
+    "recordingProvenance": "This album was donated to the Afghan Cassette Archive by Samia Karimi as part of the archive of her late father, M.N. Karimi."
   },
   {
     "id": 45,
@@ -7228,7 +7292,11 @@ const CASSETTES = [
         "name": "Side B",
         "file": "Sakhi Karimi Album_02.mp3"
       }
-    ]
+    ],
+    "collections": [
+      "M.N. Karimi Archive"
+    ],
+    "recordingProvenance": "This album was donated to the Afghan Cassette Archive by Samia Karimi as part of the archive of her late father, M.N. Karimi."
   },
   {
     "id": 66,
@@ -7332,7 +7400,11 @@ const CASSETTES = [
         "name": "Side B",
         "file": "Sarban Music Center 1_02.mp3"
       }
-    ]
+    ],
+    "collections": [
+      "M.N. Karimi Archive"
+    ],
+    "recordingProvenance": "This album was donated to the Afghan Cassette Archive by Samia Karimi as part of the archive of her late father, M.N. Karimi."
   },
   {
     "id": 70,
@@ -7466,7 +7538,11 @@ const CASSETTES = [
         "name": "Side B",
         "file": "Shala Zaland MNK021 ACA 24_02.mp3"
       }
-    ]
+    ],
+    "collections": [
+      "M.N. Karimi Archive"
+    ],
+    "recordingProvenance": "This album was donated to the Afghan Cassette Archive by Samia Karimi as part of the archive of her late father, M.N. Karimi."
   },
   {
     "id": 74,
@@ -7813,7 +7889,11 @@ const CASSETTES = [
         "name": "Side B",
         "file": "suliman_02.mp3"
       }
-    ]
+    ],
+    "collections": [
+      "M.N. Karimi Archive"
+    ],
+    "recordingProvenance": "This album was donated to the Afghan Cassette Archive by Samia Karimi as part of the archive of her late father, M.N. Karimi."
   },
   {
     "id": 82,
@@ -8286,7 +8366,11 @@ const CASSETTES = [
     ],
     "genres": [
       "Classical"
-    ]
+    ],
+    "collections": [
+      "M.N. Karimi Archive"
+    ],
+    "recordingProvenance": "This album was donated to the Afghan Cassette Archive by Samia Karimi as part of the archive of her late father, M.N. Karimi."
   },
   {
     "id": 101,
@@ -8685,7 +8769,11 @@ const CASSETTES = [
         "name": "Side B",
         "file": "wahid wafa kabul_02.mp3"
       }
-    ]
+    ],
+    "collections": [
+      "M.N. Karimi Archive"
+    ],
+    "recordingProvenance": "This album was donated to the Afghan Cassette Archive by Samia Karimi as part of the archive of her late father, M.N. Karimi."
   },
   {
     "id": 113,
@@ -8704,11 +8792,11 @@ const CASSETTES = [
     "tracks": [
       {
         "name": "Side A",
-        "file": "Wahid Wafa Nilab Music Side A.mp3"
+        "url": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Wahid%20Wafa%20Nilab%20Music/Wahid%20Wafa%20Side%20A.mp3"
       },
       {
         "name": "Side B",
-        "file": "Wahid Wafa Nilab Music Side B.mp3"
+        "url": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Wahid%20Wafa%20Nilab%20Music/Wahid%20Wafa%20Side%20B.mp3"
       }
     ]
   },
@@ -8733,7 +8821,11 @@ const CASSETTES = [
         "name": "Side B",
         "file": "wahid wafa zulekha _02.mp3"
       }
-    ]
+    ],
+    "collections": [
+      "M.N. Karimi Archive"
+    ],
+    "recordingProvenance": "This album was donated to the Afghan Cassette Archive by Samia Karimi as part of the archive of her late father, M.N. Karimi."
   },
   {
     "id": 115,
@@ -9587,7 +9679,11 @@ const CASSETTES = [
       ]
     },
     "recordingDescription": "Archival cassette metadata and musician credits for this Music Center release.",
-    "albumSectionHeading": "Cassette Metadata"
+    "albumSectionHeading": "Cassette Metadata",
+    "collections": [
+      "M.N. Karimi Archive"
+    ],
+    "recordingProvenance": "This album was donated to the Afghan Cassette Archive by Samia Karimi as part of the archive of her late father, M.N. Karimi."
   },
   {
     "id": 132,
@@ -9995,7 +10091,16 @@ const CASSETTES = [
     "language": "Farsi",
     "cover": true,
     "coverFile": "Ahmad Bashir Farhad Music.jpg",
-    "tracks": []
+    "tracks": [
+      {
+        "name": "Side A",
+        "url": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Ahmad%20bashir%20farhad%20music/Farhad%20Music%20Ahmad%20Bashir(1)_01.mp3"
+      },
+      {
+        "name": "Side B",
+        "url": "https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Ahmad%20bashir%20farhad%20music/Farhad%20Music%20Ahmad%20Bashir(1)_02.mp3"
+      }
+    ]
   },
   {
     "id": 143,
@@ -10502,7 +10607,11 @@ const CASSETTES = [
         "name": "Side B",
         "file": "Naim Popal Music album MNK karimi archive_02.mp3"
       }
-    ]
+    ],
+    "collections": [
+      "M.N. Karimi Archive"
+    ],
+    "recordingProvenance": "This album was donated to the Afghan Cassette Archive by Samia Karimi as part of the archive of her late father, M.N. Karimi."
   },
   {
     "id": 160,
@@ -10677,7 +10786,11 @@ const CASSETTES = [
         "name": "Side B",
         "file": "dalllgha Side B.mp3"
       }
-    ]
+    ],
+    "collections": [
+      "M.N. Karimi Archive"
+    ],
+    "recordingProvenance": "This album was donated to the Afghan Cassette Archive by Samia Karimi as part of the archive of her late father, M.N. Karimi."
   },
   {
     "id": 167,
@@ -11063,7 +11176,11 @@ const CASSETTES = [
         "name": "Side B",
         "file": "qariii 12111_02.mp3"
       }
-    ]
+    ],
+    "collections": [
+      "M.N. Karimi Archive"
+    ],
+    "recordingProvenance": "This album was donated to the Afghan Cassette Archive by Samia Karimi as part of the archive of her late father, M.N. Karimi."
   },
   {
     "id": 178,
@@ -11088,7 +11205,11 @@ const CASSETTES = [
         "name": "Side B",
         "file": "salim bariktullah afg_02.mp3"
       }
-    ]
+    ],
+    "collections": [
+      "M.N. Karimi Archive"
+    ],
+    "recordingProvenance": "This album was donated to the Afghan Cassette Archive by Samia Karimi as part of the archive of her late father, M.N. Karimi."
   },
   {
     "id": 179,
@@ -11136,7 +11257,11 @@ const CASSETTES = [
         "name": "Side B",
         "file": "wakil rauf rubab_02.mp3"
       }
-    ]
+    ],
+    "collections": [
+      "M.N. Karimi Archive"
+    ],
+    "recordingProvenance": "This album was donated to the Afghan Cassette Archive by Samia Karimi as part of the archive of her late father, M.N. Karimi."
   },
   {
     "id": 181,
@@ -13662,6 +13787,41 @@ function fallbackThumbnailToOriginal(img){
   }
   return false;
 }
+
+const ARCHIVE_EAGER_COVER_COUNT=6;
+let archiveCoverObserver=null;
+
+function archiveCoverImageMarkup(c,index=0){
+  const cls=rotatedCoverClass(c,"cover-img")+" archive-cover-loading";
+  const common=`class="${cls}" data-original="${coverUrl(c)}" alt="${escapeArchiveHtml(c.artist)}" decoding="async" onload="this.classList.add('is-loaded')" onerror="if(!fallbackThumbnailToOriginal(this)){this.style.display='none';if(this.nextElementSibling)this.nextElementSibling.style.display='flex'}"`;
+  if(index<ARCHIVE_EAGER_COVER_COUNT){
+    return `<img ${common} src="${thumbnailUrl(c)}" loading="eager" fetchpriority="high">`;
+  }
+  return `<img ${common} data-archive-src="${thumbnailUrl(c)}" loading="lazy" fetchpriority="low">`;
+}
+
+function loadDeferredArchiveCover(img){
+  if(!img)return;
+  const src=img.dataset.archiveSrc;
+  if(!src)return;
+  delete img.dataset.archiveSrc;
+  img.src=src;
+}
+
+function initArchiveCoverLoading(){
+  if(archiveCoverObserver){archiveCoverObserver.disconnect();archiveCoverObserver=null;}
+  const images=[...document.querySelectorAll("#cassette-grid img[data-archive-src],#zmarai-grid img[data-archive-src]")];
+  if(!images.length)return;
+  if(!("IntersectionObserver" in window)){images.forEach(loadDeferredArchiveCover);return;}
+  archiveCoverObserver=new IntersectionObserver(entries=>{
+    entries.forEach(entry=>{
+      if(!entry.isIntersecting)return;
+      loadDeferredArchiveCover(entry.target);
+      archiveCoverObserver?.unobserve(entry.target);
+    });
+  },{root:null,rootMargin:"900px 0px",threshold:0.01});
+  images.forEach(img=>archiveCoverObserver.observe(img));
+}
 const ROTATED_CASSETTE_IDS=new Set([36,64,82,117,134,156,160,161,164,165,166,167,173,182,183,184,187,190,191,196]);
 function cassetteCoverIsRotated(c){
   return !!(c&&ROTATED_CASSETTE_IDS.has(c.id));
@@ -13735,12 +13895,17 @@ function artistProfilesHtml(profiles){
 }
 function artistMetadataHtml(items){
   if(!Array.isArray(items)||!items.length)return "";
-  return items.map(item=>`
-    <div class="modal-artist-metadata-row">
-      <dt>${escapeArchiveHtml(item.label||"")}</dt>
-      <dd>${escapeArchiveHtml(item.value||"")}</dd>
-    </div>
-  `).join("");
+  return items.map(item=>{
+    const value=item.url
+      ?`<a class="archive-metadata-link" href="${escapeArchiveHtml(item.url)}" target="_blank" rel="noopener noreferrer" title="${escapeArchiveHtml(item.linkTitle||"Open related ACA page")}">${escapeArchiveHtml(item.value||"")} <span aria-hidden="true">↗</span></a>`
+      :escapeArchiveHtml(item.value||"");
+    return `
+      <div class="modal-artist-metadata-row">
+        <dt>${escapeArchiveHtml(item.label||"")}</dt>
+        <dd>${value}</dd>
+      </div>
+    `;
+  }).join("");
 }
 function albumMetadataHtml(items){
   if(!Array.isArray(items)||!items.length)return "";
@@ -13942,11 +14107,11 @@ function ensureHomeContent(){
 
 let zmaraiSearchQuery="";
 
-function zmaraiCardMarkup(c){
+function zmaraiCardMarkup(c,index=0){
   const playing=currentCassetteId===c.id;
   const fallback=defaultCoverMarkup(c,"default-cover-card");
   const visual=c.cover
-    ?`<img class="${rotatedCoverClass(c,"cover-img")}" src="${thumbnailUrl(c)}" data-original="${coverUrl(c)}" alt="${escapeArchiveHtml(c.artist)}" loading="lazy" decoding="async" fetchpriority="low" onerror="if(!fallbackThumbnailToOriginal(this)){this.style.display='none';this.nextElementSibling.style.display='flex'}"><div style="display:none">${fallback}</div>`
+    ?`${archiveCoverImageMarkup(c,index)}<div style="display:none">${fallback}</div>`
     :fallback;
   return `<div class="cassette-card${playing?" is-playing":""}" tabindex="0" role="button" aria-label="Open ${escapeArchiveHtml(c.artist)} — ${escapeArchiveHtml(c.album)}" onclick="openCassettePage(${c.id})" onkeydown="if(event.key==='Enter'||event.key===' ')openCassettePage(${c.id})">
     <div class="tape-visual">${visual}<div class="play-hover"><svg viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg></div><div class="np-badge">▶ Now Playing</div></div>
@@ -13997,7 +14162,7 @@ function renderZmaraiCollection(){
   const q=(zmaraiSearchQuery||"").trim().toLowerCase();
   let list=all.filter(c=>{
     if(!q)return true;
-    return [c.artist,c.album,c.era,c.language,genreText(c),c.folder]
+    return [c.artist,c.album,c.era,c.language,genreText(c),c.folder,(c.collections||[]).join(" ")]
       .filter(Boolean).join(" ").toLowerCase().includes(q);
   }).sort((a,b)=>a.artist.localeCompare(b.artist,undefined,{sensitivity:"base"})||a.album.localeCompare(b.album,undefined,{sensitivity:"base"}));
 
@@ -14014,6 +14179,7 @@ function renderZmaraiCollection(){
     grid.innerHTML=list.length
       ?list.map(zmaraiCardMarkup).join("")
       :`<div class="empty-state"><div class="big">♩</div>No tapes in this collection match your search.</div>`;
+    initArchiveCoverLoading();
   }
 
   const stack=document.getElementById("zmarai-cover-stack");
@@ -14124,11 +14290,11 @@ function renderGrid(){
   const statTotal=document.getElementById("statTotal");
   if(statTotal)statTotal.textContent=CASSETTES.length;
   if(!list.length){grid.innerHTML=`<div class="empty-state"><div class="big">♩</div>No cassettes match.</div>`;return}
-  grid.innerHTML=list.map(c=>{
+  grid.innerHTML=list.map((c,index)=>{
     const playing=currentCassetteId===c.id;
     const fallback=defaultCoverMarkup(c,"default-cover-card");
     const visual=c.cover
-      ?`<img class="${rotatedCoverClass(c,"cover-img")}" src="${thumbnailUrl(c)}" data-original="${coverUrl(c)}" alt="${c.artist}" loading="lazy" decoding="async" fetchpriority="low" onerror="if(!fallbackThumbnailToOriginal(this)){this.style.display='none';this.nextElementSibling.style.display='flex'}"><div style="display:none">${fallback}</div>`
+      ?`${archiveCoverImageMarkup(c,index)}<div style="display:none">${fallback}</div>`
       :fallback;
     return`<div class="cassette-card${playing?" is-playing":""}" tabindex="0" role="button" aria-label="Open ${c.artist}" onclick="openCassettePage(${c.id})" onkeydown="if(event.key==='Enter'||event.key===' ')openCassettePage(${c.id})">
       <div class="tape-visual">${visual}<div class="play-hover"><svg viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg></div><div class="np-badge">▶ Now Playing</div></div>
@@ -14143,6 +14309,7 @@ function renderGrid(){
       </div>
     </div>`;
   }).join("");
+  initArchiveCoverLoading();
   hardenMediaProtection();
 }
 
@@ -14174,7 +14341,7 @@ function renderCassettePage(c){
   document.getElementById("cassette-page-kicker").textContent=`ACA-${String(c.id).padStart(3,"0")} · Archive object`;
   document.getElementById("cassette-page-artist").textContent=c.artist;
   document.getElementById("cassette-page-album").textContent=c.album;
-  document.getElementById("cassette-page-tags").innerHTML=`${c.era?`<span class="tag tag-era">${escapeArchiveHtml(c.era)}</span>`:""}${genreTags(c)}${c.language?`<span class="tag tag-lang">${escapeArchiveHtml(c.language)}</span>`:""}${isZmaraiCollection(c)?`<span class="tag tag-collection">Zmarai Collection</span>`:""}`;
+  document.getElementById("cassette-page-tags").innerHTML=`${c.era?`<span class="tag tag-era">${escapeArchiveHtml(c.era)}</span>`:""}${genreTags(c)}${c.language?`<span class="tag tag-lang">${escapeArchiveHtml(c.language)}</span>`:""}${isZmaraiCollection(c)?`<span class="tag tag-collection">Zmarai Collection</span>`:""}${Array.isArray(c.collections)&&c.collections.includes("M.N. Karimi Archive")?`<span class="tag tag-collection">M.N. Karimi Archive</span>`:""}`;
 
   const meta=[];
   meta.push(["ACA Catalog No.",`ACA-${String(c.id).padStart(3,"0")}`]);
@@ -14511,7 +14678,7 @@ function openModal(id,updateHistory=true){
     ${c.recorded?`<div class="modal-row"><span class="modal-label">Recorded</span><span class="modal-val">${c.recorded}</span></div>`:""}
     ${c.era?`<div class="modal-row"><span class="modal-label">Era</span><span class="modal-val">${c.era}</span></div>`:""}
     <div class="modal-row"><span class="modal-label">Language</span><span class="modal-val">${c.language||"—"}</span></div>`;
-  document.getElementById("modal-tags").innerHTML=`${c.era?`<span class="tag tag-era">${c.era}</span>`:""}${genreTags(c)}${c.language?`<span class="tag tag-lang">${c.language}</span>`:""}${isZmaraiCollection(c)?`<span class="tag tag-collection">Zmarai Collection</span>`:""}`;
+  document.getElementById("modal-tags").innerHTML=`${c.era?`<span class="tag tag-era">${c.era}</span>`:""}${genreTags(c)}${c.language?`<span class="tag tag-lang">${c.language}</span>`:""}${isZmaraiCollection(c)?`<span class="tag tag-collection">Zmarai Collection</span>`:""}${Array.isArray(c.collections)&&c.collections.includes("M.N. Karimi Archive")?`<span class="tag tag-collection">M.N. Karimi Archive</span>`:""}`;
 
   const recordingDescription=document.getElementById("modal-recording-description");
   const recordingDescriptionText=document.getElementById("modal-recording-description-text");
