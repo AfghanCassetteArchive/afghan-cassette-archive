@@ -3645,6 +3645,113 @@ body.aca-gate-b-active>.player-bar{visibility:hidden}
 @keyframes archiveCoverPulse{to{background-position-x:-220%}}
 @media(prefers-reduced-motion:reduce){.cover-img.archive-cover-loading{animation:none}}
 
+
+/* ===== Oct. 25 Mountain View event popup ===== */
+.event-card-upcoming{
+  border:1px solid var(--accent);
+  box-shadow:0 10px 30px rgba(26,21,16,.13);
+}
+.event-card-upcoming::before{
+  content:"Upcoming";
+  position:absolute;top:0;right:0;z-index:3;
+  padding:.45rem .7rem;background:var(--accent);color:#fff;
+  font:700 8px/1 var(--font-mono);letter-spacing:.12em;text-transform:uppercase;
+}
+.event-register-link{background:var(--accent);color:#fff}
+.event-register-link .event-link-mark{color:#fff}
+.event-promo-overlay{
+  position:fixed;inset:0;z-index:900;display:none;align-items:center;justify-content:center;
+  padding:1rem;background:rgba(14,18,15,.78);backdrop-filter:blur(7px);
+}
+.event-promo-overlay.open{display:flex}
+.event-promo-dialog{
+  position:relative;width:min(960px,96vw);max-height:92vh;overflow:auto;
+  display:grid;grid-template-columns:minmax(280px,.9fr) minmax(320px,1fr);
+  background:#F7F4EC;color:#1D2B22;border:1px solid rgba(34,49,39,.18);
+  border-radius:18px;box-shadow:0 26px 90px rgba(0,0,0,.36);
+}
+.event-promo-flyer{min-height:520px;background:#203329;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.event-promo-flyer img{width:100%;height:100%;max-height:86vh;object-fit:contain;display:block}
+.event-promo-copy{padding:clamp(1.5rem,4vw,3rem);display:flex;flex-direction:column;justify-content:center}
+.event-promo-kicker{margin-bottom:.65rem;color:var(--accent);font:700 9px/1.3 var(--font-mono);letter-spacing:.16em;text-transform:uppercase}
+.event-promo-title{margin:0;color:#17271E;font-family:var(--font-display);font-size:clamp(2.1rem,4vw,4.2rem);font-weight:400;line-height:.94}
+.event-promo-meta{margin:1rem 0;padding:1rem 0;border-top:1px solid rgba(34,49,39,.16);border-bottom:1px solid rgba(34,49,39,.16);font:600 11px/1.7 var(--font-mono)}
+.event-promo-description{margin:0 0 1.2rem;color:#4A5A50;font:500 11px/1.75 var(--font-mono)}
+.event-promo-note{margin:.75rem 0 0;color:#6B766F;font:500 9px/1.6 var(--font-mono)}
+.event-promo-actions{display:flex;flex-wrap:wrap;gap:.65rem;margin-top:.4rem}
+.event-promo-register,.event-promo-events-link{
+  display:inline-flex;align-items:center;justify-content:center;min-height:46px;padding:.7rem 1rem;
+  border-radius:999px;font:700 9px/1 var(--font-mono);letter-spacing:.08em;text-transform:uppercase;text-decoration:none;cursor:pointer;
+}
+.event-promo-register{background:var(--accent);border:1px solid var(--accent);color:#fff}
+.event-promo-events-link{background:transparent;border:1px solid #263A2E;color:#263A2E}
+.event-promo-close{
+  position:absolute;top:12px;right:12px;z-index:4;width:40px;height:40px;border:1px solid rgba(255,255,255,.42);
+  border-radius:50%;background:rgba(20,29,23,.82);color:#fff;font-size:20px;cursor:pointer;
+}
+.event-promo-close:hover,.event-promo-close:focus-visible{background:var(--accent)}
+@media(max-width:760px){
+  .event-promo-dialog{grid-template-columns:1fr;max-height:94vh}
+  .event-promo-flyer{min-height:0;max-height:48vh}
+  .event-promo-flyer img{max-height:48vh}
+  .event-promo-copy{padding:1.35rem}
+  .event-promo-title{font-size:clamp(1.8rem,10vw,3rem)}
+}
+
+
+/* Flyer-only version of the Oct. 25 promo shown from "Enter the Archive" */
+.event-promo-dialog.event-promo-dialog-flyer-only{
+  width:min(620px,92vw);
+  max-height:92vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:visible;
+  background:transparent;
+  border:0;
+  border-radius:0;
+  box-shadow:none;
+}
+.event-promo-flyer.event-promo-flyer-only{
+  min-height:0;
+  max-height:90vh;
+  width:auto;
+  max-width:100%;
+  background:transparent;
+  border-radius:10px;
+  overflow:hidden;
+  box-shadow:0 28px 90px rgba(0,0,0,.48);
+  outline:1px solid rgba(255,255,255,.18);
+}
+.event-promo-flyer.event-promo-flyer-only img{
+  display:block;
+  width:auto;
+  max-width:100%;
+  height:auto;
+  max-height:88vh;
+  object-fit:contain;
+}
+.event-promo-dialog-flyer-only .event-promo-close{
+  top:-14px;
+  right:-14px;
+}
+@media(max-width:760px){
+  .event-promo-dialog.event-promo-dialog-flyer-only{
+    width:min(94vw,520px);
+    grid-template-columns:none;
+  }
+  .event-promo-flyer.event-promo-flyer-only{
+    max-height:88vh;
+  }
+  .event-promo-flyer.event-promo-flyer-only img{
+    max-height:84vh;
+  }
+  .event-promo-dialog-flyer-only .event-promo-close{
+    top:-10px;
+    right:-8px;
+  }
+}
+
 </style>
   <link rel="canonical" href="https://afghancassettearchive.org/">
 </head>
@@ -4350,25 +4457,41 @@ body.aca-gate-b-active>.player-bar{visibility:hidden}
     </div>
 
     <div class="press-summary" aria-label="Press coverage summary">
-      <div class="press-summary-item"><span class="press-summary-num">3</span><span class="press-summary-label">Featured stories</span></div>
-      <div class="press-summary-item"><span class="press-summary-num">2</span><span class="press-summary-label">Audio broadcasts</span></div>
+      <div class="press-summary-item"><span class="press-summary-num">5</span><span class="press-summary-label">Featured stories</span></div>
+      <div class="press-summary-item"><span class="press-summary-num">3</span><span class="press-summary-label">Audio broadcasts</span></div>
       <div class="press-summary-item"><span class="press-summary-num">2025–26</span><span class="press-summary-label">Coverage period</span></div>
     </div>
 
     <div class="press-grid">
-      <article class="press-card featured">
+      <article class="press-card">
         <div class="press-art">
-          <div class="press-outlet-mark">BBC<br>Radio 4</div>
-          <div class="press-format">Audio documentary · Artworks</div>
+          <div class="press-outlet-mark">The<br>World</div>
+          <div class="press-format">PRX · Radio &amp; digital feature</div>
         </div>
         <div class="press-content">
-          <div class="press-meta"><span>November 25, 2025</span><span>Radio documentary</span></div>
-          <h2 class="press-title">Omid’s Tapes: The Afghan Memory Keeper</h2>
-          <p class="press-description">A documentary following Omid and an international network working to find and rescue Afghan music, radio, film, and television recordings. Journalist and filmmaker Tamana Ayazi joins a mission to move two rare cassette collections out of Afghanistan before they are lost or destroyed.</p>
-          <div class="press-credit">Presented by Tamana Ayazi · An Almost Tangible production for BBC Radio 4</div>
-          <a class="press-link" href="https://www.bbc.co.uk/programmes/m002mmsh" target="_blank" rel="noopener noreferrer">Listen on BBC <span aria-hidden="true">↗</span></a>
+          <div class="press-meta"><span>October 9, 2026</span><span>Audio feature</span></div>
+          <h2 class="press-title">Keeping Afghanistan’s Musical Tradition Alive</h2>
+          <p class="press-description">The World profiles the Afghan Cassette Archive and the effort to preserve Afghan musical recordings at a time when music, musicians, instruments, and recordings remain under severe threat inside Afghanistan.</p>
+          <div class="press-credit">The World · PRX</div>
+          <a class="press-link secondary" href="https://theworld.org/segments/2026/10/09/keeping-afghanistans-musical-tradition-alive" target="_blank" rel="noopener noreferrer">Listen &amp; read <span aria-hidden="true">↗</span></a>
         </div>
       </article>
+
+
+      <article class="press-card">
+        <div class="press-art">
+          <div class="press-outlet-mark">Echoes<br>of Afghan<br>Music</div>
+          <div class="press-format">Interview · Video feature</div>
+        </div>
+        <div class="press-content">
+          <div class="press-meta"><span>October 2026</span><span>Interview</span></div>
+          <h2 class="press-title">Echoes of Afghan Music — Afghan Cassette Archive Interview</h2>
+          <p class="press-description">Echoes of Afghan Music interviewed Afghan Cassette Archive founder Omid Jahan about the project and its work preserving Afghanistan’s recorded musical heritage. The platform focuses on documenting and sharing Afghan music at a time when musicians and musical expression have faced severe restrictions, highlighting the endurance of Afghan artists, traditional sounds, and cultural memory across conflict and displacement.</p>
+          <div class="press-credit">Echoes of Afghan Music · YouTube</div>
+          <a class="press-link secondary" href="https://www.youtube.com/watch?v=V7_CVEb8qzM" target="_blank" rel="noopener noreferrer">Watch the interview <span aria-hidden="true">↗</span></a>
+        </div>
+      </article>
+
 
       <article class="press-card">
         <div class="press-art">
@@ -4383,6 +4506,7 @@ body.aca-gate-b-active>.player-bar{visibility:hidden}
           <a class="press-link secondary" href="https://www.kalw.org/2026-06-18/its-resistance-the-afghan-cassette-archive-and-ephemera-under-threat" target="_blank" rel="noopener noreferrer">Listen &amp; read <span aria-hidden="true">↗</span></a>
         </div>
       </article>
+
 
       <article class="press-card">
         <div class="press-art">
@@ -4411,27 +4535,93 @@ body.aca-gate-b-active>.player-bar{visibility:hidden}
   <section class="events-page">
     <div class="events-intro">
       <div class="events-kicker">Listening sessions · Workshops · Broadcasts · Presentations</div>
-      <h1>Past <em>events</em></h1>
-      <p>A record of public programs where the Afghan Cassette Archive has brought endangered recordings back into shared cultural life through talks, workshops, listening sessions, broadcasts, and live cassette sets.</p>
+      <h1>Events &amp; <em>Programs</em></h1>
+      <p>Upcoming and past public programs where the Afghan Cassette Archive brings endangered recordings back into shared cultural life through talks, workshops, listening sessions, broadcasts, and live cassette sets.</p>
     </div>
 
-    <div class="events-summary" aria-label="Past events summary">
-      <div class="events-summary-item"><span class="events-summary-num">6</span><span class="events-summary-label">Linked event records</span></div>
+    <div class="events-summary" aria-label="Events summary">
+      <div class="events-summary-item"><span class="events-summary-num">8</span><span class="events-summary-label">Linked event records</span></div>
       <div class="events-summary-item"><span class="events-summary-num">5</span><span class="events-summary-label">Cities &amp; platforms</span></div>
       <div class="events-summary-item"><span class="events-summary-num">2026</span><span class="events-summary-label">Program year</span></div>
     </div>
 
     <div class="events-timeline">
-      <article class="event-card">
-        <div class="event-date"><span class="event-month">Feb</span><span class="event-day">11</span><span class="event-year">2026</span></div>
+      <article class="event-card event-card-upcoming">
+        <div class="event-date"><span class="event-month">Oct</span><span class="event-day">25</span><span class="event-year">2026</span></div>
         <div class="event-content">
-          <div class="event-platform">British Council Pakistan · Workshop</div>
-          <h2 class="event-title">Archiving Afghan Memory and Migration Through Music</h2>
-          <div class="event-details">Pakistan Heritage Exchange · Day 2</div>
-          <p class="event-description">A workshop examining how Afghan music survived war, censorship, migration, and institutional collapse through portable cassette culture, informal refugee archives, digitization, and community stewardship.</p>
+          <div class="event-platform">Mountain View Public Library · Multimedia listening session</div>
+          <h2 class="event-title">Afghan Cassette Archive: Stories, Sounds, and Music from Afghanistan</h2>
+          <div class="event-details">Sunday, October 25 · 1:00–2:30 PM · Mountain View Public Library · 585 Franklin Street, Mountain View, CA 94041</div>
+          <p class="event-description">Join Omid Jahan, founder of the Afghan Cassette Archive, for a multimedia listening session exploring Afghanistan’s musical history through rare cassette recordings, archival materials, and personal stories. The program highlights Afghan music from different eras and communities, including recordings preserved from Afghanistan and the Afghan diaspora. Registration is recommended; walk-ins are also welcome.</p>
+          <a class="event-poster-link" href="https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Events/3.png" target="_blank" rel="noopener noreferrer" aria-label="Open the full-size Mountain View Afghan Cassette Archive event flyer">
+            <img class="event-poster-img" src="https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Events/3.png" alt="Flyer for Afghan Cassette Archive: Stories, Sounds, and Music from Afghanistan at Mountain View Public Library on October 25, 2026" loading="eager" decoding="async" fetchpriority="high">
+            <span class="event-poster-caption"><span>Event flyer</span><span>View full size ↗</span></span>
+          </a>
         </div>
-        <div class="event-action"><a class="event-link" href="https://www.facebook.com/BritishCouncilPakistan/posts/pakistan-heritage-exchange-day-02workshop-archiving-afghan-memory-and-migration-/1195939069419478/" target="_blank" rel="noopener noreferrer"><span class="event-link-mark">Facebook</span>View event post ↗</a></div>
+        <div class="event-action"><a class="event-link event-register-link" href="https://mountainview.libcal.com/event/17300298" target="_blank" rel="noopener noreferrer"><span class="event-link-mark">Oct 25</span>Register for the event ↗</a></div>
       </article>
+
+      <article class="event-card">
+        <div class="event-date"><span class="event-month">Sep</span><span class="event-day">03</span><span class="event-year">2026</span></div>
+        <div class="event-content">
+          <div class="event-platform">Mazikaa Enterprise × Afghan Cassette Archive · Listening session</div>
+          <h2 class="event-title">Sounds of SWANA: Afghan New Wave</h2>
+          <div class="event-details">RootStock Arts · Oakland, California · 6:30–9:30 PM</div>
+          <p class="event-description">Presented by Mazikaa Enterprise and hosted by Omid Jahan of the Afghan Cassette Archive, this session explored Afghan popular music of the 1980s through rare cassette recordings and historical context, including synthesizers, drum machines, and global pop influences. The program also incorporated archival music videos on CRT televisions and offered both in-person and online access.</p>
+        </div>
+        <div class="event-action"><a class="event-link" href="https://ma.to/event/sounds-of-swana-afghan-new-wave-04-sep-2026" target="_blank" rel="noopener noreferrer"><span class="event-link-mark">Mato</span>View event listing ↗</a></div>
+      </article>
+
+
+      <article class="event-card">
+        <div class="event-date"><span class="event-month">May</span><span class="event-day">16</span><span class="event-year">2026</span></div>
+        <div class="event-content">
+          <div class="event-platform">Discostan · Presentation &amp; cassette DJ set</div>
+          <h2 class="event-title">An Afternoon with the Afghan Cassette Archive</h2>
+          <div class="event-details">2220 Arts + Archives · Los Angeles, California</div>
+          <p class="event-description">A guided journey through Afghan cassette history followed by a live OMJVinyls set, moving from archival listening into folk, pop, ghazal, and forgotten electronic sounds.</p>
+        </div>
+        <div class="event-action"><a class="event-link" href="https://www.instagram.com/p/DYNN8JcDPDg/" target="_blank" rel="noopener noreferrer"><span class="event-link-mark">Instagram</span>View event post ↗</a></div>
+      </article>
+
+
+      <article class="event-card">
+        <div class="event-date"><span class="event-month">May</span><span class="event-day">09</span><span class="event-year">2026</span></div>
+        <div class="event-content">
+          <div class="event-platform">RootStock Arts · Listening session</div>
+          <h2 class="event-title">Composers of the Golden Era</h2>
+          <div class="event-details">RootStock Arts Center · Oakland, California</div>
+          <p class="event-description">An evening devoted to the composers, arrangements, studios, and cassette releases that shaped Afghanistan’s modern musical golden era.</p>
+          <p class="event-description"><a href="https://www.viewcy.com/event/afghan_cassette_archi" target="_blank" rel="noopener noreferrer">View the original Viewcy event listing ↗</a></p>
+        </div>
+        <div class="event-action"><a class="event-link" href="https://www.instagram.com/p/DYFruF0D5YB/" target="_blank" rel="noopener noreferrer"><span class="event-link-mark">Instagram</span>View event post ↗</a></div>
+      </article>
+
+
+      <article class="event-card">
+        <div class="event-date"><span class="event-month">Apr</span><span class="event-day">20</span><span class="event-year">2026</span></div>
+        <div class="event-content">
+          <div class="event-platform">Refuge Worldwide · Event record</div>
+          <h2 class="event-title">Iran Solidarity Show — Highlights</h2>
+          <div class="event-details">Archival broadcast follow-up</div>
+          <p class="event-description">A companion social record from the Refuge Worldwide program, documenting the live activation of archival Afghan sound in solidarity with artists, refugees, and displaced communities.</p>
+        </div>
+        <div class="event-action"><a class="event-link" href="https://www.instagram.com/p/DXW-02eAX5j/" target="_blank" rel="noopener noreferrer"><span class="event-link-mark">Instagram</span>View event record ↗</a></div>
+      </article>
+
+
+      <article class="event-card">
+        <div class="event-date"><span class="event-month">Apr</span><span class="event-day">19</span><span class="event-year">2026</span></div>
+        <div class="event-content">
+          <div class="event-platform">Refuge Worldwide · Radio broadcast</div>
+          <h2 class="event-title">Iran Solidarity Show</h2>
+          <div class="event-details">Omid Jahan / OMJVinyls · Analog Afghan &amp; Afghan Cassette Archive</div>
+          <p class="event-description">An archival mix centered on Afghanistan while tracing shared struggles across the region through displacement, exile, women’s freedom, solidarity, and music that persists across borders.</p>
+          <p class="event-description"><a href="https://www.instagram.com/reels/DXFIRdoinEN/" target="_blank" rel="noopener noreferrer">View the Instagram Reel ↗</a></p>
+        </div>
+        <div class="event-action"><a class="event-link" href="https://www.instagram.com/p/DXFIRdoinEN/" target="_blank" rel="noopener noreferrer"><span class="event-link-mark">Instagram</span>View announcement ↗</a></div>
+      </article>
+
 
       <article class="event-card">
         <div class="event-date"><span class="event-month">Mar</span><span class="event-day">09</span><span class="event-year">2026</span></div>
@@ -4445,55 +4635,14 @@ body.aca-gate-b-active>.player-bar{visibility:hidden}
       </article>
 
       <article class="event-card">
-        <div class="event-date"><span class="event-month">Apr</span><span class="event-day">19</span><span class="event-year">2026</span></div>
+        <div class="event-date"><span class="event-month">Feb</span><span class="event-day">11</span><span class="event-year">2026</span></div>
         <div class="event-content">
-          <div class="event-platform">Refuge Worldwide · Radio broadcast</div>
-          <h2 class="event-title">Iran Solidarity Show</h2>
-          <div class="event-details">Omid Jahan / OMJVinyls · Analog Afghan &amp; Afghan Cassette Archive</div>
-          <p class="event-description">An archival mix centered on Afghanistan while tracing shared struggles across the region through displacement, exile, women’s freedom, solidarity, and music that persists across borders.</p>
+          <div class="event-platform">British Council Pakistan · Workshop</div>
+          <h2 class="event-title">Archiving Afghan Memory and Migration Through Music</h2>
+          <div class="event-details">Pakistan Heritage Exchange · Day 2</div>
+          <p class="event-description">A workshop examining how Afghan music survived war, censorship, migration, and institutional collapse through portable cassette culture, informal refugee archives, digitization, and community stewardship.</p>
         </div>
-        <div class="event-action"><a class="event-link" href="https://www.instagram.com/p/DXFIRdoinEN/" target="_blank" rel="noopener noreferrer"><span class="event-link-mark">Instagram</span>View announcement ↗</a></div>
-      </article>
-
-      <article class="event-card">
-        <div class="event-date"><span class="event-month">Apr</span><span class="event-day">20</span><span class="event-year">2026</span></div>
-        <div class="event-content">
-          <div class="event-platform">Refuge Worldwide · Event record</div>
-          <h2 class="event-title">Iran Solidarity Show — Highlights</h2>
-          <div class="event-details">Archival broadcast follow-up</div>
-          <p class="event-description">A companion social record from the Refuge Worldwide program, documenting the live activation of archival Afghan sound in solidarity with artists, refugees, and displaced communities.</p>
-        </div>
-        <div class="event-action"><a class="event-link" href="https://www.instagram.com/p/DXW-02eAX5j/" target="_blank" rel="noopener noreferrer"><span class="event-link-mark">Instagram</span>View event record ↗</a></div>
-      </article>
-
-      <article class="event-card">
-        <div class="event-date"><span class="event-month">May</span><span class="event-day">09</span><span class="event-year">2026</span></div>
-        <div class="event-content">
-          <div class="event-platform">RootStock Arts · Listening session</div>
-          <h2 class="event-title">Composers of the Golden Era</h2>
-          <div class="event-details">RootStock Arts Center · Oakland, California</div>
-          <p class="event-description">An evening devoted to the composers, arrangements, studios, and cassette releases that shaped Afghanistan’s modern musical golden era.</p>
-          <a class="event-poster-link" href="event-posters/rootstock-composers-golden-era-may-9-2026.png" target="_blank" rel="noopener noreferrer" aria-label="Open the full-size Composers of the Golden Era event poster">
-            <img class="event-poster-img" src="event-posters/rootstock-composers-golden-era-may-9-2026.png" alt="Poster for Composers of the Golden Era at RootStock Arts Center in Oakland on May 9, 2026" loading="lazy" decoding="async" fetchpriority="low">
-            <span class="event-poster-caption"><span>Event poster</span><span>View full size ↗</span></span>
-          </a>
-        </div>
-        <div class="event-action"><a class="event-link" href="https://www.instagram.com/p/DYFruF0D5YB/" target="_blank" rel="noopener noreferrer"><span class="event-link-mark">Instagram</span>View event post ↗</a></div>
-      </article>
-
-      <article class="event-card">
-        <div class="event-date"><span class="event-month">May</span><span class="event-day">16</span><span class="event-year">2026</span></div>
-        <div class="event-content">
-          <div class="event-platform">Discostan · Presentation &amp; cassette DJ set</div>
-          <h2 class="event-title">An Afternoon with the Afghan Cassette Archive</h2>
-          <div class="event-details">2220 Arts + Archives · Los Angeles, California</div>
-          <p class="event-description">A guided journey through Afghan cassette history followed by a live OMJVinyls set, moving from archival listening into folk, pop, ghazal, and forgotten electronic sounds.</p>
-          <a class="event-poster-link" href="event-posters/discostan-afghan-cassette-archive-may-16-2026.png" target="_blank" rel="noopener noreferrer" aria-label="Open the full-size Discostan event poster">
-            <img class="event-poster-img" src="event-posters/discostan-afghan-cassette-archive-may-16-2026.png" alt="Poster for An Afternoon with Afghan Cassette Archive, May 16 at 2220 Arts and Archives" loading="lazy" decoding="async" fetchpriority="low">
-            <span class="event-poster-caption"><span>Event poster</span><span>View full size ↗</span></span>
-          </a>
-        </div>
-        <div class="event-action"><a class="event-link" href="https://www.instagram.com/p/DYNN8JcDPDg/" target="_blank" rel="noopener noreferrer"><span class="event-link-mark">Instagram</span>View event post ↗</a></div>
+        <div class="event-action"><a class="event-link" href="https://www.facebook.com/BritishCouncilPakistan/posts/pakistan-heritage-exchange-day-02workshop-archiving-afghan-memory-and-migration-/1195939069419478/" target="_blank" rel="noopener noreferrer"><span class="event-link-mark">Facebook</span>View event post ↗</a></div>
       </article>
     </div>
 
@@ -4759,6 +4908,17 @@ body.aca-gate-b-active>.player-bar{visibility:hidden}
       <div class="cassette-share-status" id="cassette-share-status" aria-live="polite"></div>
     </div>
     <ul class="track-list" id="track-list"></ul>
+  </div>
+</div>
+
+
+
+<div id="oct25-event-promo" class="event-promo-overlay" role="dialog" aria-modal="true" aria-label="October 25 Afghan Cassette Archive event flyer" hidden>
+  <div class="event-promo-dialog event-promo-dialog-flyer-only">
+    <button class="event-promo-close" type="button" onclick="closeOct25EventPromo()" aria-label="Close event flyer">×</button>
+    <a class="event-promo-flyer event-promo-flyer-only" href="https://mountainview.libcal.com/event/17300298" target="_blank" rel="noopener noreferrer" aria-label="Open the Mountain View Public Library event page">
+      <img src="https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/Events/3.png" alt="Afghan Cassette Archive listening session flyer for October 25, 2026 at Mountain View Public Library" decoding="async">
+    </a>
   </div>
 </div>
 
@@ -8100,7 +8260,7 @@ const CASSETTES = [
     "album": "Ustad Madadi Farhad",
     "era": "1970s",
     "language": "Farsi",
-    "cover": false,
+    "cover": true,
     "tracks": [
       {
         "name": "Side A",
@@ -8117,7 +8277,8 @@ const CASSETTES = [
     "recordingProvenance": "This cassette is part of the collection of Mohammad Hassan Zmarai, an Afghan refugee and longtime cassette collector in Pakistan whose archive preserves recordings gathered across decades of Afghan musical life and displacement.\n\nThe cassette was digitized from Zmarai’s collection by the Afghan Cassette Archive. We extend our sincere thanks to Mohammad Hassan Zmarai for allowing this recording to be digitized and preserved. Collections such as his are especially important for safeguarding Afghan cassette releases whose original commercial copies may now be rare, damaged, or difficult to locate.",
     "collections": [
       "Mohammad Hassan Zmarai Collection"
-    ]
+    ],
+    "coverFile": "Ustad Madadi Tape Farhad Music.jpg"
   },
   {
     "id": 96,
@@ -14812,7 +14973,7 @@ function handleArchiveRoute(){
 }
 window.addEventListener("popstate",handleArchiveRoute);
 document.addEventListener("keydown",e=>{
-  if(e.key==="Escape"){closeCoverViewer();closeModal()}
+  if(e.key==="Escape"){closeOct25EventPromo();closeCoverViewer();closeModal()}
 });
 
 function setPlayIcon(playing){
@@ -15994,7 +16155,15 @@ handleArchiveRoute();
   introPlay?.addEventListener("click",introTogglePlay);
   introPrev?.addEventListener("click",e=>introStep(-1,e));
   introNext?.addEventListener("click",e=>introStep(1,e));
-  enter.addEventListener("click",enterArchive);
+  enter.addEventListener("click",event=>{
+    if(shouldShowOct25EventPromo()){
+      event.preventDefault();
+      event.stopPropagation();
+      openOct25EventPromo();
+      return;
+    }
+    enterArchive(event);
+  });
 
   // Clicking anywhere else on the cinematic cover enters the archive.
   cover.addEventListener("click",event=>{
@@ -16024,6 +16193,48 @@ handleArchiveRoute();
     window.addEventListener("load",()=>window.setTimeout(()=>tryIntroAutoplay(false),120),{once:true});
   }
 })();
+
+/* ===== Oct. 25 Mountain View event promotion ===== */
+const OCT25_EVENT_START=new Date(2026,9,12,0,0,0);
+const OCT25_EVENT_END=new Date(2026,9,26,0,0,0);
+const OCT25_EVENT_SESSION_KEY="aca-oct25-event-promo-seen";
+
+function shouldShowOct25EventPromo(){
+  const now=new Date();
+  return now>=OCT25_EVENT_START&&now<OCT25_EVENT_END;
+}
+function openOct25EventPromo(){
+  const overlay=document.getElementById("oct25-event-promo");
+  if(!overlay)return;
+  overlay.hidden=false;
+  requestAnimationFrame(()=>overlay.classList.add("open"));
+  document.body.style.overflow="hidden";
+}
+function closeOct25EventPromo(){
+  const overlay=document.getElementById("oct25-event-promo");
+  if(!overlay)return;
+  overlay.classList.remove("open");
+  overlay.hidden=true;
+  document.body.style.overflow="";
+  try{sessionStorage.setItem(OCT25_EVENT_SESSION_KEY,"1")}catch(e){}
+}
+function openOct25EventPage(){
+  closeOct25EventPromo();
+  showPage("events",document.querySelector('[data-page="events"]'));
+}
+function initOct25EventPromo(){
+  if(!shouldShowOct25EventPromo())return;
+  let seen=false;
+  try{seen=sessionStorage.getItem(OCT25_EVENT_SESSION_KEY)==="1"}catch(e){}
+  if(seen)return;
+  setTimeout(openOct25EventPromo,900);
+}
+document.addEventListener("click",e=>{
+  const overlay=document.getElementById("oct25-event-promo");
+  if(overlay?.classList.contains("open")&&e.target===overlay)closeOct25EventPromo();
+});
+
+
 </script>
 
 </body>
