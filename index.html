@@ -4063,6 +4063,49 @@ input,select,textarea{accent-color:var(--aca-red)}
   font-weight:600;
 }
 
+
+
+/* FIX: full-width, aligned archive search bar */
+.archive-search-field .search-box{
+  position:relative;
+  width:100%;
+  max-width:none;
+}
+.archive-search-field .search-box input{
+  display:block;
+  width:100%;
+  min-width:0;
+  height:40px;
+  min-height:40px;
+  padding:0 14px 0 40px;
+  font-size:12px;
+  line-height:40px;
+  border:1px solid rgba(23,37,28,.16);
+  border-radius:4px;
+  background:#FCFAF3;
+  box-sizing:border-box;
+  outline:none;
+}
+.archive-search-field .search-icon{
+  position:absolute;
+  left:13px;
+  top:50%;
+  transform:translateY(-50%);
+  z-index:2;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:16px;
+  height:16px;
+  color:#435047;
+  font-size:15px;
+  line-height:1;
+  pointer-events:none;
+}
+@media(max-width:760px){
+  .archive-search-row{grid-template-columns:1fr;}
+}
+
 </style>
   <link rel="canonical" href="https://afghancassettearchive.org/">
 <link rel="icon" type="image/png" href="https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/ACA%20LOGO/1.png">
