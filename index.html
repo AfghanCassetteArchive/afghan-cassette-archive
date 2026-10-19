@@ -5,19 +5,19 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Afghan Cassette Archive — آرشیف کاست‌های افغان</title>
 <meta name="description" content="Preserving Afghan music and cassette culture. An independent archive of Afghan cassettes from the 1960s–2000s.">
-<meta name="theme-color" content="#274131">
+<meta name="theme-color" content="#85120c">
 <link rel="preconnect" href="https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev" crossorigin>
 <link rel="dns-prefetch" href="//pub-f07cb91ee11b43d294b20611220aadd5.r2.dev">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&family=Noto+Naskh+Arabic:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Gulzar&family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
 <style>
-:root {
-  --bg:#F5F0E8;--bg-card:#FDFAF4;--ink:#1A1510;--ink-mid:#4A3F32;--ink-light:#8A7A68;
-  --accent:#B85C2C;--accent-light:#E8C4A8;--accent-pale:#F5E8D8;
-  --green:#2C5F3A;--green-light:#D4E8D8;--tape-brown:#6B4423;--tape-dark:#2A1A0A;
-  --border:rgba(26,21,16,0.12);--border-strong:rgba(26,21,16,0.25);
-  --shadow:0 2px 12px rgba(26,21,16,0.08);--shadow-hover:0 8px 32px rgba(26,21,16,0.16);
-  --font-display:'Playfair Display',Georgia,serif;--font-mono:'IBM Plex Mono',monospace;--font-arabic:'Noto Naskh Arabic',serif;
+:root{
+  --bg:#91b28f;--bg-card:#f7eedc;--ink:#85120c;--ink-mid:#533530;--ink-light:#6f7369;
+  --accent:#85120c;--accent-light:#f1dfbd;--accent-pale:#ead9bc;
+  --green:#91b28f;--green-light:#bfd0bd;--tape-brown:#85120c;--tape-dark:#4f0d09;
+  --border:rgba(133,18,12,.20);--border-strong:rgba(133,18,12,.42);
+  --shadow:0 2px 12px rgba(78,31,24,.10);--shadow-hover:0 8px 32px rgba(78,31,24,.18);
+  --font-display:'Roboto Mono',monospace;--font-mono:'Roboto Mono',monospace;--font-arabic:'Gulzar',serif;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
@@ -74,25 +74,7 @@ nav a.active{border-bottom:1px solid var(--accent)}
 .cover-viewer.open{display:flex}
 .cover-viewer-stage{position:relative;display:flex;align-items:center;justify-content:center;max-width:100%;max-height:100%;overflow:auto}
 .cover-viewer-image{display:block;width:auto;height:auto;max-width:94vw;max-height:86vh;object-fit:contain;background:#0b0b09;box-shadow:0 26px 90px rgba(0,0,0,.8);-webkit-user-drag:none;user-select:none;-webkit-touch-callout:none}
-.cover-viewer-stage::after{content:'Afghan Cassette Archive';position:absolute;left:50%;top:50%;transform:translate(-50%,-50%) rotate(-22deg);z-index:2;color:rgba(255,255,255,.42);font-family:var(--font-display);font-size:clamp(34px,7vw,104px);font-weight:500;letter-spacing:.025em;line-height:1;white-space:nowrap;text-shadow:0 2px 7px rgba(0,0,0,.92),0 0 18px rgba(0,0,0,.5);pointer-events:none;user-select:none}
-.cover-viewer-close{position:fixed;top:14px;right:18px;z-index:3;width:42px;height:42px;border:1px solid rgba(245,240,232,.28);background:rgba(245,240,232,.08);color:#fff;font-size:22px;cursor:pointer}
-.cover-viewer-close:hover,.cover-viewer-close:focus-visible{background:rgba(184,92,44,.35);border-color:var(--accent)}
-.cover-viewer-caption{position:fixed;left:50%;bottom:14px;transform:translateX(-50%);z-index:3;max-width:min(760px,86vw);padding:7px 12px;background:rgba(26,21,16,.84);color:rgba(245,240,232,.82);font-size:10px;text-align:center;border:1px solid rgba(245,240,232,.12)}
-.cover-viewer-shield{position:absolute;inset:0;z-index:4;background:transparent;pointer-events:auto}
-@media(max-width:640px){.cover-viewer{padding:56px 12px 44px}.cover-viewer-image{max-width:96vw;max-height:82vh}.cover-viewer-stage::after{font-size:clamp(26px,8vw,52px);white-space:normal;width:88vw;text-align:center;line-height:1.05}}
-@media print{
-  .cover-viewer,.modal-overlay,.cover-carousel,.cassette-grid{display:none!important}
-  body::before{content:'Printing and PDF export are disabled for protected archive previews.';display:block;padding:3rem;font-family:var(--font-mono);font-size:16px}
-}
-img,.cover-img,.modal-cover,.radio-cover{-webkit-user-drag:none;user-select:none;-webkit-touch-callout:none}
-@media(prefers-reduced-motion:reduce){.cover-carousel-track{animation:none}.cover-carousel{overflow-x:auto;mask-image:none;-webkit-mask-image:none}.cover-carousel::before,.cover-carousel::after{display:none}.cover-slide{transform:none!important}}
-.archive-section{position:relative;z-index:1;max-width:1100px;margin:0 auto;padding:2rem 2rem 8rem}
-.toolbar{display:grid;grid-template-columns:minmax(220px,320px) minmax(0,1fr) auto;align-items:end;gap:14px;margin-bottom:1.5rem}
-.search-box{position:relative;width:100%;min-width:0;max-width:320px}
-.search-box input{width:100%;background:var(--bg-card);border:.5px solid var(--border-strong);border-radius:2px;padding:8px 12px 8px 34px;font-family:var(--font-mono);font-size:12px;color:var(--ink);outline:none;transition:border-color .2s}
-.search-box input:focus{border-color:var(--accent)}
-.search-box input::placeholder{color:var(--ink-light)}
-.search-icon{position:absolute;left:10px;top:50%;transform:translateY(-50%);color:var(--ink-light);font-size:14px;pointer-events:none}
+.cover-viewer-stage::after{content:'';position:absolute;left:50%;top:50%;transform:translate(-50%,-50%) rotate(-10deg);z-index:2;width:min(42vw,420px);aspect-ratio:1/1;background:url('https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/ACA%20LOGO/remove_background_01.png') center/contain no-repeat;opacity:.42;filter:drop-shadow(0 3px 10px rgba(0,0,0,.42));pointer-events:none}
 .genre-controls{display:flex;align-items:flex-end;gap:12px;min-width:0}
 .genre-shortcuts{min-width:0}
 .genre-shortcuts-label,.genre-select-wrap>span{display:block;margin-bottom:5px;font-size:8px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-light)}
@@ -1808,25 +1790,25 @@ body.aca-gate-b-active>.player-bar{visibility:hidden}
   opacity:.7;
 }
 .header-listen-link{
-  background:#E3B75F;
-  color:#1E382B;
-  border-color:#E3B75F;
+  background:#91b28f;
+  color:#85120c;
+  border-color:#91b28f;
   padding-left:12px;
   padding-right:14px;
 }
 .header-listen-link:hover,
 .header-listen-link:focus-visible,
 .header-listen-link.active{
-  background:#F0CD7D;
-  color:#183024;
-  border-color:#F0CD7D;
+  background:#a8c5a5;
+  color:#85120c;
+  border-color:#a8c5a5;
 }
 .header-live-dot{
   width:6px;
   height:6px;
   border-radius:50%;
   background:currentColor;
-  box-shadow:0 0 0 3px rgba(30,56,43,.09);
+  box-shadow:0 0 0 3px rgba(133,18,12,.12);
 }
 
 .minimal-menu-toggle{
@@ -3754,13 +3736,342 @@ body.aca-gate-b-active>.player-bar{visibility:hidden}
   }
 }
 
+
+/* ===== ACA NEW BRAND — 2026 ===== */
+html,body,button,input,select,textarea{font-family:var(--font-mono)}
+body{background:#91b28f;color:#85120c}
+:lang(fa),:lang(ps),:lang(prs),:lang(ar),[dir="rtl"],.farsi,.dari,.pashto,.rtl,.rtl-script-font{font-family:var(--font-arabic)!important;letter-spacing:0!important;line-height:1.55}
+header,.site-header,.player-bar,.menu-panel{background:#85120c!important;color:#f7eedc!important}
+header a,header button,.site-header a,.site-header button,.player-bar,.player-bar button,.menu-panel a,.menu-panel button{color:#f7eedc!important}
+.page-section,.archive-shell,.cassette-detail-shell{background:#91b28f}
+.archive-card,.press-card,.event-card,.cassette-detail-card,.collection-card,.story-card{border-color:rgba(133,18,12,.28)}
+.press-card,.event-card,.cassette-detail-card,.archive-intro-card,.collection-spotlight{background:#f7eedc;color:#3b201c}
+a{color:#85120c}
+::selection{background:#85120c;color:#f7eedc}
+.button.primary,.btn.primary,.event-register-link,.event-promo-register,.archive-guide-button,.share-button.primary{background:#85120c!important;color:#f7eedc!important;border-color:#85120c!important}
+.filter-chip.active,.genre-chip.active,.collection-chip.active{background:#91b28f!important;color:#85120c!important;border-color:#85120c!important}
+
+
+/* ===== ACA 2026 FINAL BRAND SYSTEM ===== */
+:root{
+  --aca-red:#85120c;
+  --aca-green:#91b28f;
+  --bg:#91b28f;
+  --bg-card:#f8f2e6;
+  --ink:#85120c;
+  --ink-mid:#503530;
+  --ink-light:#657467;
+  --accent:#85120c;
+  --accent-light:#f7e8ca;
+  --accent-pale:#eadcc2;
+  --green:#91b28f;
+  --green-light:#c7d7c5;
+  --tape-brown:#85120c;
+  --tape-dark:#4c0b08;
+  --border:rgba(133,18,12,.22);
+  --border-strong:rgba(133,18,12,.46);
+  --font-display:'Roboto Mono',ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;
+  --font-mono:'Roboto Mono',ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;
+  --font-arabic:'Gulzar','Noto Nastaliq Urdu','Noto Naskh Arabic',serif;
+}
+html,body,button,input,select,textarea{font-family:var(--font-mono)!important}
+body{background:var(--aca-green)!important;color:var(--aca-red)!important}
+:lang(fa),:lang(ps),:lang(prs),:lang(ar),[dir="rtl"],.farsi,.dari,.pashto,.rtl,.rtl-script-font{
+  font-family:var(--font-arabic)!important;letter-spacing:0!important;line-height:1.55
+}
+.minimal-header,.site-header,.player-bar,.site-nav-panel,.menu-panel{background:var(--aca-red)!important;color:#f8f2e6!important}
+.minimal-header a,.minimal-header button,.site-header a,.site-header button,.player-bar,.player-bar button,.site-nav-panel a,.site-nav-panel button,.menu-panel a,.menu-panel button{color:#f8f2e6!important}
+.page-section,.archive-shell,.cassette-detail-shell,.archive-section,.mission-section,.press-section,.events-section{background:var(--aca-green)!important}
+.archive-card,.press-card,.event-card,.cassette-detail-card,.collection-card,.story-card,.radio-panel,.modal-card{border-color:var(--border)!important}
+.press-card,.event-card,.cassette-detail-card,.archive-intro-card,.collection-spotlight,.modal-card{background:#f8f2e6!important;color:#321512!important}
+.archive-card{background:#f8f2e6!important;color:#321512!important}
+a{color:var(--aca-red)}
+::selection{background:var(--aca-red);color:#f8f2e6}
+.button.primary,.btn.primary,.event-register-link,.event-promo-register,.archive-guide-button,.share-button.primary,.radio-start-btn,.header-primary-link.active{background:var(--aca-red)!important;color:#f8f2e6!important;border-color:var(--aca-red)!important}
+.filter-chip.active,.genre-chip.active,.collection-chip.active,.archive-filter.active{background:var(--aca-green)!important;color:var(--aca-red)!important;border-color:var(--aca-red)!important}
+input,select,textarea{accent-color:var(--aca-red)}
+
+/* Brand mark */
+.header-brand-button{display:flex!important;flex-direction:row!important;align-items:center!important;gap:10px!important;text-align:left!important}
+.aca-header-logo{width:42px;height:42px;object-fit:cover;border-radius:3px;flex:0 0 42px;border:1px solid rgba(248,242,230,.22)}
+.aca-header-brand-copy{display:flex;flex-direction:column;min-width:0}
+.minimal-header .header-title{font-family:var(--font-mono)!important;color:#f8f2e6!important}
+.minimal-header .header-arabic{font-family:var(--font-arabic)!important;color:#c7d7c5!important}
+.aca-cover-b-brand{display:flex!important;align-items:center!important;gap:12px!important}
+.aca-cover-b-brand>span{display:flex;flex-direction:column}
+.aca-gate-logo{width:58px;height:58px;object-fit:cover;border-radius:4px;border:1px solid rgba(248,242,230,.20)}
+.aca-cover-b-arabic,.aca-cover-b-pashto{font-family:var(--font-arabic)!important}
+
+/* Keep the new red and green dominant even where older sections had legacy green/gold backgrounds. */
+.archive-intro,.press-hero,.events-hero,.mission-hero,.zmarai-hero,.radio-page{background:var(--aca-green)!important}
+.archive-intro h1,.press-hero h1,.events-hero h1,.mission-hero h1,.zmarai-hero h1{color:var(--aca-red)!important}
+.event-card-upcoming::before{background:var(--aca-red)!important;color:#f8f2e6!important}
+.progress-fill,.volume-fill,.radio-progress-fill{background:var(--aca-green)!important}
+.player-bar .progress-fill,.player-bar .volume-fill{background:#f8f2e6!important}
+@media(max-width:700px){.aca-header-logo{width:36px;height:36px;flex-basis:36px}.aca-gate-logo{width:48px;height:48px}}
+
+\n/* ===== ACA English typography — uppercase treatment ===== */\nbody,\nbutton,\ninput,\nselect,\ntextarea,\n.site-header,\n.site-header a,\n.site-header button,\n.menu-panel,\n.menu-panel a,\n.menu-panel button,\nnav, nav a,\nh1,h2,h3,h4,h5,h6,\n.archive-card,\n.archive-card .artist,\n.archive-card .album,\n.cassette-detail-shell,\n.cassette-detail-shell .artist,\n.cassette-detail-shell .album,\n.player-bar,\n.player-artist,\n.player-album,\n.press-card,\n.event-card,\n.collection-card,\n.story-card,\n.press-link,\n.event-link,\n.button,\n.btn,\n.filter-chip,\n.genre-chip,\n.collection-chip,\nlabel,\ndt,\n.meta-label,\n.eyebrow,\n.kicker,\n.section-label {\n  text-transform: uppercase;\n}\n\n:lang(fa),:lang(ps),:lang(prs),:lang(ar),\n[dir="rtl"],\n.farsi,.dari,.pashto,.rtl,\n[lang="fa"],[lang="ps"],[lang="prs"],[lang="ar"],\n.rtl-script-font {\n  text-transform:none !important;\n}\n
+
+/* ===== ACA cassette image watermark ===== */
+.tape-visual:has(> img.cover-img)::after,
+.cassette-detail-cover-button:not(:disabled)::after,
+.modal-cover-link.has-real-cover::before,
+.cassette-related-cover:has(img)::after{
+  content:"";
+  position:absolute;
+  z-index:5;
+  right:8px;
+  bottom:8px;
+  width:clamp(34px,18%,64px);
+  aspect-ratio:1/1;
+  background:url("https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/ACA%20LOGO/remove_background_01.png") center/contain no-repeat;
+  opacity:.58;
+  filter:drop-shadow(0 1px 3px rgba(0,0,0,.38));
+  pointer-events:none;
+}
+.tape-visual:has(> img.cover-img),
+.cassette-detail-cover-button,
+.modal-cover-link,
+.cassette-related-cover{position:relative}
+.cassette-detail-cover-button:not(:disabled)::after{width:clamp(44px,16%,78px);right:10px;bottom:10px}
+.modal-cover-link.has-real-cover::before{width:clamp(42px,15%,72px);right:10px;bottom:34px}
+@media(max-width:640px){
+  .tape-visual:has(> img.cover-img)::after{width:38px;right:6px;bottom:6px}
+  .cassette-detail-cover-button:not(:disabled)::after{width:48px;right:7px;bottom:7px}
+}
+
+
+/* ===== Header LISTEN button — rounded green pill ===== */
+.header-listen-link{
+  height:42px !important;
+  padding:0 18px !important;
+  border-radius:999px !important;
+  background:#91b28f !important;
+  border:1px solid #91b28f !important;
+  color:#85120c !important;
+  box-shadow:none !important;
+}
+.header-listen-link:hover,
+.header-listen-link:focus-visible,
+.header-listen-link.active{
+  background:#a8c5a5 !important;
+  border-color:#a8c5a5 !important;
+  color:#85120c !important;
+  transform:translateY(-1px);
+}
+.header-listen-link .header-live-dot{
+  background:#85120c !important;
+  box-shadow:0 0 0 4px rgba(133,18,12,.12) !important;
+}
+@media(max-width:620px){
+  .header-listen-link{
+    height:38px !important;
+    padding:0 14px !important;
+  }
+}
+
+
+/* ============================================================
+   IMPROVED PROTECTED CASSETTE COVER PREVIEW
+   Keeps the ACA watermark, but presents the full scan in a
+   centered, contained archival viewer instead of stretching it.
+   ============================================================ */
+.cover-viewer{
+  position:fixed;
+  inset:0;
+  z-index:650;
+  display:none;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:12px;
+  padding:22px;
+  overflow:hidden;
+  background:rgba(10,24,17,.985) !important;
+  backdrop-filter:blur(10px);
+}
+.cover-viewer.open{display:flex}
+
+.cover-viewer-stage{
+  position:relative;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:auto;
+  height:auto;
+  max-width:94vw;
+  max-height:calc(100vh - 122px);
+  padding:16px;
+  overflow:hidden;
+  border:1px solid rgba(248,242,230,.16);
+  border-radius:12px;
+  background:
+    radial-gradient(circle at 50% 42%,rgba(145,178,143,.13),transparent 62%),
+    #0c1710;
+  box-shadow:
+    0 28px 90px rgba(0,0,0,.62),
+    0 0 0 1px rgba(145,178,143,.05) inset;
+}
+
+.cover-viewer-image{
+  position:relative;
+  z-index:1;
+  display:block;
+  width:auto !important;
+  height:auto !important;
+  max-width:calc(94vw - 32px) !important;
+  max-height:calc(100vh - 154px) !important;
+  object-fit:contain !important;
+  object-position:center !important;
+  background:transparent !important;
+  border-radius:3px;
+  box-shadow:0 12px 42px rgba(0,0,0,.48);
+  -webkit-user-drag:none;
+  user-select:none;
+  -webkit-touch-callout:none;
+}
+
+/* KEEP the large central ACA watermark in the protected preview */
+.cover-viewer-stage::after{
+  content:"";
+  position:absolute;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%) rotate(-10deg);
+  z-index:2;
+  width:clamp(150px,30vmin,360px);
+  max-width:52%;
+  aspect-ratio:1/1;
+  background:url("https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/ACA%20LOGO/remove_background_01.png") center/contain no-repeat;
+  opacity:.42;
+  filter:drop-shadow(0 3px 10px rgba(0,0,0,.42));
+  pointer-events:none;
+}
+
+.cover-viewer-caption{
+  position:static !important;
+  width:auto;
+  max-width:min(92vw,900px);
+  margin:0;
+  padding:8px 13px;
+  border:1px solid rgba(248,242,230,.14);
+  border-radius:999px;
+  background:rgba(25,49,36,.92) !important;
+  color:rgba(248,242,230,.82);
+  font:500 9px/1.35 var(--font-mono);
+  letter-spacing:.06em;
+  text-align:center;
+  text-transform:uppercase;
+  box-shadow:0 6px 20px rgba(0,0,0,.22);
+}
+
+.cover-viewer-close{
+  position:fixed;
+  top:18px;
+  right:18px;
+  z-index:655;
+  width:40px;
+  height:40px;
+  display:grid;
+  place-items:center;
+  border:1px solid rgba(248,242,230,.24);
+  border-radius:50%;
+  background:rgba(20,39,28,.88);
+  color:#f8f2e6;
+  font:400 18px/1 var(--font-mono);
+  cursor:pointer;
+  box-shadow:0 8px 24px rgba(0,0,0,.24);
+}
+.cover-viewer-close:hover,
+.cover-viewer-close:focus-visible{
+  background:rgba(133,18,12,.92) !important;
+  border-color:#f8f2e6 !important;
+  outline:none;
+}
+
+/* Sideways source scans still fit inside the preview instead of being cropped. */
+.cover-viewer-image.rotated-cover{
+  object-fit:contain !important;
+  transform:rotate(90deg) scale(.92) !important;
+  transform-origin:center center;
+  max-width:min(calc(100vh - 180px),88vw) !important;
+  max-height:min(88vw,calc(100vh - 180px)) !important;
+}
+
+/* Phone/tablet treatment */
+@media(max-width:700px){
+  .cover-viewer{
+    justify-content:center;
+    gap:9px;
+    padding:58px 10px 16px;
+  }
+  .cover-viewer-stage{
+    max-width:96vw;
+    max-height:calc(100vh - 126px);
+    padding:8px;
+    border-radius:8px;
+  }
+  .cover-viewer-image{
+    max-width:calc(96vw - 16px) !important;
+    max-height:calc(100vh - 146px) !important;
+  }
+  .cover-viewer-stage::after{
+    width:clamp(120px,38vmin,240px);
+    max-width:58%;
+    opacity:.42;
+  }
+  .cover-viewer-caption{
+    max-width:94vw;
+    padding:7px 10px;
+    font-size:8px;
+  }
+  .cover-viewer-close{
+    top:10px;
+    right:10px;
+    width:38px;
+    height:38px;
+  }
+}
+
+
+
+/* Improve legibility of gold/small-label text on the Kaka Zmarai page */
+#page-zmarai .home-kicker{
+  color:#8A6223 !important;
+  font-weight:700;
+  letter-spacing:.16em;
+}
+#page-zmarai .zmarai-fact-card .home-kicker,
+#page-zmarai .zmarai-sources .home-kicker,
+#page-zmarai .zmarai-story-panel .home-kicker,
+#page-zmarai .zmarai-support-card .home-kicker,
+#page-zmarai .zmarai-editorial-note .home-kicker{
+  color:#7A5519 !important;
+}
+#page-zmarai .zmarai-inline-photo-credit,
+#page-zmarai .home-zmarai-photo-credit{
+  color:#56635B;
+  font-size:8px;
+  letter-spacing:.08em;
+  font-weight:600;
+}
+#page-zmarai .zmarai-profile-photo-label{
+  background:rgba(20,33,25,.88);
+  color:#F8E9BE;
+  font-size:8px;
+  letter-spacing:.08em;
+  font-weight:600;
+}
+
 </style>
   <link rel="canonical" href="https://afghancassettearchive.org/">
+<link rel="icon" type="image/png" href="https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/ACA%20LOGO/1.png">
+<link rel="apple-touch-icon" href="https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/ACA%20LOGO/1.png">
 </head>
 <body class="aca-gate-b-active">
 
 <div class="aca-cover-b" id="aca-cover-b" role="dialog" aria-modal="true" aria-labelledby="aca-cover-b-title">
-  <div class="aca-cover-b-brand">Afghan Cassette Archive<small lang="fa" dir="rtl">آرشیف کاست‌های افغان</small></div>
+  <div class="aca-cover-b-brand"><img class="aca-gate-logo" src="https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/ACA%20LOGO/1.png" alt="Afghan Cassette Archive logo"><span>Afghan Cassette Archive<small lang="fa" dir="rtl">آرشیف کاست‌های افغان</small></span></div>
   <div class="aca-cover-b-backdrop" id="aca-cover-b-backdrop" aria-hidden="true">
     <div class="aca-cover-b-row"><div class="aca-cover-b-track" data-aca-wall-row="0"></div></div>
     <div class="aca-cover-b-row reverse"><div class="aca-cover-b-track" data-aca-wall-row="1"></div></div>
@@ -3801,8 +4112,11 @@ body.aca-gate-b-active>.player-bar{visibility:hidden}
 
 <header class="minimal-header">
   <button class="header-brand header-brand-button" type="button" onclick="showPage('home',document.querySelector('[data-page=home]'))" aria-label="Afghan Cassette Archive home">
-    <div class="header-title">Afghan Cassette Archive</div>
-    <div class="header-arabic">آرشیف کاست‌های افغان</div>
+    <img class="aca-header-logo" src="https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/ACA%20LOGO/1.png" alt="" aria-hidden="true">
+    <span class="aca-header-brand-copy">
+      <span class="header-title">Afghan Cassette Archive</span>
+      <span class="header-arabic" lang="fa" dir="rtl">آرشیف کاست‌های افغان</span>
+    </span>
   </button>
 
   <div class="minimal-header-actions">
@@ -3829,7 +4143,8 @@ body.aca-gate-b-active>.player-bar{visibility:hidden}
     <a data-page="archive" onclick="showPage('archive',this)">Archive <span>02</span></a>
     <a data-page="zmarai" onclick="showPage('zmarai',this)">Zmarai Collection <span>03</span></a>
     <a class="nav-radio" data-page="radio" onclick="showPage('radio',this)">Listen Live <span>04</span></a>
-    <a data-page="stories" onclick="showPage('stories',this)">Stories <span>05</span></a>
+    <a data-page="press" onclick="showPage('press',this)">Press &amp; Features <span>05</span></a>
+    <a data-page="events" onclick="showPage('events',this)">Events &amp; Past Events <span>06</span></a>
     <a data-page="mission" onclick="showPage('mission',this)">About <span>07</span></a>
   </nav>
 </header>
@@ -4206,9 +4521,8 @@ body.aca-gate-b-active>.player-bar{visibility:hidden}
         </div>
 
         <figure class="zmarai-profile-photo-wrap">
-          <img class="zmarai-profile-photo" src="https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/KAKA%20ZMARAI/PHOTO-2025-09-18-23-01-55.jpg.jpeg" alt="Mohammad Hassan Kaka Zmarai" loading="eager" decoding="async">
-          <figcaption class="zmarai-profile-photo-label">Kaka Zmarai · Peshawar · Photo: Saad Salarzai</figcaption>
-          <div class="zmarai-inline-photo-credit" style="position:absolute;right:12px;bottom:12px;color:#F4DFA5;background:rgba(20,33,25,.78);padding:7px 9px;z-index:2">Photo: Saad Salarzai</div>
+          <img class="zmarai-profile-photo" src="https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/KAKA%20ZMARAI/IMG_6359.png" alt="Mohammad Hassan Kaka Zmarai" loading="eager" decoding="async">
+          <figcaption class="zmarai-profile-photo-label">Kaka Zmarai · Peshawar · May 2025 · Photo: Saad Salarzai</figcaption>
         </figure>
       </section>
 
@@ -4266,7 +4580,7 @@ body.aca-gate-b-active>.player-bar{visibility:hidden}
             </div>
             <aside>
               <div class="zmarai-inline-photo-wrap">
-                <img class="zmarai-story-photo" src="https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/KAKA%20ZMARAI/PHOTO-2026-01-17-01-15-40.jpg.jpeg" alt="Kaka Zmarai and the collection" loading="lazy" decoding="async">
+                <img class="zmarai-story-photo" src="https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/KAKA%20ZMARAI/IMG_6370.png" alt="Kaka Zmarai and the collection" loading="lazy" decoding="async">
                 <div class="zmarai-inline-photo-credit">Photo: Saad Salarzai</div>
               </div>
               <div class="zmarai-pullquote">“I cannot bring them to Afghanistan because the Taliban will torch them.”<small>— Kaka Zmarai, quoted in The New York Times, January 2026</small></div>
@@ -4459,8 +4773,8 @@ body.aca-gate-b-active>.player-bar{visibility:hidden}
     </div>
 
     <div class="press-summary" aria-label="Press coverage summary">
-      <div class="press-summary-item"><span class="press-summary-num">5</span><span class="press-summary-label">Featured stories</span></div>
-      <div class="press-summary-item"><span class="press-summary-num">3</span><span class="press-summary-label">Audio broadcasts</span></div>
+      <div class="press-summary-item"><span class="press-summary-num">6</span><span class="press-summary-label">Featured stories</span></div>
+      <div class="press-summary-item"><span class="press-summary-num">4</span><span class="press-summary-label">Audio broadcasts</span></div>
       <div class="press-summary-item"><span class="press-summary-num">2025–26</span><span class="press-summary-label">Coverage period</span></div>
     </div>
 
@@ -4521,6 +4835,21 @@ body.aca-gate-b-active>.player-bar{visibility:hidden}
           <p class="press-description">A reported profile of the archive’s Oakland collection, Omid’s connection to Afghan music, and the cross-border network helping endangered tapes survive war, censorship, and displacement.</p>
           <div class="press-credit">American Community Media · By Christopher Alam · Photography by Peter Schurmann</div>
           <a class="press-link secondary" href="https://americancommunitymedia.org/news-exchange/the-bay-area-archivist-saving-afghanistans-musical-legacy/" target="_blank" rel="noopener noreferrer">Read the article <span aria-hidden="true">↗</span></a>
+        </div>
+      </article>
+
+
+      <article class="press-card">
+        <div class="press-art">
+          <div class="press-outlet-mark">BBC<br>Radio 4</div>
+          <div class="press-format">Artworks · Radio documentary</div>
+        </div>
+        <div class="press-content">
+          <div class="press-meta"><span>November 25, 2025</span><span>Radio documentary</span></div>
+          <h2 class="press-title">Omid's Tapes: The Afghan Memory Keeper</h2>
+          <p class="press-description">BBC Radio 4's <em>Artworks</em> follows Omid and the international network working to find and preserve Afghan music, radio recordings, films, and television material threatened by war, displacement, and cultural erasure.</p>
+          <div class="press-credit">BBC Radio 4 · Artworks</div>
+          <a class="press-link secondary" href="https://www.bbc.co.uk/programmes/m002mmsh" target="_blank" rel="noopener noreferrer">Listen on BBC <span aria-hidden="true">↗</span></a>
         </div>
       </article>
     </div>
@@ -4628,10 +4957,10 @@ body.aca-gate-b-active>.player-bar{visibility:hidden}
       <article class="event-card">
         <div class="event-date"><span class="event-month">Mar</span><span class="event-day">09</span><span class="event-year">2026</span></div>
         <div class="event-content">
-          <div class="event-platform">School of Visual Arts · Presentation</div>
-          <h2 class="event-title">Afghan Cassette Archive at SVA</h2>
-          <div class="event-details">New York City</div>
-          <p class="event-description">A presentation introducing audiences to Afghanistan’s cassette era, the archive’s preservation work, and the ways music carried cultural memory across war and diaspora.</p>
+          <div class="event-platform">AVAH · Presentation</div>
+          <h2 class="event-title">Afghan Cassette Archive with AVAH</h2>
+          <div class="event-details">New York City · Hosted by AVAH</div>
+          <p class="event-description">An AVAH-hosted presentation introducing audiences to Afghanistan’s cassette era, the archive’s preservation work, and the ways music carried cultural memory across war and diaspora.</p>
         </div>
         <div class="event-action"><a class="event-link" href="https://www.instagram.com/p/DVXUu6Wjttt/" target="_blank" rel="noopener noreferrer"><span class="event-link-mark">Instagram</span>View event post ↗</a></div>
       </article>
@@ -16286,6 +16615,8 @@ document.addEventListener("click",e=>{
 });
 
 
+
+function applyArabicScriptFont(root=document){const a=/[\u0600-\u06FF]/;root.querySelectorAll("h1,h2,h3,h4,h5,h6,p,span,a,button,li,dt,dd").forEach(el=>{if(el.children.length===0&&a.test(el.textContent||""))el.classList.add("rtl-script-font")})}document.addEventListener("DOMContentLoaded",()=>applyArabicScriptFont());
 </script>
 
 </body>
