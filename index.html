@@ -15232,7 +15232,12 @@ function closeCoverViewerOutside(event){
 
 function cassetteShareUrl(id){
   const c=CASSETTES.find(x=>x.id===id);
-  return `${location.href.split("#")[0]}${c?cassetteRoute(c):`#cassette-${id}`}`;
+  const base=`${location.origin}${location.pathname}`;
+  const route=c?cassetteRoute(c):`#cassette-${id}`;
+  // Use a real query parameter as well as the hash. Social apps and messaging
+  // services frequently strip or ignore URL fragments (#...), while query
+  // parameters are preserved. The hash remains for readable in-site routing.
+  return `${base}?cassette=${encodeURIComponent(id)}${route}`;
 }
 function cassetteShareData(){
   if(!modalCassette)return null;
@@ -15362,8 +15367,26 @@ function closeModal(updateHistory=true){
 function closeModalOutside(e){if(e.target===document.getElementById("modal"))closeModal()}
 
 function handleArchiveRoute(){
+  const params=new URLSearchParams(location.search);
+  const sharedCassette=params.get("cassette");
   const route=(location.hash||"#home").slice(1);
   const cassetteMatch=route.match(/^cassette-(\d+)(?:-.*)?$/);
+
+  // Shared cassette URLs use ?cassette=ID because many social platforms strip
+  // hash fragments. Accept the query parameter first, then normalize the
+  // address bar back to the archive's readable cassette hash after loading.
+  if(sharedCassette && /^\d+$/.test(sharedCassette)){
+    const id=Number(sharedCassette);
+    const c=CASSETTES.find(x=>x.id===id);
+    if(c){
+      cassettePageReturnHash="#archive";
+      openCassettePage(id,false);
+      const cleanUrl=`${location.pathname}${cassetteRoute(c)}`;
+      history.replaceState({cassette:id},"",cleanUrl);
+      return;
+    }
+  }
+
   if(cassetteMatch){
     const id=Number(cassetteMatch[1]);
     cassettePageReturnHash="#archive";
