@@ -16450,9 +16450,26 @@ if(initialZmaraiPageCount)initialZmaraiPageCount.textContent=initialZmaraiCount;
 populateGenreDropdown();
 populateArchiveFacets();
 
-// Keep first paint light: the intro is the only visible experience at startup.
-// The archive grid is rendered after entry, and the homepage's editorial/carousel
-// content is rendered only if/when the visitor opens Home.
+// Direct cassette links must bypass the cinematic intro. Otherwise the intro
+// remains on top of the requested cassette and its Enter action redirects the
+// visitor to #archive, losing the cassette route that was shared.
+function isDirectCassetteEntry(){
+  const params=new URLSearchParams(location.search);
+  const sharedCassette=params.get("cassette");
+  const route=(location.hash||"").slice(1);
+  return (sharedCassette&&/^\d+$/.test(sharedCassette)) || /^cassette-\d+(?:-.*)?$/.test(route);
+}
+function bypassIntroForDirectCassette(){
+  if(!isDirectCassetteEntry())return false;
+  const intro=document.getElementById("aca-cover-b");
+  if(intro)intro.remove();
+  document.body.classList.remove("aca-gate-b-active");
+  return true;
+}
+
+// Keep first paint light for ordinary visits, but never force a visitor who
+// opened a permanent cassette URL through the intro screen first.
+bypassIntroForDirectCassette();
 initRadio().catch(console.error);
 hardenMediaProtection();
 handleArchiveRoute();
