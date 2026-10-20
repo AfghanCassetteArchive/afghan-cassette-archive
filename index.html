@@ -4106,6 +4106,23 @@ input,select,textarea{accent-color:var(--aca-red)}
   .archive-search-row{grid-template-columns:1fr;}
 }
 
+
+
+/* Desktop archive layout: use the available width and avoid the empty right-side gap */
+@media (min-width: 1100px){
+  #page-archive .archive-section{
+    width:100%;
+    max-width:1600px;
+    margin:0 auto;
+    padding-left:2.25rem;
+    padding-right:2.25rem;
+  }
+  #page-archive .cassette-grid{
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:22px 18px;
+  }
+}
+
 </style>
   <link rel="canonical" href="https://afghancassettearchive.org/">
 <link rel="icon" type="image/png" href="https://pub-f07cb91ee11b43d294b20611220aadd5.r2.dev/ACA%20LOGO/1.png">
